@@ -36,7 +36,7 @@ if($button_value == "Me réveiller") {
 	$partie_infos = getLastPartie($id_joueur);
 
 	//Si il y a une dernière partie et que le type du texte correspondant n'est pas une fin : on demande si le joueur veut reprendre sa partie
-	if(!empty($partie_infos) && isThisEndFromId((int)$partie_infos[0]['id_texte']) != true) {
+	if(is_array($partie_infos) && isThisEndFromId((int)$partie_infos[0]['id_texte']) != true) {
 		$json = array(
 				"content" => "Reprendre ?"
 			);

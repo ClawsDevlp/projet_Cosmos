@@ -44,7 +44,7 @@ SQL
 	//FIN REQUETE
 
 	if(empty($array)) {
-		exit();
+		return 0;
 	}
 	else {
 		return $array;
