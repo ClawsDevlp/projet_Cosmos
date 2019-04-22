@@ -35,7 +35,7 @@ const startGame = event => {
 
 			dataContent = data.content;
 
-			if(dataContent == 'Reprendre ?') {
+			if(dataContent == "Reprendre ?") {
 				if(confirm("Souhaitez-vous reprendre votre aventure là où vous vous étiez arrêté.e ?!")) {
 					let params = {};
 
