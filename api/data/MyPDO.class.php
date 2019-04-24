@@ -1,4 +1,5 @@
 <?php
+
 final class MyPDO {
 	/**
 	 * @var MyPDO $pdoInstance Instance unique
@@ -60,7 +61,7 @@ final class MyPDO {
 	 * @param string $password Mot de passe pour la connexion à la bdd
 	 * @param array $driverOptions Options du pilote de la bdd
 	 */
-	public static function setConfiguration($dsn, $login='', $password='', array $driverOptions=array()){
+	public static function setConfiguration($dsn, $login="", $password="", array $driverOptions=array()){
 		self::$dsn = $dsn;
 		self::$login = $login;
 		self::$password = $password;
@@ -75,3 +76,5 @@ final class MyPDO {
 		return self::$dsn !== null;
 	}
 }
+
+?>
