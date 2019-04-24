@@ -2,4 +2,4 @@
 
 require_once 'MyPDO.class.php';
 
-MyPDO::setConfiguration('mysql:host=localhost;dbname=projetphp2;charset=utf8', 'root', '');
+MyPDO::setConfiguration('mysql:host=localhost;dbname=projet_web;charset=utf8', 'root', 'root');

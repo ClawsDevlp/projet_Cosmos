@@ -1,7 +1,7 @@
 <?php
     include_once "../data/MyPDO.projet-php-dictature.include.php";
 
-    $prep = $db->prepare("SELECT * FROM Joueur WHERE pseudo = :pseudo");
+    $prep = $db->prepare("SELECT * FROM joueur WHERE pseudo = :pseudo");
     $prep->bindValue(':pseudo', $_POST['pseudo'], PDO::PARAM_STR);
 
     var_dump($_POST);
@@ -27,7 +27,7 @@
             $_SESSION["pseudo"] = $res["pseudo"];
             $_SESSION["mail"] = $res["mail"];
 
-            header('Location:menu.php');
+            header('Location:../partie_home.php');
         }
     }
 ?>

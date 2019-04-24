@@ -17,7 +17,7 @@ const printFirstValues = () => {
 
 	//Création de l'url et de sa query
 	//Le second paramètre est la racine du site
-	let url = new URL("/projetPHP/src/partie_FirstText.php", "http://localhost");
+	let url = new URL("/projetPHP/src/partie_firstText.php", "http://localhost");
 	url.search = new URLSearchParams(params);
 	console.log(url);
 
@@ -64,7 +64,7 @@ const changeTexts = event => {
 
 	//Si c'est le texte de fin alors on recharge/change de page
 	if(button1.innerHTML == "Retour au menu !") {
-		window.location.href = "partie_home.html";
+		window.location.href = "partie_home.php";
 	}
 	else {
 		let params = {};
@@ -77,7 +77,7 @@ const changeTexts = event => {
 
 		//Création de l'url et de sa query
 		//Le second paramètre est la racine du site
-		let url = new URL("/projetPHP/src/partie.php", "http://localhost");
+		let url = new URL("/projetPHP/src/partie_back.php", "http://localhost");
 		url.search = new URLSearchParams(params);
 		console.log(url);
 

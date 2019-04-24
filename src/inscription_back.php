@@ -27,7 +27,7 @@
     include_once "../data/MyPDO.projet-php-dictature.include.php";
         
     // Vérification du pseudo unique
-    $prep = $db->prepare("SELECT * FROM `Joueur` WHERE Joueur.pseudo = :pseudo");
+    $prep = $db->prepare("SELECT * FROM `joueur` WHERE joueur.pseudo = :pseudo");
     $prep->bindValue(':pseudo', $data['pseudo']);
     if($prep->execute()) {
         while($res = $prep->fetch(PDO::FETCH_ASSOC)){
@@ -40,7 +40,7 @@
     }
         
     //on insere les données pseudo, mail et mdp dans la table Joueur
-    $query = $db->prepare("INSERT INTO `Joueur` (`pseudo`,`mail`,`mdp`) VALUES (:pseudo, :mail, :mdp)");
+    $query = $db->prepare("INSERT INTO `joueur` (`pseudo`,`mail`,`mdp`) VALUES (:pseudo, :mail, :mdp)");
     $query->bindParam(':pseudo', $data['pseudo']);
     $query->bindParam(':mail', $data['mail']);
     $query->bindParam(':mdp', md5($data['mdp']));

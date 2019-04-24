@@ -18,7 +18,7 @@ document.getElementById('inscription-send').onclick = event => {
 	let params = {};
 	if(formIn.pseudo.value) params['pseudo'] = formIn.pseudo.value;
 	if(formIn.mail.value) params['mail'] = formIn.mail.value;
-	if(formIn.mdp.value) params['mdp'] = /*sha(*/formIn.mdp.value;
+	if(formIn.mdp.value) params['mdp'] = formIn.mdp.value;
 
 	// création de l'URL et de ses queries
 	// on indique en second paramètres du constructeur URL la racine du site

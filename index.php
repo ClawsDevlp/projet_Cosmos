@@ -8,7 +8,7 @@
 <?php // Le joueur est connecté
     if (isset($_SESSION["id"])){
 ?>
-    <a href="src/menu.php"> Commence une partie !</a><br/>
+    <a href="party_home.php"> Commence une partie !</a><br/>
     <a href="src/deconnexion.php">Deconnexion</a>
 
 <?php

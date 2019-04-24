@@ -10,7 +10,7 @@ profileButton.addEventListener('click', event => goToProfile(event));
 //Aller sur la page de profil
 const goToProfile = event => {
 	event.preventDefault(); //évite de recharger la page
-	window.location.href = "profile.html";
+	window.location.href = "profile.php";
 }
 
 //Lancer une partie
@@ -24,7 +24,7 @@ const startGame = event => {
 
 	//Création de l'url et de sa query
 	//Le second paramètre est la racine du site
-	let url = new URL("/projetPHP/src/partie_home.php", "http://localhost");
+	let url = new URL("/projetPHP/src/partie_home_back.php", "http://localhost");
 	url.search = new URLSearchParams(params);
 	console.log(url);
 
@@ -44,7 +44,7 @@ const startGame = event => {
 
 					//Création de l'url et de sa query
 					//Le second paramètre est la racine du site
-					let url = new URL("/projetPHP/src/partie_home.php", "http://localhost");
+					let url = new URL("/projetPHP/src/partie_home_back.php", "http://localhost");
 					url.search = new URLSearchParams(params);
 					console.log(url);
 
@@ -66,7 +66,7 @@ const startGame = event => {
 
 					//Création de l'url et de sa query
 					//Le second paramètre est la racine du site
-					let url = new URL("/projetPHP/src/partie_home.php", "http://localhost");
+					let url = new URL("/projetPHP/src/partie_home_back.php", "http://localhost");
 					url.search = new URLSearchParams(params);
 					console.log(url);
 
@@ -88,7 +88,7 @@ const startGame = event => {
 //Permet de contrer l'asynchronicité de l'éxécution des fonctions
 const waitForGame = () => {
 	if(dataContent == "Continuons !" || dataContent == "Nouvelle partie !") {
-		window.location.href = "partie.html";
+		window.location.href = "partie.php";
 	}
 	else {
 		window.setTimeout(waitForGame, 100);
