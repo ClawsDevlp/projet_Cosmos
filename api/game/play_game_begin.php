@@ -1,7 +1,9 @@
 <?php
 /*
- *  Play a game - beginning
+ *  Play a game - begin
  */
+
+session_start();
 
 //Headers
 header("Content-Type: application/json; charset=UTF-8");
@@ -14,43 +16,77 @@ if($method !== "get") {
     exit();
 }
 
-//Include data
-include_once "sql_requests/sql_requests_game.php";
-include_once "play_game_divers.php";
-
 //Check params
-$id_player = 1; //A DEFINIR
-$game_infos = getLastGame($id_player);
+$id_player = $_SESSION["id"];
+$id_text = "";
+$objects_player = array();
+$json = array();
 
-//Si il y a une dernière partie et que le type du texte correspondant n'est pas une fin, on stocke les infos dans les variables
-if(is_array($game_infos) && isThisEndFromId((int)$game_infos[0]["id_texte"]) != true) {
-		$id_game = (int)$game_infos[0]["id_partie"];
-		$id_first_text = (int)$game_infos[0]["id_texte"];
+// Include data bdd
+include_once "../data/MyPDO.projet_cosmos.include.php";
+
+//Recover infos player and game (not end)
+$stmtInfosGame = MyPDO::getInstance()->prepare(<<<SQL
+    SELECT DISTINCT p.id_partie, p.id_texte, id_objet
+    FROM partie p 
+    LEFT OUTER JOIN objetsrecuperes o ON p.id_partie = o.id_partie
+    INNER JOIN textes t ON p.id_texte = t.id_texte
+    WHERE p.date_texte = (SELECT MAX(p.date_texte) FROM partie p WHERE p.id_joueur = :id_player) AND t.id_type != 2;
+SQL
+    );
+$stmtInfosGame->execute(array(":id_player" => $id_player));
+while (($row = $stmtInfosGame->fetch()) !== false) {
+    $json["id_game"] = $row["id_partie"];
+    $id_text = $row["id_texte"];
+    $objects_player[] = $row["id_objet"];
 }
 
-$first_text = (string)getTextFromId($id_first_text);
-$type_first_text = (int)getTypeTextFromId($id_first_text);
+//Player objects for a query
+$in = "";
+if($objects_player != NULL){
+    foreach ($objects_player as $i => $object){
+        $key = ":id".$i;
+        $in .= "$key,";
+        $in_params[$key] = $object; // collecting values into key-value array
+    }
+    $in = rtrim($in,","); // :id0,:id1,:id2
+}else{
+    $in = ":id0";
+    $in_params["id0"] = 0;
+}
 
-$first_choice1 = "";
-$first_choice2 = "";
-$first_choice3 = "";
+//Recover current text (save)
+$stmtCurrentText = MyPDO::getInstance()->prepare(<<<SQL
+    SELECT DISTINCT ts.id_texte_origine, t.contenu_texte
+    FROM textesuivant ts
+    INNER JOIN textes t ON ts.id_texte_origine = t.id_texte
+    WHERE ts.id_texte_origine = :id_text;
+SQL
+    );
+$stmtCurrentText->execute(array(":id_text" => $id_text));
+$movies = array();
+while (($row = $stmtCurrentText->fetch()) !== false) {
+    $id_text = $row["id_texte_origine"];
+    $json["text"]["text_content"] = $row["contenu_texte"];
+}
 
-checkCurrentChoices($id_game, $id_first_text, $first_choice1, $first_choice2, $first_choice3);
-
-$json = array(
-		"id_player" => $id_player,
-		"id_game" => $id_game,
-		"text" => $first_text,
-		"id" => $id_first_text,
-		"typeText" => $type_first_text,
-		"choice1" => $first_choice1,
-		"choice2" => $first_choice2,
-		"choice3" => $first_choice3
-		);
+//Recover choices (save)
+$stmtNextChoices = MyPDO::getInstance()->prepare(<<<SQL
+    SELECT DISTINCT r.id_reponse, r.contenu_reponse
+    FROM reponses r
+    WHERE r.id_texte_declencheur = :id_text AND (r.id_objet_necessaire IN ($in) OR r.id_objet_necessaire IS NULL);
+SQL
+    );
+$params = [":id_text" => $id_text]; 
+$stmtNextChoices->execute(array_merge($params, $in_params)); // just merge two arrays
+while (($row = $stmtNextChoices->fetch()) !== false) {
+    $json["choices"][] = array("id_choice" => $row["id_reponse"], "text_choice" => $row["contenu_reponse"]);
+}
 
 //Response
 http_response_code(200);
 echo json_encode($json);
 
 exit();
+
 ?>

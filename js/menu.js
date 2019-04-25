@@ -36,7 +36,7 @@ function sendConnection(evt) {
 
     let url = new URL("api/identification/connection.php", "http://localhost/projetPHP/");
 
-    //AJAX query
+    //AJAX query : connection
     fetch(url, {
             method: "POST",
             body: JSON.stringify(params)
@@ -44,7 +44,6 @@ function sendConnection(evt) {
         .then(response => {
             if (response.status == 200) {
                 response.json().then(data => {
-                    console.log(data);
                     form_connection.reset();
                     window.location.href = "home.php";
                 });
@@ -84,7 +83,7 @@ function sendRegistration(evt) {
     if (form_registration.mail.value) params["mail"] = form_registration.mail.value;
     if (form_registration.pwd.value) params["pwd"] = form_registration.pwd.value;
 
-    //AJAX query
+    //AJAX query : registration
     fetch(url, {
             method: "POST",
             body: JSON.stringify(params)
@@ -92,7 +91,6 @@ function sendRegistration(evt) {
         .then(response => {
             if (response.status == 200) {
                 response.json().then(data => {
-                    console.log(data);
                     form_registration.reset();
                     connection.classList.toggle("hide");
                     registration.classList.toggle("hide");

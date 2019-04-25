@@ -33,7 +33,7 @@
                 <a href="">
                     <img src="http://placehold.it/50x50/b0f/fff&text=B">
                 </a>
-                <span>Baptiste Ory</span>
+                <span><?php echo $_SESSION["pseudo"] ?></span>
                 <a href="api/identification/deconnection.php">
                     <img id="log_out" src="css/images/log_out.svg">
                 </a>

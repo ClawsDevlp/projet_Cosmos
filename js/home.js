@@ -1,97 +1,83 @@
-const button = document.querySelectorAll('button');
-const startButton = document.getElementById('start_game');
-const profileButton = document.getElementById('go_profile');
-let dataContent = "";
+/*------------------------------
+General
+------------------------------*/
+"use strict"; //Force to declare any variable used
 
-//Listeners
-startButton.addEventListener('click', event => startGame(event));
-profileButton.addEventListener('click', event => goToProfile(event));
+const start_game = document.getElementById("start_game");
+const go_profile = document.getElementById("go_profile");
 
-//Aller sur la page de profil
-const goToProfile = event => {
-	event.preventDefault(); //évite de recharger la page
-	window.location.href = "profile.php";
+/*------------------------------
+Initialisation
+------------------------------*/
+document.addEventListener("DOMContentLoaded", initialiser);
+
+function initialiser(evt) {
+    go_profile.addEventListener("click", goProfile);
+    start_game.addEventListener("click", startGame);
 }
 
-//Lancer une partie
-const startGame = event => {
-	event.preventDefault(); //évite de recharger la page
-
-	let params = {};
-
-	params[0] = "Me réveiller";
-	console.log(params);
-
-	//Création de l'url et de sa query
-	//Le second paramètre est la racine du site
-	let url = new URL("api/game/start_game.php", "http://localhost/projetPHP/");
-	url.search = new URLSearchParams(params);
-	console.log(url);
-
-	//Requête HTTP GET
-	fetch(url)
-		.then(response => response.json())
-		.then(data => {
-
-			dataContent = data.content;
-
-			if(dataContent == "Reprendre ?") {
-				if(confirm("Souhaitez-vous reprendre votre aventure là où vous vous étiez arrêté.e ?!")) {
-					let params = {};
-
-					params[0] = "OK";
-					console.log(params);
-
-					//Création de l'url et de sa query
-					//Le second paramètre est la racine du site
-					let url = new URL("api/game/start_game.php", "http://localhost/projetPHP/");
-					url.search = new URLSearchParams(params);
-					console.log(url);
-
-					//Requête HTTP GET 
-					fetch(url)
-						.then(response => response.json())
-						.then(data => {
-
-							dataContent = data.content;
-
-						})
-						.catch(error => { console.log(error); });
-				}
-				else {
-					let params = {};
-
-					params[0] = "Annuler";
-					console.log(params);
-
-					//Création de l'url et de sa query
-					//Le second paramètre est la racine du site
-					let url = new URL("api/game/start_game.php", "http://localhost/projetPHP/");
-					url.search = new URLSearchParams(params);
-					console.log(url);
-
-					//Requête HTTP GET 
-					fetch(url)
-						.then(response => response.json())
-						.then(data => {
-
-							dataContent = data.content;
-
-						})
-						.catch(error => { console.log(error); });
-				}
-			}
-		})
-		.catch(error => { console.log(error); });			
+function goProfile(evt) {
+    window.location.href = "profile.php";
 }
 
-//Permet de contrer l'asynchronicité de l'éxécution des fonctions
-const waitForGame = () => {
-	if(dataContent == "Continuons !" || dataContent == "Nouvelle partie !") {
-		window.location.href = "game.php";
-	}
-	else {
-		window.setTimeout(waitForGame, 100);
-	}
+function startGame(evt) {
+    event.preventDefault();
+
+    //Creation URL
+    let url = new URL("api/game/play_game_begin.php", "http://localhost/projetPHP/");
+
+    //AJAX query
+    fetch(url)
+        .then(response => {
+            if (response.status == 200) {
+                response.json().then(data => {
+                    if (data.id_game) {
+                        if (confirm("Souhaitez-vous reprendre votre aventure là où vous vous étiez arrêté.e ?")) {
+                            window.location.href = "game.php";
+                        } else {
+                            createGame();
+                        }
+                    } else {
+                        createGame();
+                    }
+                });
+            } else {
+                //Error
+                response.json().then(data => {
+                    console.log(data.message);
+                });
+            }
+        })
+        //Network error
+        .catch(error => {
+            console.log(error)
+        });
+
 }
-waitForGame();
+
+// reate a new game
+function createGame() {
+    //Creation URL
+    let url = new URL("api/game/create_game.php", "http://localhost/projetPHP/");
+
+    //AJAX query
+    fetch(url, {
+            method: "POST",
+        })
+        .then(response => {
+            if (response.status == 200) {
+                response.json().then(data => {
+                    window.location.href = "game.php";
+                });
+            } else {
+                //Error
+                response.json().then(data => {
+                    console.log(data.message);
+                });
+            }
+        })
+        //Network error
+        .catch(error => {
+            console.log(error)
+        });
+}

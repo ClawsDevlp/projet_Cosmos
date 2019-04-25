@@ -4,13 +4,9 @@ General
 "use strict"; //Force to declare any variable used
 
 const buttons = document.querySelectorAll("button");
-const choice1 = document.getElementById("choice1");
-const choice2 = document.getElementById("choice2");
-const choice3 = document.getElementById("choice3");
 const text = document.getElementById("text");
 
 var id_game;
-var id_player;
 
 /*------------------------------
 Initialisation
@@ -18,99 +14,144 @@ Initialisation
 document.addEventListener("DOMContentLoaded", initialiser);
 
 function initialiser(evt) {
-    
-    //Display the first text and the first choices according to the last part corresponding to the player
-
-    //Creation URL and queries
-    let params = {};
-    params[0] = text.innerHTML;
-    console.log(params);
-
-    let url = new URL("api/game/play_game_begin.php", "http://localhost/projetPHP/");
-    url.search = new URLSearchParams(params);
-    console.log(url);
-
-    //AJAX query
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            if (data.choice2 == "") {
-                choice2.style.display = "none";
-            } else {
-                choice2.style.display = "block";
-            }
-            if (data.choice3 == "") {
-                choice3.style.display = "none";
-            } else {
-                choice3.style.display = "block";
-            }
-
-            text.innerHTML = data.text;
-            choice1.innerHTML = data.choice1;
-            choice2.innerHTML = data.choice2;
-            choice3.innerHTML = data.choice3;
-            id_game = data.id_game;
-            id_player = data.id_player;
-
-        })
-        .catch(error => {
-            console.log(error);
-        });
-
     //Possibility to make a choice for each button
     for (let button of buttons) {
+        button.classList.add("hide");
         button.addEventListener("click", makeChoice);
     }
 
+    //Creation URL
+    let url = new URL("api/game/play_game_begin.php", "http://localhost/projetPHP/");
+
+    //AJAX query : begin a game, take info last or new game
+    fetch(url)
+        .then(response => {
+            if (response.status == 200) {
+                response.json().then(data => {
+                    id_game = data.id_game;
+                    if (!(data.text)) {
+                        //If end of the game
+                        buttons[0].classList.remove("hide");
+                        buttons[0].innerHTML = "Revenir au menu";
+                        buttons[0].addEventListener("click", function () {
+                            window.location.href = "home.php";
+                        });
+                        text.innerHTML = "C'était la fin n°. Vous avez assisté à fin sur 10.";
+                    } else if (!(data.choices)) {
+                        //If no choices
+                        buttons[0].classList.remove("hide");
+                        buttons[0].dataset.idChoice = 0;
+                        buttons[0].innerHTML = "Suivant";
+                        text.innerHTML = data.text["text_content"];
+                    } else {
+                        //If choices
+                        for (let i in data.choices) {
+                            buttons[i].classList.remove("hide");
+                            buttons[i].dataset.idChoice = data.choices[i]["id_choice"];
+                            buttons[i].innerHTML = data.choices[i]["text_choice"];
+                            text.innerHTML = data.text["text_content"];
+                        }
+                    }
+
+                });
+            } else {
+                //Error
+                response.json().then(data => {
+                    console.log(data.message);
+                });
+            }
+        })
+        //Network error
+        .catch(error => {
+            console.log(error)
+        });
 }
 
 //Player make a choice
 function makeChoice(evt) {
     event.preventDefault();
 
-    //Change page if end text
-    if (choice1.innerHTML == "Retour au menu !") {
-        window.location.href = "home.php";
+    for (let button of buttons) {
+        button.classList.add("hide");
+        button.addEventListener("click", makeChoice);
     }
-    //Change texts
-    else {
-        //Creation URL and queries
-        let params = {};
-        params["text"] = text.innerHTML;
-        params["choice_player"] = evt.target.innerHTML;
-        params["id_game"] = id_game;
-        params["id_player"] = id_player;
-        console.log(params);
 
-        let url = new URL("api/game/play_game.php", "http://localhost/projetPHP/");
-        url.search = new URLSearchParams(params);
-        console.log(url);
+    //Creation URL and queries
+    let params = {};
+    params["choice_player"] = evt.target.dataset.idChoice;
+    params["id_game"] = id_game;
 
-        //AJAX query
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                if (data.choice2 == "") {
-                    choice2.style.display = "none";
-                } else {
-                    choice2.style.display = "block";
-                }
-                if (data.choice3 == "") {
-                    choice3.style.display = "none";
-                } else {
-                    choice3.style.display = "block";
-                }
-            
-                text.innerHTML = data.text;
-                choice1.innerHTML = data.choice1;
-                choice2.innerHTML = data.choice2;
-                choice3.innerHTML = data.choice3;
-                id_game = data.id_game;
-                id_player = data.id_player;
+    let url = new URL("api/game/play_game.php", "http://localhost/projetPHP/");
+    url.search = new URLSearchParams(params);
 
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
+    //AJAX query : play a game, pick up choice(s) and text
+    fetch(url)
+        .then(response => {
+            if (response.status == 200) {
+                response.json().then(data => {
+                    if (!(data.text)) {
+                        //If end of the game
+                        buttons[0].classList.remove("hide");
+                        buttons[0].innerHTML = "Revenir au menu";
+                        buttons[0].addEventListener("click", function () {
+                            window.location.href = "home.php";
+                        });
+                        text.innerHTML = "C'était la fin n°. Vous avez assisté à fin sur 10.";
+                    } else if (!(data.choices)) {
+                        //If no choices
+                        buttons[0].classList.remove("hide");
+                        buttons[0].dataset.idChoice = 0;
+                        buttons[0].innerHTML = "Suivant";
+                        text.innerHTML = data.text["text_content"];
+                        updateGame(data.text["id_text"]);
+                    } else {
+                        //If choices
+                        for (let i in data.choices) {
+                            buttons[i].classList.remove("hide");
+                            buttons[i].dataset.idChoice = data.choices[i]["id_choice"];
+                            buttons[i].innerHTML = data.choices[i]["text_choice"];
+                            text.innerHTML = data.text["text_content"];
+                            updateGame(data.text["id_text"]);
+                        }
+                    }
+                });
+            } else {
+                //Error
+                response.json().then(data => {
+                    console.log(data.message);
+                });
+            }
+        })
+        //Network error
+        .catch(error => {
+            console.log(error)
+        });
+}
+
+//Update the game
+function updateGame(id_text) {
+    //Creation URL and queries
+    let url = new URL("api/game/update_game.php", "http://localhost/projetPHP/");
+
+    let params = {};
+    params["id_text"] = id_text;
+    params["id_game"] = id_game;
+
+    //AJAX query : update a game, insert new text according to player and game
+    fetch(url, {
+            method: "PUT",
+            body: JSON.stringify(params)
+        })
+        .then(response => {
+            if (response.status != 200) {
+                //Error
+                response.json().then(data => {
+                    console.log(data.message);
+                });
+            }
+        })
+        //Network error
+        .catch(error => {
+            console.log(error)
+        });
 }
