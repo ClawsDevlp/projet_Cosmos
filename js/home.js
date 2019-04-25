@@ -24,7 +24,7 @@ const startGame = event => {
 
 	//Création de l'url et de sa query
 	//Le second paramètre est la racine du site
-	let url = new URL("api/game/partie_home_back.php", "http://localhost/projetPHP/");
+	let url = new URL("api/game/start_game.php", "http://localhost/projetPHP/");
 	url.search = new URLSearchParams(params);
 	console.log(url);
 
@@ -44,7 +44,7 @@ const startGame = event => {
 
 					//Création de l'url et de sa query
 					//Le second paramètre est la racine du site
-					let url = new URL("api/game/partie_home_back.php", "http://localhost/projetPHP/");
+					let url = new URL("api/game/start_game.php", "http://localhost/projetPHP/");
 					url.search = new URLSearchParams(params);
 					console.log(url);
 
@@ -66,7 +66,7 @@ const startGame = event => {
 
 					//Création de l'url et de sa query
 					//Le second paramètre est la racine du site
-					let url = new URL("api/game/partie_home_back.php", "http://localhost/projetPHP/");
+					let url = new URL("api/game/start_game.php", "http://localhost/projetPHP/");
 					url.search = new URLSearchParams(params);
 					console.log(url);
 

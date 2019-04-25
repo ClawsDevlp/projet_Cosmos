@@ -1,24 +1,15 @@
 <?php
+/*
+ *  Play a game - divers
+ */
 
-/***** EN-TETE *****/
-
-// headers
+//Headers
 header("Content-Type: application/json; charset=UTF-8");
 
-// check HTTP method
-$method = strtolower($_SERVER['REQUEST_METHOD']);
-
-// include data
+//Include data
 include_once "../data/MyPDO.projet_cosmos.include.php";
 
-// response status
-http_response_code(200);
-
-
-/***** CODE *****/
-
-
-function checkFutureAnswers ($id_partie, $id_new_text, &$answer1, &$answer2, &$answer3) {
+function checkFutureChoices($id_partie, $id_new_text, &$answer1, &$answer2, &$answer3) {
 	//Regarde si le nouveau texte aura un suivant direct (sans choix)
 	if(isThereDirectNext($id_new_text) == true) {
 		$answer1 = "Suivant";
@@ -33,7 +24,7 @@ function checkFutureAnswers ($id_partie, $id_new_text, &$answer1, &$answer2, &$a
 	}
 	else {
 		$answers_array = [];
-		$answers_array = getAnswers($id_new_text);
+		$answers_array = getChoices($id_new_text);
 		$current_inventory = readInventory($id_partie);
 
 		//Regarde si il y a une première réponse possible
@@ -147,7 +138,7 @@ function checkFutureAnswers ($id_partie, $id_new_text, &$answer1, &$answer2, &$a
 }
 
 
-function checkCurrentAnswers ($id_partie, $id_current_text, &$answer1, &$answer2, &$answer3) {
+function checkCurrentChoices($id_partie, $id_current_text, &$answer1, &$answer2, &$answer3) {
 	//Regarde si le texte aura un suivant direct (sans choix)
 	if(isThereDirectNext($id_current_text) == true) {
 		$answer1 = "Suivant";
@@ -162,7 +153,7 @@ function checkCurrentAnswers ($id_partie, $id_current_text, &$answer1, &$answer2
 	}
 	else {
 		$answers_array = [];
-		$answers_array = getAnswers($id_current_text);
+		$answers_array = getChoices($id_current_text);
 		$current_inventory = readInventory($id_partie);
 
 		//Regarde si il y a une première réponse possible

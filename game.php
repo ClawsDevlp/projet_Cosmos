@@ -37,13 +37,13 @@
             </div>
 
             <div id="game_story">
-                <p id="story"></p>
+                <p id="text"></p>
             </div>
 
             <div id="game_choice">
-                <button id="choice_1" type="button" class="btn" id="btn_registration"></button>
-                <button id="choice_2" type="button" class="btn" id="btn_registration"></button>
-                <button id="choice_3" type="button" class="btn" id="btn_registration"></button>
+                <button id="choice1" type="button" class="btn" id="btn_registration"></button>
+                <button id="choice2" type="button" class="btn" id="btn_registration"></button>
+                <button id="choice3" type="button" class="btn" id="btn_registration"></button>
             </div>
 
         </section>
