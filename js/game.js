@@ -154,4 +154,28 @@ function updateGame(id_text) {
         .catch(error => {
             console.log(error)
         });
+    
+    //Creation URL and queries
+    params = {};
+    params["id_game"] = id_game;
+    
+    url = new URL("api/profile/add_badges_in_game.php", "http://localhost/projetPHP/");
+
+    //AJAX query : add badges
+    fetch(url, {
+            method: "POST",
+            body: JSON.stringify(params)
+        })
+        .then(response => {
+            if (response.status != 200) {
+                //Error
+                response.json().then(data => {
+                    console.log(data.message);
+                });
+            }
+        })
+        //Network error
+        .catch(error => {
+            console.log(error)
+        });
 }

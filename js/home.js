@@ -62,7 +62,7 @@ function createGame() {
 
     //AJAX query
     fetch(url, {
-            method: "POST",
+            method: "POST"
         })
         .then(response => {
             if (response.status == 200) {

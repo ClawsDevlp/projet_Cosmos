@@ -51,7 +51,7 @@ SQL
     $stmtPutObjectInventory->execute(array(":id_game" => $id_game, ":id_object" => $id_object));
 }
 
-//Recover infos player
+//Recover infos player and game
 $stmtInfosGame = MyPDO::getInstance()->prepare(<<<SQL
     SELECT DISTINCT id_texte, id_objet
     FROM partie p 
