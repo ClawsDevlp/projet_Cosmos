@@ -26,8 +26,14 @@ if(!isset($data["pwd"]) || empty($data["pwd"])){
     echo json_encode(array("message" => "Missing password."));
     exit();
 }
+if(!isset($data["id_avatar"]) || empty($data["id_avatar"])){
+    http_response_code(422);
+    echo json_encode(array("message" => "Missing avatar."));
+    exit();
+}
 $pseudo = $data["pseudo"];
 $pwd = $data["pwd"];
+$id_avatar = $data["id_avatar"];
 $mail = (isset($data["mail"])) ? $data["mail"] : NULL;
 
 //Include data bdd
@@ -49,11 +55,11 @@ if(($row = $stmtCheckPseudo->fetch()) !== false) {
 
 //Insert player data into the player table
 $stmtInsertPlayer = $db->prepare(<<<SQL
-    INSERT INTO joueur (pseudo, mail, mdp) 
-    VALUES (:pseudo, :mail, :pwd);
+    INSERT INTO joueur (pseudo, mail, mdp, id_avatar) 
+    VALUES (:pseudo, :mail, :pwd, :id_avatar);
 SQL
 );
-$stmtInsertPlayer->execute(array(":pseudo" => $pseudo, ":mail" => $mail, ":pwd" => md5($pwd)));
+$stmtInsertPlayer->execute(array(":pseudo" => $pseudo, ":mail" => $mail, ":pwd" => md5($pwd), ":id_avatar" => $id_avatar));
 
 //Response
 http_response_code(200);

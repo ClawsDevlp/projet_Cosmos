@@ -35,12 +35,10 @@ function sendConnection(evt) {
     if (form_connection.pwd.value) params["pwd"] = form_connection.pwd.value;
 
     let url = new URL("api/identification/connection.php", "http://localhost/projetPHP/");
+    url.search = new URLSearchParams(params);
 
     //AJAX query : connection
-    fetch(url, {
-            method: "POST",
-            body: JSON.stringify(params)
-        })
+    fetch(url)
         .then(response => {
             if (response.status == 200) {
                 response.json().then(data => {
@@ -82,6 +80,7 @@ function sendRegistration(evt) {
     if (form_registration.pseudo.value) params["pseudo"] = form_registration.pseudo.value;
     if (form_registration.mail.value) params["mail"] = form_registration.mail.value;
     if (form_registration.pwd.value) params["pwd"] = form_registration.pwd.value;
+    params["id_avatar"] = form_registration.avatar.value;
 
     //AJAX query : registration
     fetch(url, {

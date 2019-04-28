@@ -24,7 +24,6 @@ if((!isset($_GET["id_game"]) || empty($_GET["id_game"]))
     exit();
 }
 $id_game = $_GET["id_game"];
-$id_player = $_SESSION["id"];
 $choice_player = $_GET["choice_player"];
 $id_text = "";
 $objects_player = array();
@@ -56,10 +55,10 @@ $stmtInfosGame = MyPDO::getInstance()->prepare(<<<SQL
     SELECT DISTINCT id_texte, id_objet
     FROM partie p 
     LEFT OUTER JOIN objetsrecuperes o ON p.id_partie = o.id_partie 
-    WHERE p.id_partie = :id_game AND p.id_joueur = :id_player
+    WHERE p.id_partie = :id_game
 SQL
     );
-$stmtInfosGame->execute(array(":id_game" => $id_game, ":id_player" => $id_player));
+$stmtInfosGame->execute(array(":id_game" => $id_game));
 while (($row = $stmtInfosGame->fetch()) !== false) {
     $id_text = $row["id_texte"];
     $objects_player[] = $row["id_objet"];

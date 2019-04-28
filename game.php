@@ -37,14 +37,17 @@
             </div>
 
             <div id="game_story">
-                <p id="text">Yo</p>
+                <p id="text"></p>
+                <div id="game_badges" class="hide">
+                    <p>Badges obtenus :</p>
+                </div>
             </div>
 
             <div id="game_choice">
-                <button data-idChoice="0" type="button" class="btn" id="btn_registration">Suivant</button>
-                <button type="button" class="btn" id="btn_registration"></button>
-                <button type="button" class="btn" id="btn_registration"></button>
-                <button type="button" class="btn" id="btn_registration"></button>
+                <button data-idChoice="0" type="button" class="btn"></button>
+                <button type="button" class="btn"></button>
+                <button type="button" class="btn"></button>
+                <button type="button" class="btn"></button>
             </div>
 
         </section>

@@ -18,11 +18,12 @@ if($method !== "post") {
 
 //Check params
 $data = json_decode(file_get_contents("php://input"), true);
-if(!isset($data["id_game"]) || empty($data["id_game"])){
+if((!isset($data["id_game"]) || empty($data["id_game"])) && (!isset($data["id_text"]) || empty($data["id_text"]))){
     http_response_code(422);
     echo json_encode(array("message" => "Missing parameters."));
     exit();
 }
+$id_text = $data["id_text"];
 $id_game = $data["id_game"];
 $id_player = $_SESSION["id"];
 
@@ -31,14 +32,13 @@ include_once "../data/MyPDO.projet_cosmos.include.php";
 
 //Create a new game
 $stmtCheckBadges = MyPDO::getInstance()->prepare(<<<SQL
-    SELECT DISTINCT b.id_badge
-    FROM partie p
-    INNER JOIN badges b ON p.id_texte = b.id_texte
-        LEFT OUTER JOIN badgesobtenus bo ON b.id_badge = bo.id_badge
-    WHERE bo.id_badge IS NULL AND p.id_joueur = :id_player AND p.id_partie = :id_game AND p.id_texte = b.id_texte;
+    SELECT b.id_badge
+    FROM badges b 
+    WHERE b.id_texte = :id_text 
+	AND (SELECT b.id_badge FROM badges b INNER JOIN badgesobtenus bo ON b.id_badge = bo.id_badge WHERE b.id_texte = :id_text AND bo.id_joueur = :id_player) IS NULL
 SQL
     );
-$stmtCheckBadges->execute(array(":id_player" => $id_player, ":id_game" => $id_game));
+$stmtCheckBadges->execute(array(":id_player" => $id_player, ":id_text" => $id_text));
 while (($row = $stmtCheckBadges->fetch()) !== false) {
     $id_badge = $row["id_badge"];
     $stmtAddBadge = MyPDO::getInstance()->prepare(<<<SQL

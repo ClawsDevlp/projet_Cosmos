@@ -30,8 +30,8 @@
         <section id="home">
 
             <div id="home_profile">
-                <a href="">
-                    <img src="http://placehold.it/50x50/b0f/fff&text=B">
+                <a href="profile.php">
+                    <img id="avatar" src="" alt="Image avatar">
                 </a>
                 <span><?php echo $_SESSION["pseudo"] ?></span>
                 <a href="api/identification/deconnection.php">

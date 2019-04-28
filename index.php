@@ -75,19 +75,19 @@
                         <div class="avatar_choice">
                             <p>Avatar</p>
                             <label>
-                                <input type="radio" name="avatar" value="avatar_1" checked>
+                                <input type="radio" name="avatar" value="1" checked>
                                 <img src="http://placehold.it/50x50/0bf/fff&text=A">
                             </label>
                             <label>
-                                <input type="radio" name="avatar" value="avatar_2">
+                                <input type="radio" name="avatar" value="2">
                                 <img src="http://placehold.it/50x50/b0f/fff&text=B">
                             </label>
                             <label>
-                                <input type="radio" name="avatar" value="avatar_2">
+                                <input type="radio" name="avatar" value="3">
                                 <img src="http://placehold.it/50x50/6cf00/fff&text=C">
                             </label>
                             <label>
-                                <input type="radio" name="avatar" value="avatar_2">
+                                <input type="radio" name="avatar" value="4">
                                 <img src="http://placehold.it/50x50/ffa700/fff&text=D">
                             </label>
                         </div>

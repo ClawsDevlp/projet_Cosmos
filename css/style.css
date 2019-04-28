@@ -204,8 +204,10 @@ Home + Game
     top: 8px;
 }
 
-#home_profile > span, #home_profile > a,
-#back_menu > span, #back_menu > a {
+#home_profile > span,
+#home_profile > a,
+#back_menu > span,
+#back_menu > a {
     display: inline-block;
     vertical-align: top;
 }
@@ -258,10 +260,20 @@ Game
 
 #game_story {
     margin-bottom: 10px;
+    min-height: 60px;
 }
 
 #back_menu {
     right: 8px;
+}
+
+#game_badges {
+    margin-top: 10px;
+}
+
+#game_badges > img {
+    margin-top: 5px;
+    margin-right: 5px;
 }
 
 /*------------------------------
@@ -269,6 +281,7 @@ Buttons
 ------------------------------*/
 
 .btn {
+    height: 34px;
     border: 1px solid transparent;
     background-color: #1d17eb;
     border-radius: 2px;
@@ -324,6 +337,10 @@ Responsive
     #home_choice > button,
     #game_choice > button {
         width: 100%;
+    }
+
+    #game_story {
+        min-height: 100px;
     }
 
     #home_profile img,

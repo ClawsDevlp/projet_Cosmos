@@ -5,6 +5,7 @@ General
 
 const start_game = document.getElementById("start_game");
 const go_profile = document.getElementById("go_profile");
+const avatar = document.getElementById("avatar");
 
 /*------------------------------
 Initialisation
@@ -12,6 +13,29 @@ Initialisation
 document.addEventListener("DOMContentLoaded", initialiser);
 
 function initialiser(evt) {
+    //Creation URL
+    let url = new URL("api/profile/have_avatar.php", "http://localhost/projetPHP/");
+
+    //AJAX query : have avatar
+    fetch(url)
+        .then(response => {
+            if (response.status == 200) {
+                response.json().then(data => {
+                    avatar.dataset.idAvatar = data.id_avatar;
+                    avatar.src = data.link;
+                });
+            } else {
+                //Error
+                response.json().then(data => {
+                    console.log(data.message);
+                });
+            }
+        })
+        //Network error
+        .catch(error => {
+            console.log(error)
+        });
+
     go_profile.addEventListener("click", goProfile);
     start_game.addEventListener("click", startGame);
 }

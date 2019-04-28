@@ -67,6 +67,7 @@ $stmtCurrentText->execute(array(":id_text" => $id_text));
 $movies = array();
 while (($row = $stmtCurrentText->fetch()) !== false) {
     $id_text = $row["id_texte_origine"];
+    $json["text"]["id_text"] = $id_text;
     $json["text"]["text_content"] = $row["contenu_texte"];
 }
 

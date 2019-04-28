@@ -8,26 +8,25 @@ header("Content-Type: application/json; charset=UTF-8");
 
 //Check HTTP method
 $method = strtolower($_SERVER["REQUEST_METHOD"]);
-if($method !== "post") {
+if($method !== "get") {
     http_response_code(405);
     echo json_encode(array("message" => "This method is not allowed."));
     exit();
 }
 
 //Check params
-$data = json_decode(file_get_contents("php://input"), true);
-if(!isset($data["pseudo"]) || empty($data["pseudo"])){
+if(!isset($_GET["pseudo"]) || empty($_GET["pseudo"])){
     http_response_code(422);
     echo json_encode(array("message" => "Missing pseudo."));
     exit();
 }
-if(!isset($data["pwd"]) || empty($data["pwd"])){
+if(!isset($_GET["pwd"]) || empty($_GET["pwd"])){
     http_response_code(422);
     echo json_encode(array("message" => "Missing password."));
     exit();
 }
-$pseudo = $data["pseudo"];
-$pwd = $data["pwd"];
+$pseudo = $_GET["pseudo"];
+$pwd = $_GET["pwd"];
 
 //Include data bdd
  include_once "../data/MyPDO.projet_cosmos_2.include.php";
