@@ -42,12 +42,12 @@ $stmtInfosGames = MyPDO::getInstance()->prepare(<<<SQL
     (SELECT COUNT(DISTINCT p.id_texte) AS "nb_ends"
     FROM partie p
         INNER JOIN textes t ON p.id_texte = t.id_texte
-    WHERE p.id_joueur = :id_player AND t.id_type = 2
+    WHERE p.id_joueur = :id_player AND t.nb_end IS NOT NULL
     GROUP BY p.id_joueur) e,
     (SELECT COUNT(p.id_partie) AS "nb_games"
     FROM partie p
     WHERE p.id_joueur = :id_player
-    GROUP BY p.id_joueur) g
+    GROUP BY p.id_joueur) g;
 SQL
     );
 $stmtInfosGames->execute(array(":id_player" => $id_player));
@@ -61,7 +61,7 @@ $stmtInfosBadges = MyPDO::getInstance()->prepare(<<<SQL
     SELECT b.id_badge, b.nom_badge, b.description_badge, b.link
     FROM badgesobtenus bo 
     INNER JOIN badges b ON bo.id_badge = b.id_badge
-    WHERE bo.id_joueur = :id_player
+    WHERE bo.id_joueur = :id_player;
 SQL
     );
 $stmtInfosBadges->execute(array(":id_player" => $id_player));

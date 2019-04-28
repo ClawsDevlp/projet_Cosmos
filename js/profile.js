@@ -27,10 +27,14 @@ function initialiser(evt) {
             method: "POST"
         })
         .then(response => {
-            if (response.status != 200) {
-                //Error
+            if (response.status == 200) {
                 response.json().then(data => {
                     console.log(data.message);
+                });
+            }else{
+                //Error
+                response.json().then(data => {
+                    console.log(data);
                 });
             }
         })
@@ -50,9 +54,11 @@ function initialiser(evt) {
                     pseudo.value = data.player.pseudo;
                     mail.value = data.player.mail;
                     avatars.querySelector("input[value='"+ data.player.id_avatar+"']").checked = true;
-
-                    nb_ends.innerHTML = data.statistics.nb_ends;
-                    nb_games.innerHTML = data.statistics.nb_games;
+                    
+                    if (data.statistics) {
+                        nb_ends.innerHTML = data.statistics.nb_ends;
+                        nb_games.innerHTML = data.statistics.nb_games;
+                    }
                     if (data.badges) {
                         for (let badge of data.badges) {
                             let img_badge = info_badges.querySelector("img[data-idBadge='" + badge["id_badge"] + "']");
@@ -105,12 +111,7 @@ function sendUpdateProfile(evt) {
             body: JSON.stringify(params)
         })
         .then(response => {
-            if (response.status == 200) {
-                response.json().then(data => {
-                    console.log(data.message);
-                });
-            } else {
-                //Error
+            if (response.status != 200) {
                 response.json().then(data => {
                     console.log(data.message);
                 });

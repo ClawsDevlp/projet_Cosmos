@@ -106,7 +106,6 @@ function displayGame(data) {
             .then(response => {
                 if (response.status == 200) {
                     response.json().then(data => {
-                        console.log(data);
                         text.innerHTML = "C'était la fin n°" + data.statistics["nb_end"] + ". Vous avez assisté à " + data.statistics["nb_ends"] + " fin sur 10.";
 
                         if (data.badges) {

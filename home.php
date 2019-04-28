@@ -34,9 +34,7 @@
                     <img id="avatar" src="" alt="Image avatar">
                 </a>
                 <span><?php echo $_SESSION["pseudo"] ?></span>
-                <a href="api/identification/deconnection.php">
-                    <img id="log_out" src="css/images/log_out.svg">
-                </a>
+                <img id="log_out" src="css/images/log_out.svg">
             </div>
 
             <div id="home_visual">

@@ -35,7 +35,7 @@ $stmtCheckBadges = MyPDO::getInstance()->prepare(<<<SQL
     SELECT b.id_badge
     FROM badges b 
     WHERE b.id_texte = :id_text 
-	AND (SELECT b.id_badge FROM badges b INNER JOIN badgesobtenus bo ON b.id_badge = bo.id_badge WHERE b.id_texte = :id_text AND bo.id_joueur = :id_player) IS NULL
+	AND (SELECT b.id_badge FROM badges b INNER JOIN badgesobtenus bo ON b.id_badge = bo.id_badge WHERE b.id_texte = :id_text AND bo.id_joueur = :id_player) IS NULL;
 SQL
     );
 $stmtCheckBadges->execute(array(":id_player" => $id_player, ":id_text" => $id_text));

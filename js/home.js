@@ -3,6 +3,7 @@ General
 ------------------------------*/
 "use strict"; //Force to declare any variable used
 
+const log_out = document.getElementById("log_out");
 const start_game = document.getElementById("start_game");
 const go_profile = document.getElementById("go_profile");
 const avatar = document.getElementById("avatar");
@@ -35,13 +36,38 @@ function initialiser(evt) {
         .catch(error => {
             console.log(error)
         });
-
-    go_profile.addEventListener("click", goProfile);
+    
+    log_out.addEventListener("click", logOut);
+    go_profile.addEventListener("click", function () {
+        window.location.href = "profile.php";
+    });
     start_game.addEventListener("click", startGame);
 }
 
-function goProfile(evt) {
-    window.location.href = "profile.php";
+function logOut(evt) {
+    event.preventDefault();
+
+    //Creation URL
+    let url = new URL("api/identification/deconnection.php", "http://localhost/projetPHP/");
+
+    //AJAX query
+    fetch(url)
+        .then(response => {
+            if (response.status == 200) {
+                response.json().then(data => {
+                    window.location.href = "index.php";
+                });
+            } else {
+                //Error
+                response.json().then(data => {
+                    console.log(data.message);
+                });
+            }
+        })
+        //Network error
+        .catch(error => {
+            console.log(error)
+        });
 }
 
 function startGame(evt) {

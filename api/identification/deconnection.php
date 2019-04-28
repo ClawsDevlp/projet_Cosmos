@@ -1,16 +1,29 @@
-<?php 
+<?php
 /*
  *  Deconnect a player
  */
 
 session_start(); 
 
-//Include data bdd
-include_once "../data/MyPDO.projet_cosmos_2.include.php";
+//Headers
+header("Content-Type: application/json; charset=UTF-8");
+
+//Check HTTP method
+$method = strtolower($_SERVER["REQUEST_METHOD"]);
+if($method !== "get") {
+    http_response_code(405);
+    echo json_encode(array("message" => "This method is not allowed."));
+    exit();
+}
 
 //Deconnection
 $_SESSION = array();
 session_destroy();
-header("Location: ../../index.php");
+
+//Response
+http_response_code(200);
+echo json_encode(array("message" => "Done."));
+
+exit();
 
 ?>

@@ -55,7 +55,7 @@ $stmtCheckPseudo->execute(array(":mail" => $mail, ":id_player" => $id_player));
 }
 
 //Change pwd
-if($pseudo){
+if($pwd){
     $stmtCheckPseudo = $db->prepare(<<<SQL
         UPDATE joueur
         SET mdp = :pwd

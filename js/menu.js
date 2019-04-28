@@ -42,7 +42,6 @@ function sendConnection(evt) {
         .then(response => {
             if (response.status == 200) {
                 response.json().then(data => {
-                    form_connection.reset();
                     window.location.href = "home.php";
                 });
             } else {

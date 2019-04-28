@@ -31,8 +31,8 @@ SQL
 $stmtInfosGame->execute(array(":id_player" => $id_player));
 
 //Response
-http_response_code(200);
 echo json_encode(array("message" => "Done."));
+http_response_code(200);
 
 exit();
 

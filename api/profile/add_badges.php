@@ -30,34 +30,34 @@ $stmtCheckBadges = MyPDO::getInstance()->prepare(<<<SQL
         (SELECT DISTINCT b.id_badge
         FROM partie p LEFT OUTER JOIN textes t ON p.id_texte = t.id_texte,
             badges b LEFT OUTER JOIN badgesobtenus bo ON b.id_badge = bo.id_badge
-        WHERE b.id_badge = 16 AND bo.id_badge IS NULL AND p.id_joueur = :id_player AND t.id_type = 2
+        WHERE p.id_joueur = :id_player AND b.id_badge = 16 AND (bo.id_joueur != :id_player OR bo.id_joueur IS NULL) AND t.nb_end IS NOT NULL
         GROUP BY p.id_joueur
         HAVING COUNT(DISTINCT p.id_texte) >= 10)
     OR b.id_badge =
         (SELECT DISTINCT b.id_badge
         FROM partie p, 
             badges b LEFT OUTER JOIN badgesobtenus bo ON b.id_badge = bo.id_badge
-        WHERE b.id_badge = 17 AND bo.id_badge IS NULL AND p.id_joueur = :id_player AND p.id_texte = 6
+        WHERE p.id_joueur = :id_player AND b.id_badge = 17 AND (bo.id_joueur != :id_player OR bo.id_joueur IS NULL)  AND p.id_texte = 6
         GROUP BY p.id_joueur
         HAVING COUNT(p.id_partie) >= 10)
     OR b.id_badge =
         (SELECT DISTINCT b.id_badge
         FROM partie p, 
             badges b LEFT OUTER JOIN badgesobtenus bo ON b.id_badge = bo.id_badge
-        WHERE b.id_badge = 18 AND bo.id_badge IS NULL AND p.id_joueur = :id_player
+        WHERE p.id_joueur = :id_player AND b.id_badge = 18 AND (bo.id_joueur != :id_player OR bo.id_joueur IS NULL) 
         GROUP BY p.id_joueur
         HAVING COUNT(p.id_partie) >= 30)
     OR b.id_badge =
         (SELECT DISTINCT b.id_badge
         FROM partie p, 
             badges b LEFT OUTER JOIN badgesobtenus bo ON b.id_badge = bo.id_badge
-        WHERE b.id_badge = 19 AND bo.id_badge IS NULL AND p.id_joueur = :id_player AND (SELECT COUNT(bo.id_badge) FROM badgesobtenus bo GROUP BY bo.id_joueur) >= 18
+        WHERE p.id_joueur = :id_player AND b.id_badge = 19 AND (bo.id_joueur != :id_player OR bo.id_joueur IS NULL) AND (SELECT COUNT(bo.id_badge) FROM badgesobtenus bo WHERE bo.id_joueur = :id_player GROUP BY bo.id_joueur) >= 18
         GROUP BY p.id_joueur)
     OR b.id_badge =
         (SELECT DISTINCT b.id_badge
         FROM joueur j, 
             badges b LEFT OUTER JOIN badgesobtenus bo ON b.id_badge = bo.id_badge
-        WHERE b.id_badge = 20 AND bo.id_badge IS NULL AND j.id_joueur = :id_player AND LOWER(j.pseudo) LIKE "%pascale%")
+        WHERE j.id_joueur = :id_player AND b.id_badge = 20 AND (bo.id_joueur != :id_player OR bo.id_joueur IS NULL) AND LOWER(j.pseudo) LIKE "%pascale%")
     ;
 SQL
     );
@@ -65,7 +65,7 @@ $stmtCheckBadges->execute(array(":id_player" => $id_player));
 while (($row = $stmtCheckBadges->fetch()) !== false) {
     $id_badge = $row["id_badge"];
     $stmtAddBadge = MyPDO::getInstance()->prepare(<<<SQL
-        INSERT INTO badgesobtenus 
+        INSERT INTO badgesobtenus (id_joueur, id_badge)
         VALUES (:id_player, :id_badge);
 SQL
     );

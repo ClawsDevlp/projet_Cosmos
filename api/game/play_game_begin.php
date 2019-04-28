@@ -1,6 +1,6 @@
 <?php
 /*
- *  Play a game - begin
+ *  Play a game - beginning
  */
 
 session_start();
@@ -31,7 +31,7 @@ $stmtInfosGame = MyPDO::getInstance()->prepare(<<<SQL
     FROM partie p 
     LEFT OUTER JOIN objetsrecuperes o ON p.id_partie = o.id_partie
     INNER JOIN textes t ON p.id_texte = t.id_texte
-    WHERE p.date_texte = (SELECT MAX(p.date_texte) FROM partie p WHERE p.id_joueur = :id_player) AND t.id_type != 2;
+    WHERE p.date_texte = (SELECT MAX(p.date_texte) FROM partie p WHERE p.id_joueur = :id_player) AND t.nb_end IS NULL;
 SQL
     );
 $stmtInfosGame->execute(array(":id_player" => $id_player));

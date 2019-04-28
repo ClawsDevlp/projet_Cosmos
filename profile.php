@@ -80,8 +80,8 @@
 
             <section id="infos_games">
                 <h2>Mes réveils</h2>
-                <p><span id="nb_ends"></span> fins sur 10</p>
-                <p><span id="nb_games"></span> réveils</p>
+                <p><span id="nb_ends">0</span> fins sur 10</p>
+                <p><span id="nb_games">0</span> réveils</p>
             </section>
 
             <section id="info_badges">

@@ -35,7 +35,7 @@ $stmtInfosGamesGame = MyPDO::getInstance()->prepare(<<<SQL
     (SELECT COUNT(DISTINCT p.id_texte) AS "nb_ends"
     FROM partie p
         INNER JOIN textes t ON p.id_texte = t.id_texte
-    WHERE p.id_joueur = :id_player AND t.id_type = 2
+    WHERE p.id_joueur = :id_player AND t.nb_end IS NOT NULL
     GROUP BY p.id_joueur) e,
     (SELECT t.nb_end
     FROM partie p
