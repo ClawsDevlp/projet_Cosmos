@@ -37,10 +37,10 @@ $id_avatar = $data["id_avatar"];
 $mail = (isset($data["mail"])) ? $data["mail"] : NULL;
 
 //Include data bdd
- include_once "../data/MyPDO.projet_cosmos_2.include.php";
+ include_once "../data/MyPDO.projet_cosmos.include.php";
 
 //Check if single pseudo
-$stmtCheckPseudo = $db->prepare(<<<SQL
+$stmtCheckPseudo = MyPDO::getInstance()->prepare(<<<SQL
     SELECT * 
     FROM joueur 
     WHERE joueur.pseudo = :pseudo;
@@ -54,7 +54,7 @@ if(($row = $stmtCheckPseudo->fetch()) !== false) {
 }
 
 //Insert player data into the player table
-$stmtInsertPlayer = $db->prepare(<<<SQL
+$stmtInsertPlayer = MyPDO::getInstance()->prepare(<<<SQL
     INSERT INTO joueur (pseudo, mail, mdp, id_avatar) 
     VALUES (:pseudo, :mail, :pwd, :id_avatar);
 SQL

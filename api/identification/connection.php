@@ -29,12 +29,12 @@ $pseudo = $_GET["pseudo"];
 $pwd = $_GET["pwd"];
 
 //Include data bdd
- include_once "../data/MyPDO.projet_cosmos_2.include.php";
+ include_once "../data/MyPDO.projet_cosmos.include.php";
 
 //Check infos connection player
-$stmtCheckPlayer = $db->prepare(<<<SQL
+$stmtCheckPlayer = MyPDO::getInstance()->prepare(<<<SQL
     SELECT * 
-    FROM Joueur 
+    FROM joueur 
     WHERE pseudo = :pseudo AND mdp = :pwd;
 SQL
 );
