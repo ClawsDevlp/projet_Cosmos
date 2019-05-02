@@ -275,6 +275,19 @@ Game
 #game_badges > img {
     margin-top: 5px;
     margin-right: 5px;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #fff;
+}
+
+/*------------------------------
+Profile
+------------------------------*/
+
+#info_badges > img{
+    width: 50px;
+    height: 50px;
+    border: 1px solid #fff;
 }
 
 /*------------------------------
