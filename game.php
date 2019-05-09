@@ -1,6 +1,5 @@
 <?php
     session_start();
-    include_once "api/data/MyPDO.projet_cosmos_2.include.php";
     if (!(isset($_SESSION["id"]))){ //Player is not connected
         header("Location: index.php");
     }
@@ -29,10 +28,10 @@
     <main>
         <section id="game">
 
-            <div id="back_menu">
-                <span>Menu</span>
+            <div id="back">
+                <span>Accueil</span>
                 <a href="home.php">
-                    <img src="http://placehold.it/50x50/ea0d0d/fff&text=Menu">
+                    <img src="http://placehold.it/50x50/ea0d0d/fff&text=Accueil">
                 </a>
             </div>
 
@@ -40,6 +39,8 @@
                 <p id="text"></p>
                 <div id="game_badges" class="hide">
                     <p>Badges obtenus :</p>
+                    <div id="badges">
+                    </div>
                 </div>
             </div>
 

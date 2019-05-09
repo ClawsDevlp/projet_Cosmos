@@ -24,7 +24,7 @@ include_once "../data/MyPDO.projet_cosmos.include.php";
 
 //Infos player
 $stmtInfosPlayer = MyPDO::getInstance()->prepare(<<<SQL
-    SELECT j.pseudo, j.mail, j.id_avatar
+    SELECT j.pseudo, j.mdp, j.planete_origine, j.id_avatar
     FROM joueur j
     WHERE j.id_joueur = :id_player;
 SQL
@@ -32,7 +32,7 @@ SQL
 $stmtInfosPlayer->execute(array(":id_player" => $id_player));
 while (($row = $stmtInfosPlayer->fetch()) !== false) {
     $json["player"]["pseudo"] = $row["pseudo"];
-    $json["player"]["mail"] = $row["mail"];
+    $json["player"]["planete"] = $row["planete_origine"];
     $json["player"]["id_avatar"] = $row["id_avatar"];
 }
 

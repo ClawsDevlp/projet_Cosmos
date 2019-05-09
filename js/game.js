@@ -5,6 +5,7 @@ General
 
 const text = document.getElementById("text");
 const game_badges = document.getElementById("game_badges");
+const badges = document.getElementById("badges");
 const buttons = document.querySelectorAll("button");
 const buttonsPlus = document.querySelectorAll("button:not(:first-child)");
 
@@ -115,7 +116,7 @@ function displayGame(data) {
                                 new_img_badge.src = badge["link"];
                                 new_img_badge.alt = badge["name_badge"];
                                 new_img_badge.title = badge["name_badge"] + " : " + badge["description_badge"];
-                                game_badges.appendChild(new_img_badge);
+                                badges.appendChild(new_img_badge);
                             }
                             game_badges.classList.remove("hide");
                         }

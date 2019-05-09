@@ -10,6 +10,8 @@ const go_registration = document.getElementById("go_registration");
 const registration = document.getElementById("menu_registration");
 const form_registration = document.getElementById("form_registration");
 
+const back = document.getElementById("back");
+
 /*------------------------------
 Initialisation
 ------------------------------*/
@@ -64,6 +66,7 @@ Menu registration
 function goRegistration(evt) {
     connection.classList.toggle("hide");
     registration.classList.toggle("hide");
+    back.classList.toggle("hide");
 
     form_registration.addEventListener("submit", sendRegistration);
 }
@@ -77,8 +80,8 @@ function sendRegistration(evt) {
 
     let params = {};
     if (form_registration.pseudo.value) params["pseudo"] = form_registration.pseudo.value;
-    if (form_registration.mail.value) params["mail"] = form_registration.mail.value;
     if (form_registration.pwd.value) params["pwd"] = form_registration.pwd.value;
+    if (form_registration.planete.value) params["planete"] = form_registration.planete.value;
     params["id_avatar"] = form_registration.avatar.value;
 
     //AJAX query : registration

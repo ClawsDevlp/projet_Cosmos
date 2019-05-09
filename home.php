@@ -1,6 +1,5 @@
 <?php
     session_start();
-    include_once "api/data/MyPDO.projet_cosmos_2.include.php";
     if (!(isset($_SESSION["id"]))){ //Player is not connected
         header("Location: index.php");
     }

@@ -1,6 +1,5 @@
 <?php
     session_start();
-    include_once "api/data/MyPDO.projet_cosmos_2.include.php";
     if (isset($_SESSION["id"])){ //Player is connected
         header("Location: home.php");
     }
@@ -29,6 +28,13 @@
     <main>
         <section id="menu">
            
+            <div id="back" class="hide">
+                <span>Retour</span>
+                <a href="index.php">
+                    <img src="http://placehold.it/50x50/ea0d0d/fff&text=Retour">
+                </a>
+            </div>
+
             <div id="menu_visual">
                 <img src="./images/visuel_4.jpg" alt="visuel 1" />
             </div>
@@ -65,30 +71,30 @@
                             <input type="text" name="pseudo" minlength="4" maxlength="20" required>
                         </div>
                         <div>
-                            <label for="mail">Email</label>
-                            <input type="email" name="mail" minlength="6" maxlength="255">
-                        </div>
-                        <div>
                             <label for="pwd">Mot de passe*</label>
                             <input type="password" name="pwd" minlength="6" maxlength="32" required>
+                        </div>
+                        <div>
+                            <label for="planete">Planète d'origine</label>
+                            <input type="text" name="planete" maxlength="20" value="Terre">
                         </div>
                         <div class="avatar_choice">
                             <p>Avatar</p>
                             <label>
                                 <input type="radio" name="avatar" value="1" checked>
-                                <img src="http://placehold.it/50x50/0bf/fff&text=A">
+                                <img src="images/avatars/avatar_1.jpg">
                             </label>
                             <label>
                                 <input type="radio" name="avatar" value="2">
-                                <img src="http://placehold.it/50x50/b0f/fff&text=B">
+                                <img src="images/avatars/avatar_2.jpg">
                             </label>
                             <label>
                                 <input type="radio" name="avatar" value="3">
-                                <img src="http://placehold.it/50x50/6cf00/fff&text=C">
+                                <img src="images/avatars/avatar_3.jpg">
                             </label>
                             <label>
                                 <input type="radio" name="avatar" value="4">
-                                <img src="http://placehold.it/50x50/ffa700/fff&text=D">
+                                <img src="images/avatars/avatar_4.jpg">
                             </label>
                         </div>
                         <div class="cgu_accept">
@@ -101,7 +107,7 @@
                     </form>
                 </section>
             </div>
-            
+
         </section>
     </main>
 

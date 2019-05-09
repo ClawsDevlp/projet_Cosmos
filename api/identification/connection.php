@@ -49,7 +49,6 @@ if(($row = $stmtCheckPlayer->fetch()) == false) {
 session_start();
 $_SESSION["id"] = $row["id_joueur"];
 $_SESSION["pseudo"] = $row["pseudo"];
-$_SESSION["mail"] = $row["mail"];
 
 //Response
 http_response_code(200);

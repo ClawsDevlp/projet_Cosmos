@@ -34,7 +34,7 @@ if(!isset($data["id_avatar"]) || empty($data["id_avatar"])){
 $pseudo = $data["pseudo"];
 $pwd = $data["pwd"];
 $id_avatar = $data["id_avatar"];
-$mail = (isset($data["mail"])) ? $data["mail"] : NULL;
+$planete = (isset($data["planete"])) ? $data["planete"] : NULL;
 
 //Include data bdd
  include_once "../data/MyPDO.projet_cosmos.include.php";
@@ -55,11 +55,11 @@ if(($row = $stmtCheckPseudo->fetch()) !== false) {
 
 //Insert player data into the player table
 $stmtInsertPlayer = MyPDO::getInstance()->prepare(<<<SQL
-    INSERT INTO joueur (pseudo, mail, mdp, id_avatar) 
-    VALUES (:pseudo, :mail, :pwd, :id_avatar);
+    INSERT INTO joueur (pseudo, planete_origine, mdp, id_avatar) 
+    VALUES (:pseudo, :planete, :pwd, :id_avatar);
 SQL
 );
-$stmtInsertPlayer->execute(array(":pseudo" => $pseudo, ":mail" => $mail, ":pwd" => md5($pwd), ":id_avatar" => $id_avatar));
+$stmtInsertPlayer->execute(array(":pseudo" => $pseudo, ":planete" => $planete, ":pwd" => md5($pwd), ":id_avatar" => $id_avatar));
 
 //Response
 http_response_code(200);

@@ -5,7 +5,7 @@ General
 
 const form_profile = document.getElementById("form_profile");
 const pseudo = document.getElementsByName("pseudo")[0];
-const mail = document.getElementsByName("mail")[0];
+const planete = document.getElementsByName("planete")[0];
 const avatars = document.querySelector("#form_profile .avatar_choice");
 
 const nb_ends = document.getElementById("nb_ends");
@@ -52,7 +52,7 @@ function initialiser(evt) {
             if (response.status == 200) {
                 response.json().then(data => {
                     pseudo.value = data.player.pseudo;
-                    mail.value = data.player.mail;
+                    planete.value = data.player.planete;
                     avatars.querySelector("input[value='"+ data.player.id_avatar+"']").checked = true;
                     
                     if (data.statistics) {
@@ -101,9 +101,9 @@ function sendUpdateProfile(evt) {
 
     let params = {};
     if (form_profile.pseudo.value) params["pseudo"] = form_profile.pseudo.value;
-    if (form_profile.mail.value) params["mail"] = form_profile.mail.value;
     if (form_profile.pwd.value) params["pwd"] = form_profile.pwd.value;
     params["avatar"] = form_profile.avatar.value;
+    if (form_profile.planete.value) params["planete"] = form_profile.planete.value;
 
     //AJAX query : registration
     fetch(url, {
