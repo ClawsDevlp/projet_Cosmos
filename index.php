@@ -109,6 +109,9 @@
             </div>
 
         </section>
+        <div id="slider">
+            <h3 id="slider_message">Message</h3>
+        </div>
     </main>
 
     <!-- JavaScript -->

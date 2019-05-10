@@ -12,6 +12,9 @@ const form_registration = document.getElementById("form_registration");
 
 const back = document.getElementById("back");
 
+const slider = document.getElementById("slider");
+const slider_message = document.getElementById("slider_message");
+
 /*------------------------------
 Initialisation
 ------------------------------*/
@@ -22,6 +25,24 @@ function initialiser(evt) {
         form_connection.addEventListener("submit", sendConnection);
         go_registration.addEventListener("click", goRegistration);
     }
+}
+
+/*------------------------------
+Slider functions
+------------------------------*/
+function wrongLoginSlider() {
+    slider_message.innerHTML = "Login(s) incorrect(s).";
+    slider.style.display = "flex";
+}
+
+function accountCreatedSlider() {
+    slider_message.innerHTML = "Ton compte à bien été créé.";
+    slider.style.display = "flex";
+}
+
+function errorAccountCreationSlider(message) {
+    slider_message.innerHTML = "Ce pseudo est déjà utilisé.";
+    slider.style.display = "flex";
 }
 
 /*------------------------------
@@ -50,6 +71,7 @@ function sendConnection(evt) {
                 //Error
                 response.json().then(data => {
                     console.log(data.message);
+                    wrongLoginSlider();
                 });
             }
         })
@@ -95,11 +117,13 @@ function sendRegistration(evt) {
                     form_registration.reset();
                     connection.classList.toggle("hide");
                     registration.classList.toggle("hide");
+                    accountCreatedSlider();
                 });
             } else {
                 //Error
                 response.json().then(data => {
                     console.log(data.message);
+                    errorAccountCreationSlider(data.message);
                 });
             }
         })
