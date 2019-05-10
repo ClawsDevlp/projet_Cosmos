@@ -90,6 +90,16 @@ Pages
     padding: 5px;
 }
 
+#profile,
+#cgu {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 85vw;
+    margin: auto;
+    padding: 5px 5px 20px 5px;
+}
+
 #home_choice,
 #game_choice {
     display: flex;
@@ -216,12 +226,12 @@ Menu - Registration
     width: 100%;
     height: 100%;
     cursor: pointer;
-    border: 3px solid transparent;
+    border: 2px solid transparent;
     box-sizing: border-box;
 }
 
 .avatar_choice [type=radio]:checked + img {
-    border: 3px solid #fff;
+    border: 2px solid #fff;
 }
 
 .cgu_accept > input {
@@ -295,15 +305,6 @@ Game
 Profile
 ------------------------------*/
 
-#profile {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 85vw;
-    margin: auto;
-    padding: 5px 5px 20px 5px;
-}
-
 #profile hr {
     border: none;
     border-top: 2px dashed #fff;
@@ -333,6 +334,29 @@ Buttons
 }
 
 /*------------------------------
+CGU
+------------------------------*/
+
+#cgu p {
+    margin: 20px 0;
+}
+
+#cgu ul {
+    padding-left: 40px;
+}
+
+#cgu .cgu_title_1 {
+    width: 75%;
+    font-size: 1.5em;
+    margin-bottom: 30px;
+}
+
+#cgu .cgu_title_2 {
+    font-size: 1.2em;
+    margin: 25px 0;
+}
+
+/*------------------------------
 Responsive
 ------------------------------*/
 
@@ -345,8 +369,7 @@ Responsive
 
     #menu,
     #home,
-    #game,
-    #profile {
+    #game {
         flex-direction: column;
         width: 85vw;
     }

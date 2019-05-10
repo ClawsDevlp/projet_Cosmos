@@ -115,6 +115,10 @@ function sendUpdateProfile(evt) {
                 response.json().then(data => {
                     console.log(data.message);
                 });
+            }else{
+                response.json().then(data => {
+                    console.log(data.message);
+                });
             }
         })
         //Network error

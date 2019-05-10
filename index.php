@@ -98,8 +98,8 @@
                             </label>
                         </div>
                         <div class="cgu_accept">
-                            <input type="checkbox" name="cgu" id="cgu" required>
-                            <label for="cgu">J'accepte les Conditions Générales d'Utilisation*</label>
+                            <input type="checkbox" name="cgu" required>
+                            <label for="cgu">J'accepte les <a href="cgu.html">Conditions Générales d'Utilisation</a>*</label>
                         </div>
                         <div>
                             <button type="submit" class="btn">Créer mon compte</button>
