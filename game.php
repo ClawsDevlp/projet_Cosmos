@@ -51,6 +51,9 @@
                 <button type="button" class="btn"></button>
             </div>
 
+            <div id="inventory">
+            </div>
+
         </section>
     </main>
 

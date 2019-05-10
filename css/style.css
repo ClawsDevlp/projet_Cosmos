@@ -135,7 +135,8 @@ Pages
     height: 50px;
 }
 
-#back {
+#back, 
+#inventory {
     right: 8px;
 }
 
@@ -146,6 +147,18 @@ Pages
 #badges > img {
     width: 50px;
     height: 50px;
+    border: 1px solid #fff;
+}
+
+#inventory {
+    position: fixed;
+    bottom: 8px;
+}
+
+#inventory > img {
+    width: 75px;
+    height: 75px;
+    margin-left: 20px; 
     border: 1px solid #fff;
 }
 

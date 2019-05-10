@@ -6,6 +6,7 @@ General
 const text = document.getElementById("text");
 const game_badges = document.getElementById("game_badges");
 const badges = document.getElementById("badges");
+const inventory = document.getElementById("inventory");
 const buttons = document.querySelectorAll("button");
 const buttonsPlus = document.querySelectorAll("button:not(:first-child)");
 
@@ -147,6 +148,19 @@ function displayGame(data) {
             text.innerHTML = data.text["text_content"];
         }
         updateGame(data.text["id_text"]);
+    }
+
+    if(data.objects && data.objects != null){
+        while (inventory.hasChildNodes()) {
+            inventory.removeChild(inventory.firstChild);
+        } 
+        for (let objet of data.objects) {
+            let new_img_objet = document.createElement("img");
+            new_img_objet.src = "http://placehold.it/50x50/ff69B4/fff&text=1";
+            new_img_objet.alt = objet;
+            new_img_objet.title = objet;
+            inventory.appendChild(new_img_objet);
+        }
     }
 }
 
