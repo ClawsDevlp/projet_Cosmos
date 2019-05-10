@@ -333,6 +333,43 @@ Buttons
 }
 
 /*------------------------------
+Slider
+------------------------------*/
+#slider {
+    height: 100px;
+    width: 130px;
+    position: absolute;
+    right: 200px;
+    top: -50px;
+    opacity: 0;
+    background-color: #008000;
+    animation: slide 5s forwards;
+    display: none;
+    justify-content: center;
+}
+
+#slider_message {
+    margin: auto;
+    padding: 0 10px;
+}
+
+@keyframes slide {
+    40% {
+        opacity: 1;
+        transform: translate3d(0, 50px, 0);
+    }
+    60% {
+        opacity: 1;
+        transform: translate3d(0, 50px, 0);
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(0, 0px, 0);
+    }
+}
+
+
+/*------------------------------
 Responsive
 ------------------------------*/
 
