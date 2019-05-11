@@ -380,9 +380,12 @@ Slider
     top: -50px;
     opacity: 0;
     background-color: #008000;
-    animation: slide 5s forwards;
-    display: none;
+    display: flex;
     justify-content: center;
+}
+
+.slider_animation {
+    animation: slide 5s forwards;
 }
 
 #slider_message {

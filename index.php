@@ -109,7 +109,7 @@
             </div>
 
         </section>
-        <div id="slider">
+        <div id="slider" class="">
             <h3 id="slider_message">Message</h3>
         </div>
     </main>

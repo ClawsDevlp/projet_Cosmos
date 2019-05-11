@@ -30,19 +30,38 @@ function initialiser(evt) {
 /*------------------------------
 Slider functions
 ------------------------------*/
+let isAnimated = false;
 function wrongLoginSlider() {
+    isAnimated = true;
     slider_message.innerHTML = "Login(s) incorrect(s).";
-    slider.style.display = "flex";
+    slider.classList.add("slider_animation");
+    
+    window.setTimeout(function() {
+        slider.classList.remove("slider_animation");
+        isAnimated = false;
+    }, 5000)
 }
 
 function accountCreatedSlider() {
+    isAnimated = true;
     slider_message.innerHTML = "Ton compte à bien été créé.";
-    slider.style.display = "flex";
+    slider.classList.add("slider_animation");
+
+    window.setTimeout(function() {
+        slider.classList.remove("slider_animation");
+        isAnimated = false;
+    }, 5000)
 }
 
 function errorAccountCreationSlider(message) {
+    isAnimated = true;
     slider_message.innerHTML = "Ce pseudo est déjà utilisé.";
-    slider.style.display = "flex";
+    slider.classList.add("slider_animation");
+
+    window.setTimeout(function() {
+        slider.classList.remove("slider_animation");
+        isAnimated = false;
+    }, 5000)
 }
 
 /*------------------------------
@@ -71,7 +90,9 @@ function sendConnection(evt) {
                 //Error
                 response.json().then(data => {
                     console.log(data.message);
-                    wrongLoginSlider();
+                    if(!isAnimated) {
+                        wrongLoginSlider();
+                    }
                 });
             }
         })
@@ -117,13 +138,17 @@ function sendRegistration(evt) {
                     form_registration.reset();
                     connection.classList.toggle("hide");
                     registration.classList.toggle("hide");
-                    accountCreatedSlider();
+                    if(!isAnimated) {
+                        accountCreatedSlider();
+                    }
                 });
             } else {
                 //Error
                 response.json().then(data => {
                     console.log(data.message);
-                    errorAccountCreationSlider(data.message);
+                    if(!isAnimated) {
+                        errorAccountCreationSlider(data.message);
+                    }
                 });
             }
         })
