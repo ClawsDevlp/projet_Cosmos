@@ -301,6 +301,9 @@ Game
     margin-bottom: 10px;
     min-height: 60px;
 }
+#game_story #text{
+	width : 100%;
+}
 
 #game_badges {
     margin-top: 10px;
