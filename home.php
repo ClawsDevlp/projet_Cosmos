@@ -38,7 +38,7 @@
 
             <div id="home_visual">
                 <h1>Projet Cosmos</h1>
-                <img src="./images/visuel_4.jpg" alt="visuel 2" />
+                <img src="./images/Visuel_02.jpg" alt="visuel 2" />
             </div>
 
             <div id="home_choice">

@@ -27,6 +27,7 @@
 <body>
     <main>
         <section id="game">
+            <audio autoplay="true" src="sounds/ambiant_01.mp3" loop="true" controls hidden></audio>
 
             <div id="back">
                 <span>Accueil</span>

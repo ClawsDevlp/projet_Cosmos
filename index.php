@@ -36,7 +36,7 @@
             </div>
 
             <div id="menu_visual">
-                <img src="./images/visuel_4.jpg" alt="visuel 1" />
+                <img src="./images/Visuel_01_01.jpg" alt="visuel 1" />
             </div>
 
             <div id="menu_text">
