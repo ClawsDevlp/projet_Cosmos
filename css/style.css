@@ -317,6 +317,7 @@ Game
     margin-right: 5px;
 }
 
+
 /*------------------------------
 Profile
 ------------------------------*/
@@ -325,6 +326,30 @@ Profile
     border: none;
     border-top: 2px dashed #fff;
     margin: 30px 0 20px 0;
+}
+
+#popup {
+    display: none;
+    position: absolute;
+    margin: auto;
+    width: 1000px;
+    height: 500px;
+    background-color: #171717;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.popup_animation {
+    animation: pop 1s forwards;
+}
+
+@keyframes pop {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 /*------------------------------

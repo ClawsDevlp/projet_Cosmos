@@ -13,6 +13,41 @@ const nb_games = document.getElementById("nb_games");
 
 const info_badges = document.getElementById("info_badges");
 
+const popup = document.getElementById("popup"); 
+const validate_btn = document.getElementById("validate");
+const cancel_btn = document.getElementById("cancel");
+
+const slider = document.getElementById("slider");
+const slider_message = document.getElementById("slider_message");
+
+/*------------------------------
+Popup functions
+------------------------------*/
+let isAimated=false;
+function pop(evt) {
+    evt.preventDefault();
+    popup.style.display="flex";
+    popup.classList.add("popup_animation");
+}
+
+function unpop(evt) {
+    evt.preventDefault();
+    popup.classList.remove("popup_animation");
+    popup.style.display="none";
+}
+
+function wrongPwd() {
+    isAimated=true;
+    slider_message.innerHTML = "Mot de passe incorrect.";
+    slider.classList.add("slider_animation");
+    
+    window.setTimeout(function() {
+        slider.classList.remove("slider_animation");
+        isAnimated = false;
+    }, 5000)    
+}
+
+
 /*------------------------------
 Initialisation
 ------------------------------*/
@@ -89,7 +124,9 @@ function initialiser(evt) {
             console.log(error)
         });
 
-    form_profile.addEventListener("submit", sendUpdateProfile);
+    form_profile.addEventListener("submit", pop);
+    validate_btn.addEventListener("click", sendUpdateProfile);
+    cancel_btn.addEventListener("click", unpop);
 }
 
 //Send update profile
