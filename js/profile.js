@@ -14,6 +14,7 @@ const nb_games = document.getElementById("nb_games");
 const info_badges = document.getElementById("info_badges");
 
 const popup = document.getElementById("popup"); 
+const popup_bg = document.getElementById("popup_bg");
 const validate_btn = document.getElementById("validate");
 const cancel_btn = document.getElementById("cancel");
 
@@ -21,12 +22,13 @@ const slider = document.getElementById("slider");
 const slider_message = document.getElementById("slider_message");
 
 /*------------------------------
-Popup functions
+Popup & slider functions
 ------------------------------*/
 let isAimated=false;
 function pop(evt) {
     evt.preventDefault();
     popup.style.display="flex";
+    popup_bg.style.display="flex";
     popup.classList.add("popup_animation");
 }
 
@@ -34,6 +36,7 @@ function unpop(evt) {
     evt.preventDefault();
     popup.classList.remove("popup_animation");
     popup.style.display="none";
+    popup_bg.style.display="none";
 }
 
 function wrongPwd() {
@@ -162,4 +165,5 @@ function sendUpdateProfile(evt) {
         .catch(error => {
             console.log(error)
         });
+    unpop(evt);
 }

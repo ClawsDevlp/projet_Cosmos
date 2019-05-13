@@ -109,14 +109,16 @@
             </section>
 
         </section>
-        <form id="popup" class="">
-            <h3>Veuillez entrer votre mot de passe pour valider</h3>
-            <input type="password" name="mdp" minlength="6" maxlength="32">
-            <div>
-                <button type="button" id="validate" class="btn">Valider</button>
-                <button type="button" id="cancel" class="btn">Annuler</button>
-            </div>
-        </form>
+        <div id="popup_bg">
+            <form id="popup" class="">
+                <h3>Veuillez entrer votre mot de passe pour valider</h3>
+                <input type="password" name="mdp" minlength="6" maxlength="32">
+                <div>
+                    <button type="button" id="validate" class="btn">Valider</button>
+                    <button type="button" id="cancel" class="btn">Annuler</button>
+                </div>
+            </form>
+        </div>
         <div id="slider" class="">
             <h3 id="slider_message">Message</h3>
         </div>
