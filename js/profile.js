@@ -154,10 +154,13 @@ function sendUpdateProfile(evt) {
             if (response.status != 200) {
                 response.json().then(data => {
                     console.log(data.message);
+                    wrongPwd(evt);
                 });
             }else{
                 response.json().then(data => {
                     console.log(data.message);
+                    unpop(evt);
+
                 });
             }
         })
@@ -165,5 +168,4 @@ function sendUpdateProfile(evt) {
         .catch(error => {
             console.log(error)
         });
-    unpop(evt);
 }
