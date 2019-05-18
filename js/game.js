@@ -241,7 +241,7 @@ function typing(){
 	},20);
 	
 	//Clearing interval when clicking on the text : display whole text
-	text.addEventListener("click",function(){
+	window.addEventListener("click",function(){
 		clearInterval(afficherTexte);
 		text.innerHTML = txtContent;
 	});
