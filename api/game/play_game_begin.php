@@ -27,9 +27,10 @@ include_once "../data/MyPDO.projet_cosmos.include.php";
 
 //Recover infos player and game (not end)
 $stmtInfosGame = MyPDO::getInstance()->prepare(<<<SQL
-    SELECT DISTINCT p.id_partie, p.id_texte, id_objet
+    SELECT DISTINCT p.id_partie, p.id_texte, ob.id_objet, nom_objet
     FROM partie p 
-    LEFT OUTER JOIN objetsrecuperes o ON p.id_partie = o.id_partie
+    LEFT OUTER JOIN objetsrecuperes ob ON p.id_partie = ob.id_partie
+    LEFT OUTER JOIN objets o ON ob.id_objet = o.id_objet
     INNER JOIN textes t ON p.id_texte = t.id_texte
     WHERE p.date_texte = (SELECT MAX(p.date_texte) FROM partie p WHERE p.id_joueur = :id_player) AND t.nb_end IS NULL;
 SQL
@@ -39,6 +40,7 @@ while (($row = $stmtInfosGame->fetch()) !== false) {
     $json["id_game"] = $row["id_partie"];
     $id_text = $row["id_texte"];
     $objects_player[] = $row["id_objet"];
+    $objects_name[] = $row["nom_objet"];
 }
 
 //Player objects for a query
@@ -50,6 +52,11 @@ if($objects_player != NULL){
         $in_params[$key] = $object; // collecting values into key-value array
     }
     $in = rtrim($in,","); // :id0,:id1,:id2
+
+    if($objects_name[0] != null){
+        $json["objects"] = $objects_name;
+    }
+
 }else{
     $in = ":id0";
     $in_params["id0"] = 0;

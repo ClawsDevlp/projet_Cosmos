@@ -54,7 +54,7 @@ SQL
 $stmtInfosGame = MyPDO::getInstance()->prepare(<<<SQL
     SELECT DISTINCT id_texte, ob.id_objet, nom_objet
     FROM partie p
-    LEFT OUTER JOIN objetsrecuperes ob ON p.id_partie = ob.id_partie 
+    LEFT OUTER JOIN objetsrecuperes ob ON p.id_partie = ob.id_partie
     LEFT OUTER JOIN objets o ON ob.id_objet = o.id_objet
     WHERE p.id_partie = :id_game
 SQL
@@ -75,7 +75,11 @@ if($objects_player != NULL){
         $in_params[$key] = $object; // collecting values into key-value array
     }
     $in = rtrim($in,","); // :id0,:id1,:id2
-    $json["objects"] = $objects_name;
+    
+    if($objects_name[0] != null){
+        $json["objects"] = $objects_name;
+    }
+    
 }else{
     $in = ":id0";
     $in_params["id0"] = 0;
