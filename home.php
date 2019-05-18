@@ -47,6 +47,17 @@
             </div>
 
         </section>
+
+        <div id="popup_bg">
+            <form id="popup" class="">
+                <h3>Souhaitez-vous reprendre votre aventure là où vous vous étiez arrêté.e ?</h3>
+                <div>
+                    <button type="button" id="validate" class="btn">Oui</button>
+                    <button type="button" id="cancel" class="btn">Non</button>
+                </div>
+            </form>
+        </div>
+
     </main>
 
     <!-- JavaScript -->
