@@ -32,8 +32,30 @@ $pwd = (isset($data["pwd"])) ? $data["pwd"] : NULL;
 $id_avatar = $data["avatar"];
 $id_player = $_SESSION["id"];
 
+if(!isset($data["currentPwd"]) || empty($data["currentPwd"])){
+    http_response_code(422);
+    echo json_encode(array("message" => "Missing password."));
+    exit();
+}
+$currentPwd = $data["currentPwd"];
+
+
 //Include data bdd
 include_once "../data/MyPDO.projet_cosmos.include.php";
+
+//Check current pwd
+$stmtCheckPlayer = MyPDO::getInstance()->prepare(<<<SQL
+    SELECT * 
+    FROM joueur 
+    WHERE id_joueur = :id_player AND mdp = :currentPwd;
+SQL
+);
+$stmtCheckPlayer->execute(array(":id_player" => $id_player, ":currentPwd" => md5($currentPwd)));
+if(($row = $stmtCheckPlayer->fetch()) == false) {
+    http_response_code(422);
+    echo json_encode(array("message" => "Password incorrect."));
+    exit();
+}
 
 //Change pseudo
 if($pseudo){

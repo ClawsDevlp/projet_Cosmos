@@ -24,7 +24,7 @@ const slider_message = document.getElementById("slider_message");
 /*------------------------------
 Popup & slider functions
 ------------------------------*/
-let isAimated=false;
+let isAnimated=false;
 function pop(evt) {
     evt.preventDefault();
     popup.style.display="flex";
@@ -39,9 +39,22 @@ function unpop(evt) {
     popup_bg.style.display="none";
 }
 
-function wrongPwd() {
-    isAimated=true;
+function wrongPdw() {
+    slider.style.backgroundColor = "#8B0000";
+    isAnimated=true;
     slider_message.innerHTML = "Mot de passe incorrect.";
+    slider.classList.add("slider_animation");
+    
+    window.setTimeout(function() {
+        slider.classList.remove("slider_animation");
+        isAnimated = false;
+        slider.style.backgroundColor = "#008000";
+    }, 5000)    
+}
+
+function updateDone() {
+    isAnimated=true;
+    slider_message.innerHTML = "Ton profil a bien été mis à jour.";
     slider.classList.add("slider_animation");
     
     window.setTimeout(function() {
@@ -49,7 +62,6 @@ function wrongPwd() {
         isAnimated = false;
     }, 5000)    
 }
-
 
 /*------------------------------
 Initialisation
@@ -144,6 +156,7 @@ function sendUpdateProfile(evt) {
     if (form_profile.pwd.value) params["pwd"] = form_profile.pwd.value;
     params["avatar"] = form_profile.avatar.value;
     if (form_profile.planete.value) params["planete"] = form_profile.planete.value;
+    if (popup.mdp.value) params["currentPwd"] = popup.mdp.value;
 
     //AJAX query : registration
     fetch(url, {
@@ -154,13 +167,13 @@ function sendUpdateProfile(evt) {
             if (response.status != 200) {
                 response.json().then(data => {
                     console.log(data.message);
-                    wrongPwd(evt);
+                    wrongPdw();
                 });
             }else{
                 response.json().then(data => {
                     console.log(data.message);
                     unpop(evt);
-
+                    updateDone();
                 });
             }
         })

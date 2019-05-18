@@ -12,10 +12,13 @@ const popup = document.getElementById("popup");
 const popup_bg = document.getElementById("popup_bg");
 const validate_btn = document.getElementById("validate");
 const cancel_btn = document.getElementById("cancel");
+const slider = document.getElementById("slider");
 
 /*------------------------------
-Popup functions
+Popup & slider functions
 ------------------------------*/
+var isAnimated = false;
+
 function pop(evt) {
     evt.preventDefault();
     popup.style.display="flex";
@@ -45,6 +48,17 @@ function unpopAndRestartGame(evt) {
     createGame();
 }
 
+function connectedSlider() {
+    isAnimated = true;
+    slider_message.innerHTML = "Tu es bien connecté.e.";
+    slider.classList.add("slider_animation");
+    
+    window.setTimeout(function() {
+        slider.classList.remove("slider_animation");
+        isAnimated = false;
+    }, 5000)
+}
+
 /*------------------------------
 Initialisation
 ------------------------------*/
@@ -61,6 +75,7 @@ function initialiser(evt) {
                 response.json().then(data => {
                     avatar.dataset.idAvatar = data.id_avatar;
                     avatar.src = data.link;
+                    connectedSlider();
                 });
             } else {
                 //Error

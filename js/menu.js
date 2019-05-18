@@ -32,6 +32,7 @@ Slider functions
 ------------------------------*/
 let isAnimated = false;
 function wrongLoginSlider() {
+    slider.style.backgroundColor = "#8B0000";
     isAnimated = true;
     slider_message.innerHTML = "Login(s) incorrect(s).";
     slider.classList.add("slider_animation");
@@ -39,6 +40,7 @@ function wrongLoginSlider() {
     window.setTimeout(function() {
         slider.classList.remove("slider_animation");
         isAnimated = false;
+        slider.style.backgroundColor = "#008000";
     }, 5000)
 }
 
