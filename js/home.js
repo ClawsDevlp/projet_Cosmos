@@ -124,7 +124,6 @@ function logOut(evt) {
 
 function startGame(evt) {
     event.preventDefault();
-    pop(evt);
 
     //Creation URL
     let url = new URL("api/game/play_game_begin.php", "http://localhost/projetPHP/");
@@ -140,6 +139,7 @@ function startGame(evt) {
                         } else {
                             createGame();
                         }*/
+                        pop(evt);
                         validate_btn.addEventListener("click", unpopAndContinueGame);
                         cancel_btn.addEventListener("click", unpopAndRestartGame);
                     } else {

@@ -15,6 +15,12 @@ const back = document.getElementById("back");
 const slider = document.getElementById("slider");
 const slider_message = document.getElementById("slider_message");
 
+const popup = document.getElementById("popup"); 
+const popup_bg = document.getElementById("popup_bg");
+const return_btn = document.getElementById("return");
+
+const cgu = document.getElementById("cgu_link");
+
 /*------------------------------
 Initialisation
 ------------------------------*/
@@ -28,7 +34,7 @@ function initialiser(evt) {
 }
 
 /*------------------------------
-Slider functions
+Slider & popup functions
 ------------------------------*/
 let isAnimated = false;
 function wrongLoginSlider() {
@@ -64,6 +70,20 @@ function errorAccountCreationSlider(message) {
         slider.classList.remove("slider_animation");
         isAnimated = false;
     }, 5000)
+}
+
+function pop(evt) {
+    evt.preventDefault();
+    popup.style.display="flex";
+    popup_bg.style.display="flex";
+    popup.classList.add("popup_animation");
+}
+
+function unpop(evt) {
+    evt.preventDefault();
+    popup.classList.remove("popup_animation");
+    popup.style.display="none";
+    popup_bg.style.display="none";
 }
 
 /*------------------------------
@@ -159,3 +179,6 @@ function sendRegistration(evt) {
             console.log(error)
         });
 }
+
+cgu.addEventListener("click", pop);
+return_btn.addEventListener("click", unpop);
