@@ -435,6 +435,21 @@ Popup
     justify-content: center;
 }
 
+#popup_badge{
+	display : none;
+    position : absolute;
+	z-index : 999;
+	top : 20%;
+	left : 50%;
+	width : 600px;
+	height : 200px;
+	transform : translate(-50%,-50%);
+	background-color: #000000;
+	border : 2px solid white;
+	text-align : center;
+	padding : 10px;
+}
+
 #popup h3, #popup input, #popup div {
     margin: 10px auto;
 }
@@ -455,6 +470,21 @@ Popup
 #popup object {
     padding: 10px;
     height: 500px;
+}
+
+#pop_button{
+	position : absolute;
+	top : 0px;
+	left: 0px;
+	width : 30px;
+	margin : 30 auto auto auto;
+	font-size : 1.5em;
+	border : 2px solid white;
+	padding : 8px;
+}
+
+#pop_button:hover{
+	cursor : pointer;
 }
 
 

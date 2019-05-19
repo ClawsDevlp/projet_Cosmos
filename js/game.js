@@ -9,6 +9,11 @@ const badges = document.getElementById("badges");
 const inventory = document.getElementById("inventory");
 const buttons = document.querySelectorAll("button");
 const buttonsPlus = document.querySelectorAll("button:not(:first-child)");
+
+const current_badge = document.getElementById("popup_badge");
+const current_badge_content = document.getElementById("contenu_popup");
+const img_popup = document.getElementById("img_popup");
+
 var id_game;
 
 /*------------------------------
@@ -65,12 +70,13 @@ function makeChoice(evt) {
 
     let url = new URL("api/game/play_game.php", "http://localhost/projetPHP/");
     url.search = new URLSearchParams(params);
-
+	
     //AJAX query : play a game, pick up choice(s) and text
     fetch(url)
         .then(response => {
             if (response.status == 200) {
                 response.json().then(data => {
+					console.log(data);
                     displayGame(data);
                 });
             } else {
@@ -84,12 +90,14 @@ function makeChoice(evt) {
         .catch(error => {
             console.log(error)
         });
+	
 }
 
 //Display game
 function displayGame(data) {
 	
     if (!(data.text)) {
+		
         //If end of the game
         buttons[0].innerHTML = "Revenir au menu";
         buttons[0].addEventListener("click", function () {
@@ -140,7 +148,6 @@ function displayGame(data) {
         buttons[0].innerHTML = "Suivant";
         text.innerHTML = data.text["text_content"];
         updateGame(data.text["id_text"]);
-		//console.log("suivant");
     } else {
         //If choices
         for (let i in data.choices) {
@@ -152,6 +159,11 @@ function displayGame(data) {
         }
         updateGame(data.text["id_text"]);
     }
+	
+	//console.log(data.badges_popup);
+	if(data.badges_popup != undefined){
+		pop_badge(data.badges_popup["nom_badge"], data.badges_popup["link"]);
+	}
 
     if(data.objects && data.objects != null){
         while (inventory.hasChildNodes()) {
@@ -175,8 +187,9 @@ function updateGame(id_text) {
     let params = {};
     params["id_text"] = id_text;
     params["id_game"] = id_game;
-
+	
     //AJAX query : update a game, insert new text according to player and game
+	//Display popup if an achivement has been obtained
 	
     fetch(url, {
             method: "PUT",
@@ -253,3 +266,19 @@ function typing(){
 		});
 	})
 }
+
+function pop_badge(nom_badge , link_img) {
+	current_badge.style.display = "block";
+    current_badge.classList.add("popup_animation");
+	current_badge_content.innerHTML = "Nouveau badge obtenu : " + nom_badge;
+	img_popup.innerHTML = "<img src = '" + link_img + "' alt =/>" 
+}
+
+function closePopup(){
+	current_badge.style.display = "none";
+}
+
+document.getElementById("pop_button").addEventListener("click", function(e){
+	e.preventDefault;
+	closePopup();
+});

@@ -26,16 +26,18 @@
 
 <body>
     <main>
+		
+		
         <section id="game">
             <audio autoplay="true" src="sounds/ambiant_01.mp3" loop="true" controls hidden></audio>
-
+			
             <div id="back">
                 <span>Accueil</span>
                 <a href="home.php">
                     <img src="http://placehold.it/50x50/ea0d0d/fff&text=Accueil">
                 </a>
             </div>
-
+			
             <div id="game_story">
                 <p id="text"></p>
                 <div id="game_badges" class="hide">
@@ -54,8 +56,14 @@
 
             <div id="inventory">
             </div>
-
+			
         </section>
+		
+		<div id="popup_badge">
+			<div id = "contenu_popup"></div>
+			<div id = "img_popup"></div>
+			<a id="pop_button" style="display:block;">x</a>
+		</div>
     </main>
 
     <!-- JavaScript -->

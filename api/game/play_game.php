@@ -26,6 +26,7 @@ if((!isset($_GET["id_game"]) || empty($_GET["id_game"]))
 $id_game = $_GET["id_game"];
 $choice_player = $_GET["choice_player"];
 $id_text = "";
+$id_badge = "";
 $objects_player = array();
 $json = array();
 
@@ -117,6 +118,31 @@ $stmtNextChoices->execute(array_merge($params,$in_params)); // just merge two ar
 while (($row = $stmtNextChoices->fetch()) !== false) {
     $json["choices"][] = array("id_choice" => $row["id_reponse"], "text_choice" => $row["contenu_reponse"]);
 }
+
+//Popup badges
+//retourne la valeur du badge obtenu par l'id du texte sur la partie en cours
+$stmtPopupBadges = MyPDO::getInstance()->prepare(<<<SQL
+	SELECT DISTINCT b.id_badge, b.nom_badge, b.description_badge, b.link,  b.id_texte
+	FROM textes t
+	INNER JOIN badges b ON t.id_texte = b.id_texte
+	INNER JOIN badgesobtenus bo ON b.id_badge = bo.id_badge
+	WHERE t.id_texte = :id_text;
+SQL
+    );
+$stmtPopupBadges->execute(array(":id_text" => $id_text));
+while (($row = $stmtPopupBadges->fetch()) !== false) {
+   $json["badges_popup"] = array("nom_badge" => $row["nom_badge"], "link" => $row["link"]);
+}
+
+/*
+	SELECT b.id_badge, b.nom_badge, b.description_badge, b.link,  b.id_texte
+	FROM textes t
+	INNER JOIN badges b ON t.id_texte = b.id_texte
+	INNER JOIN badgesobtenus bo ON b.id_badge = bo.id_badge
+	INNER JOIN partie p ON bo.id_partie = p.id_partie
+	WHERE t.id_texte = :id_text
+	AND p.id_partie = :id_game
+*/
 
 //Response
 http_response_code(200);
