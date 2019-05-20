@@ -174,10 +174,11 @@ function displayGame(data) {
         } 
         for (let objet of data.objects) {
             let new_img_objet = document.createElement("img");
-            new_img_objet.src = "http://placehold.it/50x50/ff69B4/fff&text=1";
             new_img_objet.alt = objet;
             new_img_objet.title = objet;
+			new_img_objet.src = data.objects_link;
             inventory.appendChild(new_img_objet);
+			
         }
     }
 }

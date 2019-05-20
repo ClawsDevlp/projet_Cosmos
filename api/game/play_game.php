@@ -53,7 +53,7 @@ SQL
 
 //Recover infos player, objects and game
 $stmtInfosGame = MyPDO::getInstance()->prepare(<<<SQL
-    SELECT DISTINCT id_texte, ob.id_objet, nom_objet
+    SELECT DISTINCT id_texte, ob.id_objet, nom_objet, o.link
     FROM partie p
     LEFT OUTER JOIN objetsrecuperes ob ON p.id_partie = ob.id_partie
     LEFT OUTER JOIN objets o ON ob.id_objet = o.id_objet
@@ -65,6 +65,7 @@ while (($row = $stmtInfosGame->fetch()) !== false) {
     $id_text = $row["id_texte"];
     $objects_player[] = $row["id_objet"];
     $objects_name[] = $row["nom_objet"];
+	$objects_link[] = $row["link"];
 }
 
 //Player objects for a query
@@ -79,6 +80,7 @@ if($objects_player != NULL){
     
     if($objects_name[0] != null){
         $json["objects"] = $objects_name;
+		$json["objects_link"] = $objects_link;
     }
     
 }else{
