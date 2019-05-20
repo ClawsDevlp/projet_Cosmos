@@ -11,7 +11,7 @@ const avatars = document.querySelector("#form_profile .avatar_choice");
 const nb_ends = document.getElementById("nb_ends");
 const nb_games = document.getElementById("nb_games");
 
-const info_badges = document.getElementById("info_badges");
+const badgesArea = document.getElementById("badges");
 
 const popup = document.getElementById("popup"); 
 const popup_bg = document.getElementById("popup_bg");
@@ -121,7 +121,7 @@ function initialiser(evt) {
                                 new_img_badge.src = badge["link"];
                                 new_img_badge.alt = badge["name_badge"];
                                 new_img_badge.title = badge["name_badge"] + " : " + badge["description_badge"];
-                                info_badges.appendChild(new_img_badge);
+                                badgesArea.appendChild(new_img_badge);
                             }
                         }
                     }

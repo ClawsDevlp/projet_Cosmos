@@ -208,7 +208,7 @@ Menu
 
 #menu_text {
     flex: 2;
-    height: 375px;
+    min-height: 375px;
     margin-left: 30px;
 }
 
