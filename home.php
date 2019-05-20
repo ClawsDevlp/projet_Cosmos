@@ -3,6 +3,12 @@
     if (!(isset($_SESSION["id"]))){ //Player is not connected
         header("Location: index.php");
     }
+    if(isset($_SERVER['HTTP_REFERER'])) {
+        $previous_page = $_SERVER['HTTP_REFERER'];
+    //echo json_encode($json);
+        echo "<div id='previous_page'>$previous_page</div>";
+    };
+    http_response_code(200);
 ?>
 
 <!DOCTYPE HTML>
