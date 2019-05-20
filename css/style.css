@@ -164,21 +164,23 @@ Pages
 }
 
 #music_button, #fx_button {
-    position: fixed;
+    position: absolute;
     bottom: 8px;
     cursor: pointer;
     z-index: 999;
 }
 
-#music_button > img {
-    width: 40px;
-    height: 40px;
+#music_button {
+	left: 10px;
 }
 
-#fx_button > img {
-    width: 40px;
+#fx_button {
+    left: 60px;
+}
+
+#music_button > img, #fx_button > img {
+	width: 40px;
     height: 40px;
-    margin-left: 50px;
 }
 
 
