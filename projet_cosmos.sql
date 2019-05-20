@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 20 mai 2019 à 12:19
--- Version du serveur :  5.7.26
--- Version de PHP :  7.2.18
+-- Généré le :  lun. 20 mai 2019 à 17:18
+-- Version du serveur :  5.7.24
+-- Version de PHP :  7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -405,7 +405,7 @@ INSERT INTO `textes` (`id_texte`, `contenu_texte`, `nb_end`) VALUES
 (49, 'Vous mourez dans d’atroces souffrances.', 4),
 (50, 'Vous vous apprêtez à retirer ce corps étranger de votre cuisse mais vous apercevez la flasque de whishy. Elle est juste en face de vous, intacte.', NULL),
 (51, 'Vous tendez le bras pour l’atteindre et parvenez finalement à l’attraper.', NULL),
-(52, 'Une gorgée pour le courage et le reste sur la plaie pour la désinfecter', NULL),
+(52, 'Une gorgée pour le courage et le reste sur la plaie pour la désinfecter.', NULL),
 (53, 'Le verrou est fermé. Vous sortez le tournevis afin de crocheter la serrure.', NULL),
 (54, 'A l’intérieur il y a de la nourriture en abondance.', NULL),
 (55, '*Scrunch…scrunch…* Vous regagnez des forces.', NULL),

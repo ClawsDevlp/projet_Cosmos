@@ -14,6 +14,8 @@ const validate_btn = document.getElementById("validate");
 const cancel_btn = document.getElementById("cancel");
 const slider = document.getElementById("slider");
 
+const previous_page = document.getElementById("previous_page");
+
 /*------------------------------
 Popup & slider functions
 ------------------------------*/
@@ -75,7 +77,6 @@ function initialiser(evt) {
                 response.json().then(data => {
                     avatar.dataset.idAvatar = data.id_avatar;
                     avatar.src = data.link;
-                    connectedSlider();
                 });
             } else {
                 //Error
@@ -186,3 +187,12 @@ function createGame() {
             console.log(error)
         });
 }
+
+//Test previous page to show connection slider
+function testPreviousPage() {
+    if(previous_page.innerHTML == "http://localhost/projetPHP/index.php") {
+        connectedSlider();
+    }  
+}
+
+testPreviousPage();
