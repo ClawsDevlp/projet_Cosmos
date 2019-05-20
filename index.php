@@ -99,7 +99,7 @@
                         </div>
                         <div class="cgu_accept">
                             <input type="checkbox" name="cgu" required>
-                            <label for="cgu">J'accepte les <a id="cgu_link" href="cgu.html">Conditions Générales d'Utilisation</a>*</label>
+                            <label for="cgu">J'accepte les <a id="cgu_link" href="">Conditions Générales d'Utilisation</a>*</label>
                         </div>
                         <div>
                             <button type="submit" class="btn">Créer mon compte</button>
@@ -111,7 +111,7 @@
         </section>
 
         <div id="popup_bg">
-            <form id="popup" class="">
+            <form id="popup">
                 <object data="cgu.html" type="text/html"></object>
                 <div>
                     <button type="button" id="return" class="btn">Retour</button>
@@ -119,9 +119,8 @@
             </form>
         </div>
 
-
-        <div id="slider" class="">
-            <h3 id="slider_message">Message</h3>
+        <div id="slider">
+            <p id="slider_message"></p>
         </div>
     </main>
 

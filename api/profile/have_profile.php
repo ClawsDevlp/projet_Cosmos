@@ -1,6 +1,6 @@
 <?php
 /*
- *  Create a game
+ *  Have profile player
  */
 
 session_start();

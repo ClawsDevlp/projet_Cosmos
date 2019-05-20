@@ -56,7 +56,6 @@
             </div>
 
             <div id="inventory">
-			
             </div>
 			
         </section>
@@ -65,10 +64,11 @@
         <div id="fx_button"><img id="fx_img" src="images/Logo_FX.png" alt="Bouton FX"></div>
 
 		<div id="popup_badge">
-			<div id = "contenu_popup"></div>
-			<div id = "img_popup"></div>
+			<div id="contenu_popup"></div>
+			<div id="img_popup"></div>
 			<a id="pop_button" style="display:block;">x</a>
 		</div>
+   
     </main>
 
     <!-- JavaScript -->

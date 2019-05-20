@@ -43,12 +43,12 @@
                         <input type="text" name="pseudo" minlength="4" maxlength="20">
                     </div>
                     <div>
-                        <label for="pwd">Mot de passe</label>
-                        <input type="password" name="pwd" minlength="6" maxlength="32">
-                    </div>
-                    <div>
                         <label for="planete">Planète d'origine</label>
                         <input type="text" name="planete" maxlength="20">
+                    </div>
+                    <div>
+                        <label for="pwd">Nouveau mot de passe</label>
+                        <input type="password" name="pwd" minlength="6" maxlength="32">
                     </div>
                     <div class="avatar_choice">
                         <p>Avatar</p>
@@ -109,9 +109,10 @@
             </section>
 
         </section>
+
         <div id="popup_bg">
-            <form id="popup" class="">
-                <h3>Veuillez entrer votre mot de passe pour valider</h3>
+            <form id="popup">
+                <p>Entrez votre mot de passe pour valider :</p>
                 <input type="password" name="mdp" minlength="6" maxlength="32">
                 <div>
                     <button type="button" id="validate" class="btn">Valider</button>
@@ -119,8 +120,9 @@
                 </div>
             </form>
         </div>
-        <div id="slider" class="">
-            <h3 id="slider_message">Message</h3>
+
+        <div id="slider">
+            <p id="slider_message"></p>
         </div>
     </main>
 

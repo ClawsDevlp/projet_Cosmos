@@ -38,7 +38,7 @@
                 <a href="profile.php">
                     <img id="avatar" src="" alt="Image avatar">
                 </a>
-                <span><?php echo $_SESSION["pseudo"] ?></span>
+                <span id="pseudo"></span>
                 <img id="log_out" src="css/images/log_out.svg">
             </div>
 
@@ -55,17 +55,18 @@
         </section>
 
         <div id="popup_bg">
-            <form id="popup" class="">
-                <h3>Souhaitez-vous reprendre votre aventure là où vous vous étiez arrêté.e ?</h3>
+            <form id="popup">
+                <p>Souhaitez-vous reprendre votre aventure là où vous vous étiez arrêté.e ?</p>
                 <div>
                     <button type="button" id="validate" class="btn">Oui</button>
-                    <button type="button" id="cancel" class="btn">Non</button>
+                    <button type="button" id="validate_no" class="btn">Non</button>
+                    <button type="button" id="cancel" class="btn">Annuler</button>
                 </div>
             </form>
         </div>
 
-        <div id="slider" class="">
-            <h3 id="slider_message">Message</h3>
+        <div id="slider">
+            <p id="slider_message"></p>
         </div>
 
     </main>

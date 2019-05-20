@@ -54,7 +54,7 @@ function wrongPdw() {
 
 function updateDone() {
     isAnimated=true;
-    slider_message.innerHTML = "Ton profil a bien été mis à jour.";
+    slider_message.innerHTML = "Votre profil a bien été mis à jour.";
     slider.classList.add("slider_animation");
     
     window.setTimeout(function() {

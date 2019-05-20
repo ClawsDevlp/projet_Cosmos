@@ -6,11 +6,13 @@ General
 const log_out = document.getElementById("log_out");
 const start_game = document.getElementById("start_game");
 const go_profile = document.getElementById("go_profile");
+const pseudo = document.getElementById("pseudo");
 const avatar = document.getElementById("avatar");
 
 const popup = document.getElementById("popup"); 
 const popup_bg = document.getElementById("popup_bg");
 const validate_btn = document.getElementById("validate");
+const validate_no_btn = document.getElementById("validate_no");
 const cancel_btn = document.getElementById("cancel");
 const slider = document.getElementById("slider");
 
@@ -26,8 +28,13 @@ function pop(evt) {
     popup.style.display="flex";
     popup_bg.style.display="flex";
     popup.classList.add("popup_animation");
-    validate_btn.style = "width: 200px; margin: 25px;";
-    cancel_btn.style = "width: 200px; margin: 25px;";
+}
+
+function unpop(evt) {
+    evt.preventDefault();
+    popup.classList.remove("popup_animation");
+    popup.style.display="none";
+    popup_bg.style.display="none";
 }
 
 function unpopAndContinueGame(evt) {
@@ -36,8 +43,6 @@ function unpopAndContinueGame(evt) {
     popup.style.display="none";
     popup_bg.style.display="none";
     window.location.href = "game.php";
-    validate_btn.style = "";
-    cancel_btn.style = "";
 }
 
 function unpopAndRestartGame(evt) {
@@ -45,14 +50,12 @@ function unpopAndRestartGame(evt) {
     popup.classList.remove("popup_animation");
     popup.style.display="none";
     popup_bg.style.display="none";
-    validate_btn.style = "";
-    cancel_btn.style = "";
     createGame();
 }
 
 function connectedSlider() {
     isAnimated = true;
-    slider_message.innerHTML = "Tu es bien connecté.e.";
+    slider_message.innerHTML = "Vous êtes maintenant dans votre navette. Que voulez-vous faire ?";
     slider.classList.add("slider_animation");
     
     window.setTimeout(function() {
@@ -68,13 +71,14 @@ document.addEventListener("DOMContentLoaded", initialiser);
 
 function initialiser(evt) {
     //Creation URL
-    let url = new URL("api/profile/have_avatar.php", "http://localhost/projetPHP/");
+    let url = new URL("api/profile/have_infos_player.php", "http://localhost/projetPHP/");
 
     //AJAX query : have avatar
     fetch(url)
         .then(response => {
             if (response.status == 200) {
                 response.json().then(data => {
+                    pseudo.innerHTML = data.pseudo;
                     avatar.dataset.idAvatar = data.id_avatar;
                     avatar.src = data.link;
                 });
@@ -134,15 +138,11 @@ function startGame(evt) {
         .then(response => {
             if (response.status == 200) {
                 response.json().then(data => {
-                    if (data.id_game) {
-                       /* if (confirm("Souhaitez-vous reprendre votre aventure là où vous vous étiez arrêté.e ?")) {
-                            window.location.href = "game.php";
-                        } else {
-                            createGame();
-                        }*/
+                    if (data.id_game && data.text.id_text > 4) {
                         pop(evt);
                         validate_btn.addEventListener("click", unpopAndContinueGame);
-                        cancel_btn.addEventListener("click", unpopAndRestartGame);
+                        validate_no_btn.addEventListener("click", unpopAndRestartGame);
+                        cancel_btn.addEventListener("click", unpop);
                     } else {
                         createGame();
                     }

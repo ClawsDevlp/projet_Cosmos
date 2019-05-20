@@ -40,7 +40,7 @@ let isAnimated = false;
 function wrongLoginSlider() {
     slider.style.backgroundColor = "#8B0000";
     isAnimated = true;
-    slider_message.innerHTML = "Login(s) incorrect(s).";
+    slider_message.innerHTML = "Login(s) incorrect(s). Réessayez.";
     slider.classList.add("slider_animation");
     
     window.setTimeout(function() {
@@ -51,8 +51,9 @@ function wrongLoginSlider() {
 }
 
 function accountCreatedSlider() {
+    slider.style.backgroundColor = "#008000";
     isAnimated = true;
-    slider_message.innerHTML = "Ton compte à bien été créé.";
+    slider_message.innerHTML = "Vous avez été retenu pour la mission. Embarquez dans votre navette !";
     slider.classList.add("slider_animation");
 
     window.setTimeout(function() {
@@ -62,8 +63,9 @@ function accountCreatedSlider() {
 }
 
 function errorAccountCreationSlider(message) {
+    slider.style.backgroundColor = "#8B0000";
     isAnimated = true;
-    slider_message.innerHTML = "Ce pseudo est déjà utilisé.";
+    slider_message.innerHTML = "Ce pseudo existe déjà dans l'univers.";
     slider.classList.add("slider_animation");
 
     window.setTimeout(function() {
