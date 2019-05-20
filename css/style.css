@@ -588,3 +588,12 @@ Responsive
         min-height: 100px;
     }
 }
+
+
+/*------------------------------
+Other
+------------------------------*/
+
+#previous_page {
+    display: none;
+}

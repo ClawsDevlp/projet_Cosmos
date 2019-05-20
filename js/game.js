@@ -61,6 +61,9 @@ function initialiser(evt) {
 function makeChoice(evt) {
     event.preventDefault();
 
+    //Play a little sound FX
+    document.querySelector('#button_sound').play();
+
     for (let button of buttonsPlus) {
         button.classList.add("hide");
     }
