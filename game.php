@@ -29,7 +29,7 @@
 		
 		
         <section id="game">
-            <audio autoplay="true" src="sounds/ambiant_01.mp3" loop="true" controls hidden></audio>
+            <audio id="music" autoplay="true" src="sounds/ambiant_01.mp3" loop="true" controls hidden></audio>
             <audio id="button_sound" src="sounds/button_sound_01.mp3" controls hidden></audio>
 			
             <div id="back">
@@ -61,6 +61,9 @@
 			
         </section>
 		
+        <div id="music_button"><img id="music_img" src="images/Logo_Music.png" alt="Bouton musique"></div>
+        <div id="fx_button"><img id="fx_img" src="images/Logo_FX.png" alt="Bouton FX"></div>
+
 		<div id="popup_badge">
 			<div id = "contenu_popup"></div>
 			<div id = "img_popup"></div>

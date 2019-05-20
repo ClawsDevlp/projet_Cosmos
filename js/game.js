@@ -14,6 +14,11 @@ const current_badge = document.getElementById("popup_badge");
 const current_badge_content = document.getElementById("contenu_popup");
 const img_popup = document.getElementById("img_popup");
 
+const music_button = document.querySelector('#music_button');
+const music_img = document.querySelector('#music_img');
+const fx_button = document.querySelector('#fx_button');
+const fx_img = document.querySelector('#fx_img');
+
 var isEnd = 0;
 var id_game;
 
@@ -295,4 +300,36 @@ function closePopup(){
 document.getElementById("pop_button").addEventListener("click", function(e){
 	e.preventDefault;
 	closePopup();
+});
+
+//Play or pause the music
+music_button.addEventListener('click', evt => {
+    evt.preventDefault();
+    const music = document.querySelector('#music');
+
+    if(music.paused) {
+        music_img.src = "images/Logo_Music.png";
+        music.play();
+    }
+    else {
+        console.log("Mise en pause");
+        music_img.src = "images/Logo_No_Music.png";
+        music.pause();
+    }
+
+});
+
+//Play or pause the sounds FX
+fx_button.addEventListener('click', evt => {
+    evt.preventDefault();
+    const fx = document.querySelector('#button_sound');
+
+    if(fx.muted == true) {
+        fx_img.src = "images/Logo_FX.png";
+        fx.muted = false;      
+    }
+    else {
+        fx_img.src = "images/Logo_No_FX.png";
+        fx.muted = true;  
+    }
 });
