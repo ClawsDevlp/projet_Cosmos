@@ -14,6 +14,7 @@ const current_badge = document.getElementById("popup_badge");
 const current_badge_content = document.getElementById("contenu_popup");
 const img_popup = document.getElementById("img_popup");
 
+var isEnd = 0;
 var id_game;
 
 /*------------------------------
@@ -22,6 +23,7 @@ Initialisation
 document.addEventListener("DOMContentLoaded", initialiser);
 
 function initialiser(evt) {
+	isEnd = 0;
     console.log(buttonsPlus);
     //Possibility to make a choice for each button
     for (let button of buttons) {
@@ -76,7 +78,7 @@ function makeChoice(evt) {
         .then(response => {
             if (response.status == 200) {
                 response.json().then(data => {
-					console.log(data);
+					//console.log(data);
                     displayGame(data);
                 });
             } else {
@@ -116,8 +118,9 @@ function displayGame(data) {
             .then(response => {
                 if (response.status == 200) {
                     response.json().then(data => {
+						isEnd = 1;
                         text.innerHTML = "C'était la fin n°" + data.statistics["nb_end"] + ". Vous avez assisté à " + data.statistics["nb_ends"] + " fin sur 10.";
-						typing();
+						typing(isEnd, text.innerHTML);
                         if (data.badges) {
                             for (let badge of data.badges) {
                                 let new_img_badge = document.createElement("img");
@@ -181,6 +184,7 @@ function displayGame(data) {
 
 //Update the game
 function updateGame(id_text) {
+	typing(isEnd);
     //Creation URL and queries
     let url = new URL("api/game/update_game.php", "http://localhost/projetPHP/");
 
@@ -208,12 +212,11 @@ function updateGame(id_text) {
         .catch(error => {
             console.log(error)
         });
-
-    url = new URL("api/profile/add_badges_in_game.php", "http://localhost/projetPHP/");
 	
-	//sets typing effects on text
-	typing();
-
+	
+    url = new URL("api/profile/add_badges_in_game.php", "http://localhost/projetPHP/");	
+	
+	
     //AJAX query : add badges in game
     fetch(url, {
             method: "POST",
@@ -234,37 +237,44 @@ function updateGame(id_text) {
 	
 }
 
-function typing(){
-
-	let txtContent = text.textContent;
-	let txtLength = txtContent.length;
-	//Empty text content
-	text.innerHTML = "";
-	var counter = 0;
-	
-	//Displaying text content with prompt effect
-	var afficherTexte = setInterval(function(){
-		text.innerHTML += (txtContent.charAt(counter) +"<div id='trait'>A</div>");
-		counter++;
-		if(counter >= txtLength){
+function typing(isEnd, mytxt){
+	console.log(isEnd);
+	if(isEnd == 0){	
+		let txtContent = text.textContent;
+		let txtLength = txtContent.length;
+		//Empty text content
+		text.innerHTML = "";
+		var counter = 0;
+		
+		//Displaying text content with prompt effect
+		var afficherTexte = setInterval(function(){
+			text.innerHTML += (txtContent.charAt(counter));
+			counter++;
+			if(counter >= txtLength){
+				clearInterval(afficherTexte);
+			}
+			
+		},20);
+		
+		//Clearing interval when clicking on the text : display whole text
+		if(isEnd == 0){
+			window.addEventListener("click",function(){
 			clearInterval(afficherTexte);
+			text.innerHTML = txtContent;
+			});
 		}
-		let trait = document.querySelector("#trait");
-		trait.parentNode.removeChild(trait);
-	},20);
-	
-	//Clearing interval when clicking on the text : display whole text
-	window.addEventListener("click",function(){
-		clearInterval(afficherTexte);
-		text.innerHTML = txtContent;
-	});
-	
-	//Clearing interval when clicking on buttons to prevent texts from mixing
-	buttons.forEach(e => {
-		e.addEventListener("click", function(){
+		//Clearing interval when clicking on buttons to prevent texts from mixing
+		buttons.forEach(e => {
+			e.addEventListener("click", function(){
+				clearInterval(afficherTexte);
+			});
+		})
+	}else{
+		window.addEventListener("click",function(){
 			clearInterval(afficherTexte);
+			text.innerHTML = mytxt;
 		});
-	})
+	}
 }
 
 function pop_badge(nom_badge , link_img) {
