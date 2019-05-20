@@ -1,6 +1,6 @@
 <?php
 /*
- *  Register a player
+ *  Update profile player
  */
 
 session_start();

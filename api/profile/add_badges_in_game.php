@@ -1,6 +1,6 @@
 <?php
 /*
- *  Create a game
+ *  Add badges in game
  */
 
 session_start();

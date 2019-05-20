@@ -52,6 +52,7 @@ body {
 }
 
 main {
+    position: relative;
     display: flex;
     min-height: 100%;
     background-color: #000;
@@ -131,11 +132,11 @@ Pages
 
 #home_profile img,
 #back img {
-    width: 50px;
+    max-width: 50px;
     height: 50px;
 }
 
-#back, 
+#back,
 #inventory {
     right: 8px;
 }
@@ -158,7 +159,7 @@ Pages
 #inventory > img {
     width: 75px;
     height: 75px;
-    margin-left: 20px; 
+    margin-left: 20px;
     border: 1px solid #fff;
 }
 
@@ -186,6 +187,7 @@ Menu
 
 #menu_text {
     flex: 2;
+    height: 375px;
     margin-left: 30px;
 }
 
@@ -269,9 +271,9 @@ Home
 #home_visual > h1 {
     position: absolute;
     width: 100%;
-    color: #1d17eb;
+    color: #fff;
     font-size: 3em;
-    margin-top: 10px;
+    margin-top: 6px;
     text-align: center;
 }
 
@@ -301,8 +303,9 @@ Game
     margin-bottom: 10px;
     min-height: 60px;
 }
-#game_story #text{
-	width : 100%;
+
+#game_story #text {
+    width: 100%;
 }
 
 #game_badges {
@@ -333,7 +336,6 @@ Buttons
 ------------------------------*/
 
 .btn {
-    height: 34px;
     border: 1px solid transparent;
     background-color: #1d17eb;
     border-radius: 2px;
@@ -377,15 +379,17 @@ CGU
 Slider
 ------------------------------*/
 #slider {
-    height: 100px;
-    width: 130px;
     position: absolute;
-    right: 200px;
-    top: -50px;
-    opacity: 0;
-    background-color: #008000;
     display: flex;
+    visibility: hidden;
+    width: 150px;
+    height: 120px;
+    right: 10vw;
+    top: -50px;
+    background-color: #008000;
     justify-content: center;
+    opacity: 0;
+    z-index: 2;
 }
 
 .slider_animation {
@@ -398,73 +402,64 @@ Slider
 }
 
 @keyframes slide {
-    40% {
-        opacity: 1;
-        transform: translate3d(0, 50px, 0);
+    0% {
+        visibility: visible;
     }
-    60% {
+
+    20% {
         opacity: 1;
-        transform: translate3d(0, 50px, 0);
+        top: 0px;
     }
+
+    80% {
+        opacity: 1;
+        top: 0px;
+    }
+
     100% {
+        display: none;
         opacity: 0;
-        transform: translate3d(0, 0px, 0);
+        top: -50px;
     }
 }
 
 /*------------------------------
-Popup
+Popup générale
 ------------------------------*/
 
 #popup_bg {
-    display: none;
     position: absolute;
+    display: none;
     width: 100%;
-    height: 100%;
-    justify-content: center;;
+    height: 100vh;
+    justify-content: center;
+    z-index: 3;
 }
 
 #popup {
     display: none;
-    position: relative;
-    margin: auto;
-    width: 1000px;
+    width: 90vw;
     height: 500px;
+    margin: auto;
+    padding: 10px;
     background-color: #171717;
     flex-direction: column;
     justify-content: center;
 }
 
-#popup_badge{
-	display : none;
-    position : absolute;
-	z-index : 999;
-	top : 20%;
-	left : 50%;
-	width : 600px;
-	height : 200px;
-	transform : translate(-50%,-50%);
-	background-color: #000000;
-	border : 2px solid white;
-	text-align : center;
-	padding : 10px;
-}
-
-#popup h3, #popup input, #popup div {
+#popup p,
+#popup input,
+#popup div {
     margin: 10px auto;
+    text-align: center;
 }
 
-.popup_animation {
-    animation: pop 1s forwards;
+#popup button {
+    min-width: 75px;
 }
 
-@keyframes pop {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+#popup p {
+    font-size: 1.15em;
 }
 
 #popup object {
@@ -472,21 +467,53 @@ Popup
     height: 500px;
 }
 
-#pop_button{
-	position : absolute;
-	top : 0px;
-	left: 0px;
-	width : 30px;
-	margin : 30 auto auto auto;
-	font-size : 1.5em;
-	border : 2px solid white;
-	padding : 8px;
+.popup_animation {
+    animation: pop 0.5s forwards;
 }
 
-#pop_button:hover{
-	cursor : pointer;
+@keyframes pop {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
+/*------------------------------
+Popup badge
+------------------------------*/
+
+#popup_badge {
+    position: absolute;
+    display: none;
+    width: 600px;
+    height: 200px;
+    top: 20%;
+    left: 50%;
+    padding: 10px;
+    transform: translate(-50%, -50%);
+    background-color: #000000;
+    border: 2px solid white;
+    text-align: center;
+    z-index: 3;
+}
+
+#pop_button {
+    position: absolute;
+    width: 30px;
+    top: 0px;
+    left: 0px;
+    margin: 30 auto auto auto;
+    padding: 8px;
+    border: 2px solid white;
+    font-size: 1.5em;
+}
+
+#pop_button:hover {
+    cursor: pointer;
+}
 
 /*------------------------------
 Responsive
@@ -528,8 +555,13 @@ Responsive
     }
 
     /* Menu */
+    #menu {
+        min-height: 435px;
+    }
+
     #menu_visual {
         height: 50px;
+        max-height: 50px;
         margin-bottom: 20px;
     }
 
@@ -543,6 +575,10 @@ Responsive
     }
 
     /* Home */
+    #home_visual {
+        height: 200px;
+    }
+    
     #home_visual > h1 {
         font-size: 2.5em;
     }

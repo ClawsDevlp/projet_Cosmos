@@ -34,7 +34,7 @@ if(!isset($data["id_avatar"]) || empty($data["id_avatar"])){
 $pseudo = $data["pseudo"];
 $pwd = $data["pwd"];
 $id_avatar = $data["id_avatar"];
-$planete = (isset($data["planete"])) ? $data["planete"] : NULL;
+$planete = (isset($data["planete"])) ? $data["planete"] : "Terre";
 
 //Include data bdd
  include_once "../data/MyPDO.projet_cosmos.include.php";

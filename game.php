@@ -55,16 +55,16 @@
             </div>
 
             <div id="inventory">
-			
             </div>
 			
         </section>
 		
 		<div id="popup_badge">
-			<div id = "contenu_popup"></div>
-			<div id = "img_popup"></div>
+			<div id="contenu_popup"></div>
+			<div id="img_popup"></div>
 			<a id="pop_button" style="display:block;">x</a>
 		</div>
+   
     </main>
 
     <!-- JavaScript -->
