@@ -30,6 +30,7 @@
 		
         <section id="game">
             <audio autoplay="true" src="sounds/ambiant_01.mp3" loop="true" controls hidden></audio>
+            <audio id="button_sound" src="sounds/button_sound_01.mp3" controls hidden></audio>
 			
             <div id="back">
                 <span>Accueil</span>
