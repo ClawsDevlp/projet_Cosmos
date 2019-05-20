@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 10 mai 2019 à 17:02
--- Version du serveur :  5.7.24
--- Version de PHP :  7.2.14
+-- Généré le :  lun. 20 mai 2019 à 12:19
+-- Version du serveur :  5.7.26
+-- Version de PHP :  7.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -145,6 +145,7 @@ CREATE TABLE IF NOT EXISTS `objets` (
   `id_objet` int(3) NOT NULL,
   `nom_objet` varchar(25) DEFAULT NULL,
   `id_reponse` int(3) DEFAULT NULL,
+  `link` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_objet`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -152,11 +153,11 @@ CREATE TABLE IF NOT EXISTS `objets` (
 -- Déchargement des données de la table `objets`
 --
 
-INSERT INTO `objets` (`id_objet`, `nom_objet`, `id_reponse`) VALUES
-(1, 'Clé à molette', 3),
-(2, 'Tournevis', 4),
-(3, 'Marteau', 5),
-(4, 'Chapeau', 27);
+INSERT INTO `objets` (`id_objet`, `nom_objet`, `id_reponse`, `link`) VALUES
+(1, 'Clé à molette', 3, 'images/objets/objet1.jpg'),
+(2, 'Tournevis', 4, 'images/objets/objet2.jpg'),
+(3, 'Marteau', 5, 'images/objets/objet3.jpg'),
+(4, 'Chapeau', 27, 'images/objets/objet4.jpg');
 
 -- --------------------------------------------------------
 
