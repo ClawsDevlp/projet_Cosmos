@@ -130,6 +130,7 @@ function displayGame(data) {
                 if (response.status == 200) {
                     response.json().then(data => {
 						isEnd = 1;
+						console.log("C'est la finnn");
                         text.innerHTML = "C'était la fin n°" + data.statistics["nb_end"] + ". Vous avez assisté à " + data.statistics["nb_ends"] + " fin sur 10.";
 						typing(isEnd, text.innerHTML);
                         if (data.badges) {
@@ -157,12 +158,18 @@ function displayGame(data) {
             });
 		
     } else if (!(data.choices)) {
+		if(data.badges_popup != undefined){
+			pop_badge(data.badges_popup["nom_badge"], data.badges_popup["link"]);
+		}
         //If no choices
         buttons[0].dataset.idChoice = 0;
         buttons[0].innerHTML = "Suivant";
         text.innerHTML = data.text["text_content"];
         updateGame(data.text["id_text"]);
     } else {
+		if(data.badges_popup != undefined){
+			pop_badge(data.badges_popup["nom_badge"], data.badges_popup["link"]);
+		}
         //If choices
         for (let i in data.choices) {
             buttons[i].classList.remove("hide");
@@ -174,10 +181,7 @@ function displayGame(data) {
         updateGame(data.text["id_text"]);
     }
 	
-	//console.log(data.badges_popup);
-	if(data.badges_popup != undefined){
-		pop_badge(data.badges_popup["nom_badge"], data.badges_popup["link"]);
-	}
+	
 
     if(data.objects && data.objects != null){
         while (inventory.hasChildNodes()) {
@@ -276,13 +280,13 @@ function typing(isEnd, mytxt){
 				if(target.tagName == "BUTTON"){
 					clearInterval(afficherTexte);
 					text.innerHTML = "";
-					console.log("coucou");
 				}else{
 					clearInterval(afficherTexte);
 					text.innerHTML = txtContent;
 				}
 			}, false);
 		}
+	//special case to display the end screen	
 	//special case to display the end screen	
 	}else{
 		window.addEventListener("click",function(){
