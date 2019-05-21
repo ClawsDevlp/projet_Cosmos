@@ -269,7 +269,7 @@ function typing(isEnd, mytxt){
 		if(isEnd == 0){
 			window.addEventListener("click",function(){
 			clearInterval(afficherTexte);
-			text.innerHTML = txtContent;
+			text.innerHTML = "";
 			});
 		}
 		//Clearing interval when clicking on buttons to prevent texts from mixing
