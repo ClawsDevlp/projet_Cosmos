@@ -32,6 +32,9 @@ function initialiser(evt) {
     console.log(buttonsPlus);
     //Possibility to make a choice for each button
     for (let button of buttons) {
+		button.addEventListener("click", function(){
+			text.innerHTML = "";
+		});
         button.addEventListener("click", makeChoice);
     }
     for (let button of buttonsPlus) {
@@ -64,6 +67,7 @@ function initialiser(evt) {
 
 //Player make a choice
 function makeChoice(evt) {
+	
     event.preventDefault();
 
     //Play a little sound FX
@@ -105,7 +109,6 @@ function makeChoice(evt) {
 
 //Display game
 function displayGame(data) {
-	
     if (!(data.text)) {
 		
         //If end of the game
@@ -193,6 +196,7 @@ function displayGame(data) {
 
 //Update the game
 function updateGame(id_text) {
+	
 	typing(isEnd);
     //Creation URL and queries
     let url = new URL("api/game/update_game.php", "http://localhost/projetPHP/");
@@ -247,7 +251,7 @@ function updateGame(id_text) {
 }
 
 function typing(isEnd, mytxt){
-	console.log(isEnd);
+	//console.log(isEnd);
 	if(isEnd == 0){	
 		let txtContent = text.textContent;
 		let txtLength = txtContent.length;
@@ -266,18 +270,20 @@ function typing(isEnd, mytxt){
 		},20);
 		
 		//Clearing interval when clicking on the text : display whole text
-		if(isEnd == 0){
-			window.addEventListener("click",function(){
-			clearInterval(afficherTexte);
-			text.innerHTML = "";
-			});
+		if(isEnd == 0){ 
+			document.addEventListener('click', function(e) {
+				var target = e.target;
+				if(target.tagName == "BUTTON"){
+					clearInterval(afficherTexte);
+					text.innerHTML = "";
+					console.log("coucou");
+				}else{
+					clearInterval(afficherTexte);
+					text.innerHTML = txtContent;
+				}
+			}, false);
 		}
-		//Clearing interval when clicking on buttons to prevent texts from mixing
-		buttons.forEach(e => {
-			e.addEventListener("click", function(){
-				clearInterval(afficherTexte);
-			});
-		})
+	//special case to display the end screen	
 	}else{
 		window.addEventListener("click",function(){
 			clearInterval(afficherTexte);

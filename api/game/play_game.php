@@ -127,7 +127,6 @@ $stmtPopupBadges = MyPDO::getInstance()->prepare(<<<SQL
 	SELECT DISTINCT b.id_badge, b.nom_badge, b.description_badge, b.link,  b.id_texte
 	FROM textes t
 	INNER JOIN badges b ON t.id_texte = b.id_texte
-	INNER JOIN badgesobtenus bo ON b.id_badge = bo.id_badge
 	WHERE t.id_texte = :id_text;
 SQL
     );
