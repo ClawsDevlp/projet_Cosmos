@@ -34,7 +34,7 @@
             <div id="back" class="hide">
                 <span>Retour</span>
                 <a href="index.php">
-                    <img src="http://placehold.it/50x50/ea0d0d/fff&text=Retour">
+                    <img src="images/back.jpg">
                 </a>
             </div>
 

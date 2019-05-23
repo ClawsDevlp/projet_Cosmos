@@ -34,7 +34,7 @@
             <div id="back">
                 <span>Accueil</span>
                 <a href="home.php">
-                    <img src="http://placehold.it/50x50/ea0d0d/fff&text=Accueil">
+                    <img src="images/home.jpg">
                 </a>
             </div>
 
