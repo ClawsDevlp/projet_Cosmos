@@ -9,7 +9,6 @@
 <html lang="fr">
 
 <head>
-    <!--<link rel="shortcut icon" href="" />-->
     <title>Projet Cosmos · Bienvenue</title>
 
     <!-- Required meta tags -->
@@ -33,8 +32,8 @@
            
             <div id="back" class="hide">
                 <span>Retour</span>
-                <a href="index.php">
-                    <img src="images/back.jpg">
+                <a href="">
+                    <img src="http://placehold.it/50x50/ea0d0d/fff&text=Retour">
                 </a>
             </div>
 
@@ -113,8 +112,8 @@
 
         </section>
 
-        <div id="popup_bg">
-            <form id="popup">
+        <div id="popup_bg" class="hide">
+            <form id="popup" class="popup_animation">
                 <object data="cgu.html" type="text/html"></object>
                 <div>
                     <button type="button" id="return" class="btn">Retour</button>

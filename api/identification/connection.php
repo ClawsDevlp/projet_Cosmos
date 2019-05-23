@@ -40,7 +40,7 @@ SQL
 );
 $stmtCheckPlayer->execute(array(":pseudo" => $pseudo, ":pwd" => md5($pwd)));
 if(($row = $stmtCheckPlayer->fetch()) == false) {
-    http_response_code(422);
+    http_response_code(401);
     echo json_encode(array("message" => "Pseudo or password incorrect."));
     exit();
 }

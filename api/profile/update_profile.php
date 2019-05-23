@@ -44,60 +44,74 @@ $currentPwd = $data["currentPwd"];
 include_once "../data/MyPDO.projet_cosmos.include.php";
 
 //Check current pwd
-$stmtCheckPlayer = MyPDO::getInstance()->prepare(<<<SQL
+$stmtCheckPwd = MyPDO::getInstance()->prepare(<<<SQL
     SELECT * 
     FROM joueur 
     WHERE id_joueur = :id_player AND mdp = :currentPwd;
 SQL
 );
-$stmtCheckPlayer->execute(array(":id_player" => $id_player, ":currentPwd" => md5($currentPwd)));
-if(($row = $stmtCheckPlayer->fetch()) == false) {
-    http_response_code(422);
+$stmtCheckPwd->execute(array(":id_player" => $id_player, ":currentPwd" => md5($currentPwd)));
+if(($row = $stmtCheckPwd->fetch()) == false) {
+    http_response_code(401);
     echo json_encode(array("message" => "Password incorrect."));
     exit();
 }
 
 //Change pseudo
 if($pseudo){
+    //Check if single pseudo
     $stmtCheckPseudo = MyPDO::getInstance()->prepare(<<<SQL
+        SELECT * 
+        FROM joueur 
+        WHERE joueur.pseudo = :pseudo AND id_joueur != :id_player;
+SQL
+    );
+    $stmtCheckPseudo->execute(array(":pseudo" => $pseudo, ":id_player" => $id_player));
+    if(($row = $stmtCheckPseudo->fetch()) !== false) {
+        http_response_code(409);
+        echo json_encode(array("message" => "Pseudo already exists."));
+        exit();
+    }
+    
+    $stmtUpdatePseudo = MyPDO::getInstance()->prepare(<<<SQL
         UPDATE joueur
         SET pseudo = :pseudo
         WHERE id_joueur = :id_player;
 SQL
-);
-$stmtCheckPseudo->execute(array(":pseudo" => $pseudo, ":id_player" => $id_player));
+    );
+    $stmtUpdatePseudo->execute(array(":pseudo" => $pseudo, ":id_player" => $id_player));
 }
 
 //Change planete origine
 if($planete){
-    $stmtCheckPseudo = MyPDO::getInstance()->prepare(<<<SQL
+    $stmtUpdatePlanete = MyPDO::getInstance()->prepare(<<<SQL
         UPDATE joueur
         SET planete_origine = :planete
         WHERE id_joueur = :id_player;
 SQL
-);
-$stmtCheckPseudo->execute(array(":planete" => $planete, ":id_player" => $id_player));
+    );
+    $stmtUpdatePlanete->execute(array(":planete" => $planete, ":id_player" => $id_player));
 }
 
 //Change pwd
 if($pwd){
-    $stmtCheckPseudo = MyPDO::getInstance()->prepare(<<<SQL
+    $stmtUpdatePwd = MyPDO::getInstance()->prepare(<<<SQL
         UPDATE joueur
         SET mdp = :pwd
         WHERE id_joueur = :id_player;
 SQL
-);
-$stmtCheckPseudo->execute(array(":pwd" => md5($pwd), ":id_player" => $id_player));
+    );
+    $stmtUpdatePwd->execute(array(":pwd" => md5($pwd), ":id_player" => $id_player));
 }
 
 //Change avatar
-$stmtCheckPseudo = MyPDO::getInstance()->prepare(<<<SQL
+$stmtUpdateAvatar = MyPDO::getInstance()->prepare(<<<SQL
     UPDATE joueur
     SET id_avatar = :id_avatar
     WHERE id_joueur = :id_player;
 SQL
 );
-$stmtCheckPseudo->execute(array(":id_avatar" => $id_avatar, ":id_player" => $id_player));
+$stmtUpdateAvatar->execute(array(":id_avatar" => $id_avatar, ":id_player" => $id_player));
 
 //Response
 http_response_code(200);

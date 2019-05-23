@@ -31,7 +31,7 @@ figcaption {
 }
 
 .hide {
-    display: none;
+    display: none!important;
 }
 
 a {
@@ -330,7 +330,7 @@ Game
 }
 
 #game_badges {
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 #game_badges > p {
@@ -399,6 +399,14 @@ CGU
 /*------------------------------
 Slider
 ------------------------------*/
+.slider_red {
+    background-color: #8B0000;
+}
+
+.slider_green {
+    background-color: #008000;
+}
+
 #slider {
     position: absolute;
     display: flex;
@@ -407,10 +415,9 @@ Slider
     height: 120px;
     right: 10vw;
     top: -50px;
-    background-color: #008000;
     justify-content: center;
     opacity: 0;
-    z-index: 2;
+    z-index: 3;
 }
 
 .slider_animation {
@@ -450,17 +457,17 @@ Popup générale
 
 #popup_bg {
     position: absolute;
-    display: none;
+    display: flex;
     width: 100%;
     height: 100vh;
     justify-content: center;
-    z-index: 3;
+    z-index: 2;
 }
 
 #popup {
-    display: none;
-    width: 90vw;
-    height: 500px;
+    display: flex;
+    width: 90%;
+    height: 80%;
     margin: auto;
     padding: 10px;
     background-color: #171717;

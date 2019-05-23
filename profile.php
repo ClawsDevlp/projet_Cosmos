@@ -9,7 +9,6 @@
 <html lang="fr">
 
 <head>
-    <!--<link rel="shortcut icon" href="" />-->
     <title>Projet Cosmos · Jeu</title>
 
     <!-- Required meta tags -->
@@ -29,7 +28,7 @@
 
 <body>
     <main>
-        <section id="profile">
+        <section id="profile" class="hide">
 
             <div id="back">
                 <span>Accueil</span>
@@ -113,8 +112,8 @@
 
         </section>
 
-        <div id="popup_bg">
-            <form id="popup">
+        <div id="popup_bg" class="hide">
+            <form id="popup" class="popup_animation">
                 <p>Entrez votre mot de passe pour valider :</p>
                 <input type="password" name="mdp" minlength="6" maxlength="32">
                 <div>

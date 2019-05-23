@@ -14,10 +14,10 @@ const current_badge = document.getElementById("popup_badge");
 const current_badge_content = document.getElementById("contenu_popup");
 const img_popup = document.getElementById("img_popup");
 
-const music_button = document.querySelector('#music_button');
-const music_img = document.querySelector('#music_img');
-const fx_button = document.querySelector('#fx_button');
-const fx_img = document.querySelector('#fx_img');
+const music_button = document.getElementById("music_button");
+const music_img = document.getElementById("music_img");
+const fx_button = document.getElementById("fx_button");
+const fx_img = document.getElementById("fx_img");
 
 var isEnd = 0;
 var id_game;
@@ -28,17 +28,12 @@ Initialisation
 document.addEventListener("DOMContentLoaded", initialiser);
 
 function initialiser(evt) {
-	isEnd = 0;
-    console.log(buttonsPlus);
     //Possibility to make a choice for each button
     for (let button of buttons) {
 		button.addEventListener("click", function(){
 			text.innerHTML = "";
 		});
         button.addEventListener("click", makeChoice);
-    }
-    for (let button of buttonsPlus) {
-        button.classList.add("hide");
     }
 
     //Creation URL
@@ -73,7 +68,7 @@ function makeChoice(evt) {
     //Play a little sound FX
     document.querySelector('#button_sound').play();
 
-    for (let button of buttonsPlus) {
+    for (let button of buttons) {
         button.classList.add("hide");
     }
 
@@ -90,7 +85,6 @@ function makeChoice(evt) {
         .then(response => {
             if (response.status == 200) {
                 response.json().then(data => {
-					//console.log(data);
                     displayGame(data);
                 });
             } else {
@@ -110,7 +104,6 @@ function makeChoice(evt) {
 //Display game
 function displayGame(data) {
     if (!(data.text)) {
-		
         //If end of the game
         buttons[0].innerHTML = "Revenir au menu";
         buttons[0].addEventListener("click", function () {
@@ -130,7 +123,7 @@ function displayGame(data) {
                 if (response.status == 200) {
                     response.json().then(data => {
 						isEnd = 1;
-						console.log("C'est la finnn");
+						console.log("C'est la fin");
                         text.innerHTML = "C'était la fin n°" + data.statistics["nb_end"] + ". Vous avez assisté à " + data.statistics["nb_ends"] + " fin sur 10.";
 						typing(isEnd, text.innerHTML);
                         if (data.badges) {
@@ -162,6 +155,7 @@ function displayGame(data) {
 			pop_badge(data.badges_popup["nom_badge"], data.badges_popup["link"]);
 		}
         //If no choices
+        buttons[0].classList.remove("hide");
         buttons[0].dataset.idChoice = 0;
         buttons[0].innerHTML = "Suivant";
         text.innerHTML = data.text["text_content"];
@@ -193,7 +187,6 @@ function displayGame(data) {
             new_img_objet.title = objet;
 			new_img_objet.src = data.objects_link;
             inventory.appendChild(new_img_objet);
-			
         }
     }
 }
@@ -286,8 +279,7 @@ function typing(isEnd, mytxt){
 				}
 			}, false);
 		}
-	//special case to display the end screen	
-	//special case to display the end screen	
+	//special case to display the end screen
 	}else{
 		window.addEventListener("click",function(){
 			clearInterval(afficherTexte);

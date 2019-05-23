@@ -9,7 +9,6 @@
 <html lang="fr">
 
 <head>
-    <!--<link rel="shortcut icon" href="" />-->
     <title>Projet Cosmos · Jeu</title>
 
     <!-- Required meta tags -->
@@ -29,11 +28,8 @@
 
 <body>
     <main>
-		
-		
+
         <section id="game">
-            <audio id="music" autoplay="true" src="sounds/ambiant_01.mp3" loop="true" controls hidden></audio>
-            <audio id="button_sound" src="sounds/button_sound_01.mp3" controls hidden></audio>
 			
             <div id="back">
                 <span>Accueil</span>
@@ -52,10 +48,10 @@
             </div>
 
             <div id="game_choice">
-                <button data-idChoice="0" type="button" class="btn"></button>
-                <button type="button" class="btn"></button>
-                <button type="button" class="btn"></button>
-                <button type="button" class="btn"></button>
+                <button data-idChoice="0" type="button" class="btn hide"></button>
+                <button type="button" class="btn hide"></button>
+                <button type="button" class="btn hide"></button>
+                <button type="button" class="btn hide"></button>
             </div>
 
             <div id="inventory">
@@ -65,6 +61,8 @@
 		
         <div id="music_button"><img id="music_img" src="images/Logo_Music.png" alt="Bouton musique"></div>
         <div id="fx_button"><img id="fx_img" src="images/Logo_FX.png" alt="Bouton FX"></div>
+        <audio id="music" autoplay="true" src="sounds/ambiant_01.mp3" loop="true" controls hidden></audio>
+        <audio id="button_sound" src="sounds/button_sound_01.mp3" controls hidden></audio>
 
 		<div id="popup_badge">
 			<div id="contenu_popup"></div>

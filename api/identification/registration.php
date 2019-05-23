@@ -48,7 +48,7 @@ SQL
 );
 $stmtCheckPseudo->execute(array(":pseudo" => $pseudo));
 if(($row = $stmtCheckPseudo->fetch()) !== false) {
-    http_response_code(422);
+    http_response_code(409);
     echo json_encode(array("message" => "Pseudo already exists."));
     exit();
 }

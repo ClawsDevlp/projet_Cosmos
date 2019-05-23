@@ -3,19 +3,12 @@
     if (!(isset($_SESSION["id"]))){ //Player is not connected
         header("Location: index.php");
     }
-    if(isset($_SERVER['HTTP_REFERER'])) {
-        $previous_page = $_SERVER['HTTP_REFERER'];
-    //echo json_encode($json);
-        echo "<div id='previous_page'>$previous_page</div>";
-    };
-    http_response_code(200);
 ?>
 
 <!DOCTYPE HTML>
 <html lang="fr">
 
 <head>
-    <!--<link rel="shortcut icon" href="" />-->
     <title>Projet Cosmos · Accueil</title>
 
     <!-- Required meta tags -->
@@ -35,7 +28,7 @@
 
 <body>
     <main>
-        <section id="home">
+        <section id="home" class="hide">
 
             <div id="home_profile">
                 <a href="profile.php">
@@ -57,8 +50,8 @@
 
         </section>
 
-        <div id="popup_bg">
-            <form id="popup">
+        <div id="popup_bg" class="hide">
+            <form id="popup" class="popup_animation">
                 <p>Souhaitez-vous reprendre votre aventure là où vous vous étiez arrêté.e ?</p>
                 <div>
                     <button type="button" id="validate" class="btn">Oui</button>

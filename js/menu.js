@@ -15,8 +15,7 @@ const back = document.getElementById("back");
 const slider = document.getElementById("slider");
 const slider_message = document.getElementById("slider_message");
 
-const popup = document.getElementById("popup"); 
-const popup_bg = document.getElementById("popup_bg");
+const popup = document.getElementById("popup");
 const return_btn = document.getElementById("return");
 
 const cgu = document.getElementById("cgu_link");
@@ -27,65 +26,38 @@ Initialisation
 document.addEventListener("DOMContentLoaded", initialiser);
 
 function initialiser(evt) {
-    if (typeof connection !== "undefined" && connection !== null) {
-        form_connection.addEventListener("submit", sendConnection);
-        go_registration.addEventListener("click", goRegistration);
-    }
+    form_connection.addEventListener("submit", sendConnection);
+    go_registration.addEventListener("click", goRegistration);
+    
+    back.addEventListener("click", goRegistration);
+    form_registration.addEventListener("submit", sendRegistration);
+    cgu.addEventListener("click", pop);
+    return_btn.addEventListener("click", goBack);
 }
 
 /*------------------------------
 Slider & popup functions
 ------------------------------*/
-let isAnimated = false;
-function wrongLoginSlider() {
-    slider.style.backgroundColor = "#8B0000";
-    isAnimated = true;
-    slider_message.innerHTML = "Login(s) incorrect(s). Réessayez.";
-    slider.classList.add("slider_animation");
-    
-    window.setTimeout(function() {
-        slider.classList.remove("slider_animation");
-        isAnimated = false;
-        slider.style.backgroundColor = "#008000";
-    }, 5000)
-}
-
-function accountCreatedSlider() {
-    slider.style.backgroundColor = "#008000";
-    isAnimated = true;
-    slider_message.innerHTML = "Vous avez été retenu pour la mission. Embarquez dans votre navette !";
-    slider.classList.add("slider_animation");
-
-    window.setTimeout(function() {
-        slider.classList.remove("slider_animation");
-        isAnimated = false;
-    }, 5000)
-}
-
-function errorAccountCreationSlider(message) {
-    slider.style.backgroundColor = "#8B0000";
-    isAnimated = true;
-    slider_message.innerHTML = "Ce pseudo existe déjà dans l'univers.";
-    slider.classList.add("slider_animation");
-
-    window.setTimeout(function() {
-        slider.classList.remove("slider_animation");
-        isAnimated = false;
-    }, 5000)
-}
 
 function pop(evt) {
     evt.preventDefault();
-    popup.style.display="flex";
-    popup_bg.style.display="flex";
-    popup.classList.add("popup_animation");
+    popup_bg.classList.remove("hide");
 }
 
 function unpop(evt) {
     evt.preventDefault();
-    popup.classList.remove("popup_animation");
-    popup.style.display="none";
-    popup_bg.style.display="none";
+    popup_bg.classList.add("hide");
+}
+
+function slide(message, color) {
+    slider.className = "";
+    slider.classList.add(color);
+    slider_message.innerHTML = message;
+    window.requestAnimationFrame(function (time) {
+        window.requestAnimationFrame(function (time) {
+            slider.classList.add("slider_animation");
+        });
+    });
 }
 
 /*------------------------------
@@ -114,9 +86,7 @@ function sendConnection(evt) {
                 //Error
                 response.json().then(data => {
                     console.log(data.message);
-                    if(!isAnimated) {
-                        wrongLoginSlider();
-                    }
+                    slide("Login(s) incorrect(s). Réessayez.", "slider_red");
                 });
             }
         })
@@ -131,11 +101,15 @@ Menu registration
 ------------------------------*/
 //Go to menu registration
 function goRegistration(evt) {
-    connection.classList.toggle("hide");
-    registration.classList.toggle("hide");
-    back.classList.toggle("hide");
+    connection.classList.add("hide");
+    registration.classList.remove("hide");
+    back.classList.remove("hide");
+}
 
-    form_registration.addEventListener("submit", sendRegistration);
+function goBack(evt) {
+    connection.classList.remove("hide");
+    registration.classList.add("hide");
+    back.classList.add("hide");
 }
 
 //Send registration
@@ -160,19 +134,18 @@ function sendRegistration(evt) {
             if (response.status == 200) {
                 response.json().then(data => {
                     form_registration.reset();
-                    connection.classList.toggle("hide");
-                    registration.classList.toggle("hide");
-                    if(!isAnimated) {
-                        accountCreatedSlider();
-                    }
+                    goBack(evt);
+                    slide("Vous avez été retenu pour la mission. Embarquez dans votre navette !", "slider_green");
                 });
-            } else {
-                //Error
+            } else if (response.status == 409){
                 response.json().then(data => {
                     console.log(data.message);
-                    if(!isAnimated) {
-                        errorAccountCreationSlider(data.message);
-                    }
+                    slide("Ce pseudo existe déjà dans l'univers.", "slider_red");
+                });
+            } else {
+                //Other errors
+                response.json().then(data => {
+                    console.log(data.message);
                 });
             }
         })
@@ -181,6 +154,3 @@ function sendRegistration(evt) {
             console.log(error)
         });
 }
-
-cgu.addEventListener("click", pop);
-return_btn.addEventListener("click", unpop);

@@ -3,6 +3,8 @@ General
 ------------------------------*/
 "use strict"; //Force to declare any variable used
 
+const profile = document.getElementById("profile");
+
 const form_profile = document.getElementById("form_profile");
 const pseudo = document.getElementsByName("pseudo")[0];
 const planete = document.getElementsByName("planete")[0];
@@ -13,7 +15,6 @@ const nb_games = document.getElementById("nb_games");
 
 const badgesArea = document.getElementById("badges");
 
-const popup = document.getElementById("popup"); 
 const popup_bg = document.getElementById("popup_bg");
 const validate_btn = document.getElementById("validate");
 const cancel_btn = document.getElementById("cancel");
@@ -24,43 +25,26 @@ const slider_message = document.getElementById("slider_message");
 /*------------------------------
 Popup & slider functions
 ------------------------------*/
-let isAnimated=false;
+
 function pop(evt) {
     evt.preventDefault();
-    popup.style.display="flex";
-    popup_bg.style.display="flex";
-    popup.classList.add("popup_animation");
+    popup_bg.classList.remove("hide");
 }
 
 function unpop(evt) {
     evt.preventDefault();
-    popup.classList.remove("popup_animation");
-    popup.style.display="none";
-    popup_bg.style.display="none";
+    popup_bg.classList.add("hide");
 }
 
-function wrongPdw() {
-    slider.style.backgroundColor = "#8B0000";
-    isAnimated=true;
-    slider_message.innerHTML = "Mot de passe incorrect.";
-    slider.classList.add("slider_animation");
-    
-    window.setTimeout(function() {
-        slider.classList.remove("slider_animation");
-        isAnimated = false;
-        slider.style.backgroundColor = "#008000";
-    }, 5000)    
-}
-
-function updateDone() {
-    isAnimated=true;
-    slider_message.innerHTML = "Votre profil a bien été mis à jour.";
-    slider.classList.add("slider_animation");
-    
-    window.setTimeout(function() {
-        slider.classList.remove("slider_animation");
-        isAnimated = false;
-    }, 5000)    
+function slide(message, color) {
+    slider.className = "";
+    slider.classList.add(color);
+    slider_message.innerHTML = message;
+    window.requestAnimationFrame(function (time) {
+        window.requestAnimationFrame(function (time) {
+            slider.classList.add("slider_animation");
+        });
+    });
 }
 
 /*------------------------------
@@ -125,7 +109,7 @@ function initialiser(evt) {
                             }
                         }
                     }
-
+                    profile.classList.remove("hide");
                 });
             } else {
                 //Error
@@ -164,16 +148,26 @@ function sendUpdateProfile(evt) {
             body: JSON.stringify(params)
         })
         .then(response => {
-            if (response.status != 200) {
+            if (response.status == 200) {
                 response.json().then(data => {
-                    console.log(data.message);
-                    wrongPdw();
-                });
-            }else{
-                response.json().then(data => {
-                    console.log(data.message);
+                    popup.reset();
                     unpop(evt);
-                    updateDone();
+                    slide("Votre profil a bien été mis à jour.", "slider_green");
+                });
+            } else if (response.status == 401){
+                response.json().then(data => {
+                    slide("Mot de passe incorrect.", "slider_red");
+                });
+            } else if (response.status == 409){
+                response.json().then(data => {
+                    popup.reset();
+                    unpop(evt);
+                    slide("Ce pseudo existe déjà dans l'univers.", "slider_red");
+                });
+            } else {
+                //Other errors
+                response.json().then(data => {
+                    console.log(data.message);
                 });
             }
         })

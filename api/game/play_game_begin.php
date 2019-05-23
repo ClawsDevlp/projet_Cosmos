@@ -18,27 +18,28 @@ if($method !== "get") {
 
 //Check params
 $id_player = $_SESSION["id"];
-$id_text = "";
 $objects_player = array();
 $json = array();
 
 // Include data bdd
 include_once "../data/MyPDO.projet_cosmos.include.php";
 
-//Recover infos player and game (not end)
+//Recover infos player and game
 $stmtInfosGame = MyPDO::getInstance()->prepare(<<<SQL
-    SELECT DISTINCT p.id_partie, p.id_texte, ob.id_objet, nom_objet, o.link
-    FROM partie p 
+    SELECT DISTINCT p.id_partie, p.id_texte, ob.id_objet, nom_objet, o.link, t.contenu_texte, t.nb_end
+    FROM partie p
     LEFT OUTER JOIN objetsrecuperes ob ON p.id_partie = ob.id_partie
     LEFT OUTER JOIN objets o ON ob.id_objet = o.id_objet
     INNER JOIN textes t ON p.id_texte = t.id_texte
-    WHERE p.date_texte = (SELECT MAX(p.date_texte) FROM partie p WHERE p.id_joueur = :id_player) AND t.nb_end IS NULL;
+    WHERE p.date_texte = (SELECT MAX(p.date_texte) FROM partie p WHERE p.id_joueur = :id_player);
 SQL
     );
 $stmtInfosGame->execute(array(":id_player" => $id_player));
 while (($row = $stmtInfosGame->fetch()) !== false) {
     $json["id_game"] = $row["id_partie"];
-    $id_text = $row["id_texte"];
+    $json["text"]["id_text"] =  $row["id_texte"];
+    $json["text"]["text_content"] = $row["contenu_texte"];
+    $json["text"]["nb_end"] = $row["nb_end"];
     $objects_player[] = $row["id_objet"];
     $objects_name[] = $row["nom_objet"];
 	$objects_link[] = $row["link"];
@@ -64,22 +65,6 @@ if($objects_player != NULL){
     $in_params["id0"] = 0;
 }
 
-//Recover current text (save)
-$stmtCurrentText = MyPDO::getInstance()->prepare(<<<SQL
-    SELECT DISTINCT ts.id_texte_origine, t.contenu_texte
-    FROM textesuivant ts
-    INNER JOIN textes t ON ts.id_texte_origine = t.id_texte
-    WHERE ts.id_texte_origine = :id_text;
-SQL
-    );
-$stmtCurrentText->execute(array(":id_text" => $id_text));
-$movies = array();
-while (($row = $stmtCurrentText->fetch()) !== false) {
-    $id_text = $row["id_texte_origine"];
-    $json["text"]["id_text"] = $id_text;
-    $json["text"]["text_content"] = $row["contenu_texte"];
-}
-
 //Recover choices (save)
 $stmtNextChoices = MyPDO::getInstance()->prepare(<<<SQL
     SELECT DISTINCT r.id_reponse, r.contenu_reponse
@@ -87,10 +72,23 @@ $stmtNextChoices = MyPDO::getInstance()->prepare(<<<SQL
     WHERE r.id_texte_declencheur = :id_text AND (r.id_objet_necessaire IN ($in) OR r.id_objet_necessaire IS NULL);
 SQL
     );
-$params = [":id_text" => $id_text]; 
+$params = [":id_text" => ($json["text"]["id_text"])]; 
 $stmtNextChoices->execute(array_merge($params, $in_params)); // just merge two arrays
 while (($row = $stmtNextChoices->fetch()) !== false) {
     $json["choices"][] = array("id_choice" => $row["id_reponse"], "text_choice" => $row["contenu_reponse"]);
+}
+
+//Recover badges obtained
+$stmtPopupBadges = MyPDO::getInstance()->prepare(<<<SQL
+	SELECT DISTINCT b.id_badge, b.nom_badge, b.description_badge, b.link,  b.id_texte
+	FROM textes t
+	INNER JOIN badges b ON t.id_texte = b.id_texte
+	WHERE t.id_texte = :id_text;
+SQL
+    );
+$stmtPopupBadges->execute(array(":id_text" => $json["text"]["id_text"]));
+while (($row = $stmtPopupBadges->fetch()) !== false) {
+   $json["badges_popup"] = array("nom_badge" => $row["nom_badge"], "link" => $row["link"]);
 }
 
 //Response
