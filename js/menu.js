@@ -36,16 +36,13 @@ function initialiser(evt) {
 }
 
 /*------------------------------
-Slider & popup functions
+Slider general & popup functions
 ------------------------------*/
-
-function pop(evt) {
-    evt.preventDefault();
+function pop() {
     popup_bg.classList.remove("hide");
 }
 
-function unpop(evt) {
-    evt.preventDefault();
+function unpop() {
     popup_bg.classList.add("hide");
 }
 
@@ -71,10 +68,8 @@ function sendConnection(evt) {
     let params = {};
     if (form_connection.pseudo.value) params["pseudo"] = form_connection.pseudo.value;
     if (form_connection.pwd.value) params["pwd"] = form_connection.pwd.value;
-
     let url = new URL("api/identification/connection.php", "http://localhost/projetPHP/");
     url.search = new URLSearchParams(params);
-
     //AJAX query : connection
     fetch(url)
         .then(response => {
@@ -85,7 +80,6 @@ function sendConnection(evt) {
             } else {
                 //Error
                 response.json().then(data => {
-                    console.log(data.message);
                     slide("Login(s) incorrect(s). Réessayez.", "slider_red");
                 });
             }
@@ -118,13 +112,11 @@ function sendRegistration(evt) {
 
     //Creation URL and queries
     let url = new URL("api/identification/registration.php", "http://localhost/projetPHP/");
-
     let params = {};
     if (form_registration.pseudo.value) params["pseudo"] = form_registration.pseudo.value;
     if (form_registration.pwd.value) params["pwd"] = form_registration.pwd.value;
     if (form_registration.planete.value) params["planete"] = form_registration.planete.value;
     params["id_avatar"] = form_registration.avatar.value;
-
     //AJAX query : registration
     fetch(url, {
             method: "POST",
@@ -139,7 +131,6 @@ function sendRegistration(evt) {
                 });
             } else if (response.status == 409){
                 response.json().then(data => {
-                    console.log(data.message);
                     slide("Ce pseudo existe déjà dans l'univers.", "slider_red");
                 });
             } else {

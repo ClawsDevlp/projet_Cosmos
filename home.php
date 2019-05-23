@@ -35,7 +35,7 @@
                     <img id="avatar" src="" alt="Image avatar">
                 </a>
                 <span id="pseudo"></span>
-                <img id="log_out" src="css/images/log_out.svg">
+                <img id="log_out" src="./images/log_out.svg">
             </div>
 
             <div id="home_visual">

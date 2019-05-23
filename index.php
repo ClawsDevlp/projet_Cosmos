@@ -21,19 +21,19 @@
     <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
     <link rel="stylesheet" href="css/normalize.css" type="text/css" />
     <link rel="stylesheet" href="css/style.css" type="text/css" />
-	
-	<!--Favicon-->
-	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
     <main>
         <section id="menu">
-           
+
             <div id="back" class="hide">
-                <span>Retour</span>
                 <a href="">
-                    <img src="http://placehold.it/50x50/ea0d0d/fff&text=Retour">
+                    <span>Retour</span>
+                    <div class="return_back"></div>
                 </a>
             </div>
 

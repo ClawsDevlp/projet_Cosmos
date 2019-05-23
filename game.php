@@ -21,23 +21,23 @@
     <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
     <link rel="stylesheet" href="css/normalize.css" type="text/css" />
     <link rel="stylesheet" href="css/style.css" type="text/css" />
-	
-	<!--Favicon-->
-	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
     <main>
 
-        <section id="game">
-			
-            <div id="back">
+        <div id="back">
+            <a href="home.php">
                 <span>Accueil</span>
-                <a href="home.php">
-                    <img src="images/home.jpg">
-                </a>
-            </div>
-			
+                <div class="home_back"></div>
+            </a>
+        </div>
+
+        <section id="game">
+
             <div id="game_story">
                 <p id="text"></p>
                 <div id="game_badges" class="hide">
@@ -56,20 +56,22 @@
 
             <div id="inventory">
             </div>
-			
-        </section>
-		
-        <div id="music_button"><img id="music_img" src="images/Logo_Music.png" alt="Bouton musique"></div>
-        <div id="fx_button"><img id="fx_img" src="images/Logo_FX.png" alt="Bouton FX"></div>
-        <audio id="music" autoplay="true" src="sounds/ambiant_01.mp3" loop="true" controls hidden></audio>
-        <audio id="button_sound" src="sounds/button_sound_01.mp3" controls hidden></audio>
 
-		<div id="popup_badge">
-			<div id="contenu_popup"></div>
-			<div id="img_popup"></div>
-			<a id="pop_button" style="display:block;">x</a>
-		</div>
-   
+        </section>
+
+        <div id="musicFx">
+            <img id="music_img" src="images/Logo_Music.png" alt="Bouton musique">
+            <img id="fx_img" src="images/Logo_FX.png" alt="Bouton FX">
+            <audio id="music" autoplay="true" src="sounds/ambiant_01.mp3" loop="true" controls hidden></audio>
+            <audio id="button_sound" src="sounds/button_sound_01.mp3" controls hidden></audio>
+        </div>
+
+        <div id="popup_badge">
+            <div id="contenu_popup"></div>
+            <div id="img_popup"></div>
+            <a id="pop_button" style="display:block;">x</a>
+        </div>
+
     </main>
 
     <!-- JavaScript -->

@@ -63,7 +63,7 @@ main {
 }
 
 /*------------------------------
-Titres
+Titles
 ------------------------------*/
 
 h1 {
@@ -81,6 +81,7 @@ h2 {
 /*------------------------------
 Pages
 ------------------------------*/
+
 #home,
 #game {
     position: relative;
@@ -101,6 +102,7 @@ Pages
     padding: 5px 5px 20px 5px;
 }
 
+/* Choices */
 #home_choice,
 #game_choice {
     display: flex;
@@ -115,6 +117,7 @@ Pages
     margin-top: 10px;
 }
 
+/* Back & infos profile */
 #home_profile,
 #back {
     position: fixed;
@@ -122,25 +125,59 @@ Pages
     z-index: 1;
 }
 
+#back {
+    right: 8px;
+}
+
 #home_profile > span,
 #home_profile > a,
-#back > span,
-#back > a {
+#back > a > span,
+#back > a > div {
     display: inline-block;
     vertical-align: top;
 }
 
-#home_profile img,
-#back img {
-    max-width: 50px;
+#avatar {
+    width: 50px;
     height: 50px;
 }
 
-#back,
-#inventory {
-    right: 8px;
+#back span {
+    color: #fff;
 }
 
+#back div {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #fff;
+    background-size: cover;
+}
+
+#back .return_back{
+    background-image: url("../images/back_1.jpg");
+}
+
+#back .home_back{
+    background-image: url("../images/home_1.jpg");
+}
+
+#back > a:hover > span {
+    color: #1d17eb;
+}
+
+#back > a:hover > div {
+    border: 1px solid #1d17eb;
+}
+
+#back > a:hover > .return_back{
+    background-image: url("../images/back_2.jpg");
+}
+
+#back > a:hover > .home_back{
+    background-image: url("../images/home_2.jpg");
+}
+
+/* Badges */
 #badges {
     width: 55%;
 }
@@ -151,42 +188,10 @@ Pages
     border: 1px solid #fff;
 }
 
-#inventory {
-    position: fixed;
-    bottom: 8px;
-}
-
-#inventory > img {
-    width: 75px;
-    height: 75px;
-    margin-left: 20px;
-    border: 1px solid #fff;
-}
-
-#music_button, #fx_button {
-    position: absolute;
-    bottom: 8px;
-    cursor: pointer;
-    z-index: 999;
-}
-
-#music_button {
-	left: 10px;
-}
-
-#fx_button {
-    left: 60px;
-}
-
-#music_button > img, #fx_button > img {
-	width: 40px;
-    height: 40px;
-}
-
-
 /*------------------------------
 Menu
 ------------------------------*/
+
 #menu {
     display: flex;
     width: 50%;
@@ -232,18 +237,12 @@ form input {
     box-sizing: border-box;
 }
 
-/*------------------------------
-Menu - Connection
-------------------------------*/
-
+/* Connection */
 #menu_connection form label {
     display: none;
 }
 
-/*------------------------------
-Menu - Registration
-------------------------------*/
-
+/* Registration */
 .avatar_choice label {
     display: inline-block;
     width: 50px;
@@ -329,6 +328,10 @@ Game
     width: 100%;
 }
 
+#game_story .end_text {
+    color: #ff00ff;
+}
+
 #game_badges {
     margin-top: 15px;
 }
@@ -341,6 +344,33 @@ Game
     margin-right: 5px;
 }
 
+/* Inventory */
+#inventory {
+    position: fixed;
+    bottom: 8px;
+    right: 8px;
+}
+
+#inventory > img {
+    width: 75px;
+    height: 75px;
+    margin-left: 20px;
+    border: 1px solid #fff;
+}
+
+/* Music & FX buttons */
+#musicFx {
+    position: fixed;
+    bottom: 8px;
+    left: 10px;
+}
+
+#musicFx img {
+    display: inline-block;
+	width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
 
 /*------------------------------
 Profile
@@ -588,10 +618,9 @@ Responsive
     }
 
     #menu_visual {
-        /*height: 50px;
+        height: 50px;
         max-height: 50px;
-        margin-bottom: 20px;*/
-        display: none;
+        margin-bottom: 20px;
     }
 
     #menu_text {
@@ -616,13 +645,4 @@ Responsive
     #game_story {
         min-height: 100px;
     }
-}
-
-
-/*------------------------------
-Other
-------------------------------*/
-
-#previous_page {
-    display: none;
 }

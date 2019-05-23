@@ -21,9 +21,9 @@
     <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
     <link rel="stylesheet" href="css/normalize.css" type="text/css" />
     <link rel="stylesheet" href="css/style.css" type="text/css" />
-	
-	<!--Favicon-->
-	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
@@ -31,9 +31,9 @@
         <section id="profile" class="hide">
 
             <div id="back">
-                <span>Accueil</span>
                 <a href="home.php">
-                    <img src="images/home.jpg">
+                    <span>Accueil</span>
+                    <div class="home_back"></div>
                 </a>
             </div>
 

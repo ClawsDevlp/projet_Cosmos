@@ -23,16 +23,13 @@ const slider = document.getElementById("slider");
 const slider_message = document.getElementById("slider_message");
 
 /*------------------------------
-Popup & slider functions
+Popup general & slider functions
 ------------------------------*/
-
-function pop(evt) {
-    evt.preventDefault();
+function pop() {
     popup_bg.classList.remove("hide");
 }
 
-function unpop(evt) {
-    evt.preventDefault();
+function unpop() {
     popup_bg.classList.add("hide");
 }
 
@@ -55,20 +52,15 @@ document.addEventListener("DOMContentLoaded", initialiser);
 function initialiser(evt) {
     //Creation URL and queries
     let url = new URL("api/profile/add_badges.php", "http://localhost/projetPHP/");
-
-    //AJAX query : add badges
+    //AJAX query : have badges
     fetch(url, {
             method: "POST"
         })
         .then(response => {
-            if (response.status == 200) {
+            if (response.status != 200) {
                 response.json().then(data => {
+                    //Error
                     console.log(data.message);
-                });
-            }else{
-                //Error
-                response.json().then(data => {
-                    console.log(data);
                 });
             }
         })
@@ -79,7 +71,6 @@ function initialiser(evt) {
 
     //Creation URL and queries
     url = new URL("api/profile/have_profile.php", "http://localhost/projetPHP/");
-
     //AJAX query : have profile
     fetch(url)
         .then(response => {
@@ -123,25 +114,27 @@ function initialiser(evt) {
             console.log(error)
         });
 
+    //Popup update profile
     form_profile.addEventListener("submit", pop);
     validate_btn.addEventListener("click", sendUpdateProfile);
     cancel_btn.addEventListener("click", unpop);
 }
 
+/*------------------------------
+Update the profile
+------------------------------*/
 //Send update profile
 function sendUpdateProfile(evt) {
     evt.preventDefault();
 
     //Creation URL and queries
     let url = new URL("api/profile/update_profile.php", "http://localhost/projetPHP/");
-
     let params = {};
     if (form_profile.pseudo.value) params["pseudo"] = form_profile.pseudo.value;
     if (form_profile.pwd.value) params["pwd"] = form_profile.pwd.value;
     params["avatar"] = form_profile.avatar.value;
     if (form_profile.planete.value) params["planete"] = form_profile.planete.value;
     if (popup.mdp.value) params["currentPwd"] = popup.mdp.value;
-
     //AJAX query : registration
     fetch(url, {
             method: "PUT",
