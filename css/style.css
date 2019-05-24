@@ -31,7 +31,7 @@ figcaption {
 }
 
 .hide {
-    display: none!important;
+    display: none !important;
 }
 
 a {
@@ -153,11 +153,11 @@ Pages
     background-size: cover;
 }
 
-#back .return_back{
+#back .return_back {
     background-image: url("../images/back_1.jpg");
 }
 
-#back .home_back{
+#back .home_back {
     background-image: url("../images/home_1.jpg");
 }
 
@@ -169,23 +169,12 @@ Pages
     border: 1px solid #1d17eb;
 }
 
-#back > a:hover > .return_back{
+#back > a:hover > .return_back {
     background-image: url("../images/back_2.jpg");
 }
 
-#back > a:hover > .home_back{
+#back > a:hover > .home_back {
     background-image: url("../images/home_2.jpg");
-}
-
-/* Badges */
-#badges {
-    width: 55%;
-}
-
-#badges > img {
-    width: 50px;
-    height: 50px;
-    border: 1px solid #fff;
 }
 
 /*------------------------------
@@ -329,6 +318,7 @@ Game
 }
 
 #game_story .end_text {
+    font-size: 1.2em;
     color: #ff00ff;
 }
 
@@ -367,7 +357,7 @@ Game
 
 #musicFx img {
     display: inline-block;
-	width: 40px;
+    width: 40px;
     height: 40px;
     cursor: pointer;
 }
@@ -424,6 +414,53 @@ CGU
 #cgu .cgu_title_2 {
     font-size: 1.2em;
     margin: 25px 0;
+}
+
+/*------------------------------
+Badges & infobulles
+------------------------------*/
+
+#badges {
+    width: 55%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#badges a {
+    margin-right: 5px;
+}
+
+#badges img {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #fff;
+}
+
+.infobulle {
+    text-decoration: none;
+    position: relative;
+}
+
+.infobulle span {
+    display: none;
+    background-color: red;
+    font-size: 0.9em;
+    left: 50%;
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    z-index: 3;
+    padding: 8px;
+    user-select: none;
+    width: 200px;
+}
+
+.infobulle:hover {
+    cursor: pointer;
+}
+
+.infobulle:hover span {
+    display: block;
 }
 
 /*------------------------------
@@ -501,6 +538,7 @@ Popup générale
     margin: auto;
     padding: 10px;
     background-color: #171717;
+    box-sizing: border-box;
     flex-direction: column;
     justify-content: center;
 }
@@ -543,34 +581,56 @@ Popup générale
 Popup badge
 ------------------------------*/
 
-#popup_badge {
+#popup_badge_bg {
     position: absolute;
-    display: none;
-    width: 600px;
-    height: 200px;
-    top: 20%;
-    left: 50%;
-    padding: 10px;
-    transform: translate(-50%, -50%);
-    background-color: #000000;
-    border: 2px solid white;
-    text-align: center;
-    z-index: 3;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    z-index: 2;
 }
 
-#pop_button {
+#popup_badge {
+    position: relative;
+    display: flex;
+    width: 50%;
+    height: 55%;
+    margin: auto;
+    padding: 20px;
+    background-color: #000000;
+    box-sizing: border-box;
+    border: 2px solid white;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#button_popup_badge {
     position: absolute;
     width: 30px;
     top: 0px;
     left: 0px;
-    margin: 30 auto auto auto;
     padding: 8px;
     border: 2px solid white;
     font-size: 1.5em;
 }
 
-#pop_button:hover {
+#button_popup_badge:hover {
+    border-color: #1d17eb;
+    color: #1d17eb;
     cursor: pointer;
+}
+
+#title_popup_badge {
+    color: #ff00ff;
+    font-size: 1.2em;
+}
+
+#img_popup_badge {
+    width: 100px;
+    margin: 25px 0;
+    border: 1px solid #fff;
 }
 
 /*------------------------------
@@ -636,7 +696,7 @@ Responsive
     #home_visual {
         height: 200px;
     }
-    
+
     #home_visual > h1 {
         font-size: 2.5em;
     }
@@ -644,5 +704,10 @@ Responsive
     /* Game */
     #game_story {
         min-height: 100px;
+    }
+    
+    #popup_badge {
+        width: 90%;
+        height: 70%;
     }
 }

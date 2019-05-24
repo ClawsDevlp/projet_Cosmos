@@ -38,11 +38,12 @@ function initialiser(evt) {
 /*------------------------------
 Slider general & popup functions
 ------------------------------*/
-function pop() {
+function pop(evt) {
+    evt.preventDefault();
     popup_bg.classList.remove("hide");
 }
 
-function unpop() {
+function unpop(evt) {
     popup_bg.classList.add("hide");
 }
 

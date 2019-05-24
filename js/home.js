@@ -21,11 +21,13 @@ const slider = document.getElementById("slider");
 /*------------------------------
 Popup general & slider functions
 ------------------------------*/
-function pop() {
+function pop(evt) {
+    evt.preventDefault();
     popup_bg.classList.remove("hide");
 }
 
-function unpop() {
+function unpop(evt) {
+    evt.preventDefault();
     popup_bg.classList.add("hide");
 }
 

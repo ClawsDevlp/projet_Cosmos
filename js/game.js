@@ -12,14 +12,15 @@ const inventory = document.getElementById("inventory");
 const buttons = document.querySelectorAll("button");
 const buttonsPlus = document.querySelectorAll("button:not(:first-child)");
 
-const current_badge = document.getElementById("popup_badge");
-const current_badge_content = document.getElementById("contenu_popup");
-const img_popup = document.getElementById("img_popup");
-const pop_button = document.getElementById("pop_button");
+const popup_badge_bg = document.getElementById("popup_badge_bg");
+const title_popup_badge = document.getElementById("title_popup_badge");
+const img_popup_badge = document.getElementById("img_popup_badge");
+const description_popup_badge = document.getElementById("description_popup_badge");
+const button_popup_badge = document.getElementById("button_popup_badge");
 
 const music = document.getElementById("music");
 const music_img = document.getElementById("music_img");
-const fx = document.getElementById("button_sound");
+const fx = document.getElementById("fx");
 const fx_img = document.getElementById("fx_img");
 
 var id_game;
@@ -42,12 +43,10 @@ function initialiser(evt) {
     //Music & FX
     music_img.addEventListener("click", playMusic);
     fx_img.addEventListener("click", playFX);
-    music.muted = false;
-    fx.muted = false;
-    
+
     //Popup badge
-    pop_button.addEventListener("click", function () {
-        current_badge.style.display = "none";
+    button_popup_badge.addEventListener("click", function () {
+        popup_badge_bg.classList.add("hide");
     });
 
     //Creation URL
@@ -79,7 +78,11 @@ Game
 //Player make a choice
 function makeChoice(evt) {
     evt.preventDefault();
-    
+
+    //Play a FX sound
+    fx.currentTime = 0;
+    fx.play();
+
     // Hide all choices buttons
     for (let button of buttons) {
         button.classList.add("hide");
@@ -120,7 +123,7 @@ function displayGame(data) {
         buttons[0].addEventListener("click", function () {
             window.location.href = "home.php";
         });
-        
+
         //Creation URL and queries
         let params = {};
         params["id_game"] = id_game;
@@ -162,9 +165,6 @@ function displayGame(data) {
 
     } else if (!(data.choices)) {
         //If no choices
-        if (data.badges_popup != undefined) {
-            pop_badge(data.badges_popup["nom_badge"], data.badges_popup["link"]);
-        }
         buttons[0].classList.remove("hide");
         buttons[0].dataset.idChoice = 0;
         buttons[0].innerHTML = "Suivant";
@@ -172,9 +172,6 @@ function displayGame(data) {
         updateGame(data.text["id_text"]);
     } else {
         //If choices
-        if (data.badges_popup != undefined) {
-            pop_badge(data.badges_popup["nom_badge"], data.badges_popup["link"]);
-        }
         for (let i in data.choices) {
             buttons[i].classList.remove("hide");
             buttons[i].dataset.idChoice = data.choices[i]["id_choice"];
@@ -198,14 +195,14 @@ function displayGame(data) {
             inventory.appendChild(new_img_objet);
         }
     }
-    
+
 }
 
 //Update the game
 function updateGame(id_text) {
     //Typing text story
     typing(isEnd);
-    
+
     //Creation URL and queries
     let url = new URL("api/game/update_game.php", "http://localhost/projetPHP/");
     let params = {};
@@ -229,7 +226,7 @@ function updateGame(id_text) {
         .catch(error => {
             console.log(error)
         });
-    
+
     //Creation URL
     url = new URL("api/profile/add_badges_in_game.php", "http://localhost/projetPHP/");
     //AJAX query : add badges in game
@@ -238,7 +235,15 @@ function updateGame(id_text) {
             body: JSON.stringify(params)
         })
         .then(response => {
-            if (response.status != 200) {
+            if (response.status == 200) {
+                response.json().then(data => {
+                    if (data.badges) {
+                        for (let badge of data.badges) {
+                            pop_badge(badge["id_badge"], badge["name_badge"], badge["description_badge"], badge["link"]);
+                        }
+                    }
+                });
+            } else {
                 //Error
                 response.json().then(data => {
                     console.log(data.message);
@@ -268,8 +273,9 @@ function typing(isEnd, mytxt) {
         }, 20);
         //Clearing interval when clicking on the text : display whole text
         if (isEnd == 0) {
-            game.addEventListener("click", function (e) {
-                var target = e.target;
+            game.addEventListener("click", function (evt) {
+                evt.preventDefault();
+                var target = evt.target;
                 if (target.tagName == "BUTTON") {
                     clearInterval(afficherTexte);
                     text.innerHTML = "";
@@ -279,7 +285,7 @@ function typing(isEnd, mytxt) {
                 }
             }, false);
         }
-    //Special case to display the end screen
+        //Special case to display the end screen
     } else {
         window.addEventListener("click", function () {
             clearInterval(afficherTexte);
@@ -289,11 +295,13 @@ function typing(isEnd, mytxt) {
 }
 
 //Popup new badge
-function pop_badge(nom_badge, link_img) {
-    current_badge.style.display = "block";
-    current_badge.classList.add("popup_animation");
-    current_badge_content.innerHTML = "Nouveau badge obtenu : " + nom_badge;
-    img_popup.innerHTML = "<img src = '" + link_img + "' alt =/>"
+function pop_badge(id_badge, nom_badge, description_badge, link_img_badge) {
+    popup_badge_bg.classList.remove("hide");
+    title_popup_badge.innerHTML = "Nouveau badge obtenu : "+nom_badge+".";
+    img_popup_badge.dataset.idBadge = id_badge;
+    img_popup_badge.src = link_img_badge;
+    img_popup_badge.alt = nom_badge;
+    description_popup_badge.innerHTML = description_badge;
 }
 
 /*------------------------------

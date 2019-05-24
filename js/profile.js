@@ -25,11 +25,13 @@ const slider_message = document.getElementById("slider_message");
 /*------------------------------
 Popup general & slider functions
 ------------------------------*/
-function pop() {
+function pop(evt) {
+    evt.preventDefault();
     popup_bg.classList.remove("hide");
 }
 
-function unpop() {
+function unpop(evt) {
+    evt.preventDefault();
     popup_bg.classList.add("hide");
 }
 
@@ -118,6 +120,15 @@ function initialiser(evt) {
     form_profile.addEventListener("submit", pop);
     validate_btn.addEventListener("click", sendUpdateProfile);
     cancel_btn.addEventListener("click", unpop);
+    
+    if(document.getElementById("test").getBoundingClientRect().x + 200 > window.innerWidth){
+        console.log("oui");
+        document.getElementById("test2").style.left = "0%";
+        document.getElementById("test2").style.right = "50%";
+    }
+    
+     console.log(document.getElementById("test").getBoundingClientRect());
+    console.log(window.innerWidth);
 }
 
 /*------------------------------

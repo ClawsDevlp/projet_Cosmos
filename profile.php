@@ -28,7 +28,7 @@
 
 <body>
     <main>
-        <section id="profile" class="hide">
+        <section id="profile">
 
             <div id="back">
                 <a href="home.php">
@@ -88,25 +88,82 @@
             <section id="info_badges">
                 <h2>Mes badges</h2>
                 <div id="badges">
-                    <img data-idBadge="1" src="images/badges/locked.jpg" alt="Petit ange parti trop tôt" title="Petit ange parti trop tôt">
-                    <img data-idBadge="2" src="images/badges/locked.jpg" alt="Noir c'est noir" title="Noir c'est noir">
-                    <img data-idBadge="3" src="images/badges/locked.jpg" alt="La race avant tout" title="La race avant tout">
-                    <img data-idBadge="4" src="images/badges/locked.jpg" alt="440 Hz" title="440 Hz">
-                    <img data-idBadge="5" src="images/badges/locked.jpg" alt="Complètement marteau" title="Complètement marteau">
-                    <img data-idBadge="6" src="images/badges/locked.jpg" alt="Oh no." title="Oh no.">
-                    <img data-idBadge="7" src="images/badges/locked.jpg" alt="MacGyver" title="MacGyver">
-                    <img data-idBadge="8" src="images/badges/locked.jpg" alt="Tapez dans l'dos !" title="Tapez dans l'dos !">
-                    <img data-idBadge="9" src="images/badges/locked.jpg" alt="Bienvenue dans la grappe" title="Bienvenue dans la grappe">
-                    <img data-idBadge="10" src="images/badges/locked.jpg" alt="	Les Raisins de la colère" title="Les Raisins de la colère">
-                    <img data-idBadge="11" src="images/badges/locked.jpg" alt="Caaapitaine Flam" title="Caaapitaine Flam">
-                    <img data-idBadge="12" src="images/badges/locked.jpg" alt="Poussières d’étoiles" title="Poussières d’étoiles">
-                    <img data-idBadge="13" src="images/badges/locked.jpg" alt="Chorémanie" title="Chorémanie">
-                    <img data-idBadge="14" src="images/badges/locked.jpg" alt="Mon langage de requête structurée" title="Mon langage de requête structurée">
-                    <img data-idBadge="15" src="images/badges/locked.jpg" alt="Premier degré" title="Premier degré">
-                    <img data-idBadge="16" src="images/badges/locked.jpg" alt="Fintastique !" title="Fintastique !">
-                    <img data-idBadge="17" src="images/badges/locked.jpg" alt="C'EST LE BOUTON ROUGE" title="C'EST LE BOUTON ROUGE">
-                    <img data-idBadge="18" src="images/badges/locked.jpg" alt="Passion amnésie spatiale" title="Passion amnésie spatiale">
-                    <img data-idBadge="19" src="images/badges/locked.jpg" alt="J'adore ce que vous faîtes" title="J'adore ce que vous faîtes">
+                    <a class="infobulle">
+                        <img data-idBadge="1" src="images/badges/locked.jpg" alt="Petit ange parti trop tôt" title="Petit ange parti trop tôt" class="infobulle">
+                        <span>Ici je peux mettre tout mon texte d'aide</span>
+                    </a>
+                    <a class="infobulle">
+                        <img data-idBadge="2" src="images/badges/locked.jpg" alt="Noir c'est noir" title="Noir c'est noir">
+                        <span>Ici je peux mettre tout mon texte d'aide</span>
+                    </a>
+                    <a class="infobulle">
+                        <img data-idBadge="3" src="images/badges/locked.jpg" alt="La race avant tout" title="La race avant tout">
+                        <span>Ici je peux mettre tout mon texte d'aide</span>
+                    </a>
+                    <a class="infobulle">
+                        <img data-idBadge="4" src="images/badges/locked.jpg" alt="440 Hz" title="440 Hz">
+                        <span>Ici je peux mettre tout mon texte d'aide</span>
+                    </a>
+                    <a class="infobulle">
+                        <img data-idBadge="5" src="images/badges/locked.jpg" alt="Complètement marteau" title="Complètement marteau">
+                        <span>Ici je peux mettre tout mon texte d'aide</span>
+                    </a>
+                    <a class="infobulle">
+                        <img data-idBadge="6" src="images/badges/locked.jpg" alt="Oh no." title="Oh no.">
+                        <span>Ici je peux mettre tout mon texte d'aide</span>
+                    </a>
+                    <a class="infobulle">
+                        <img data-idBadge="7" src="images/badges/locked.jpg" alt="MacGyver" title="MacGyver">
+                        <span>Ici je peux mettre tout mon texte d'aide</span>
+                    </a>
+                    <a class="infobulle">
+                        <img data-idBadge="8" src="images/badges/locked.jpg" alt="Tapez dans l'dos !" title="Tapez dans l'dos !">
+                        <span>Ici je peux mettre tout mon texte d'aide</span>
+                    </a>
+                    <a class="infobulle">
+                        <img data-idBadge="9" src="images/badges/locked.jpg" alt="Bienvenue dans la grappe" title="Bienvenue dans la grappe">
+                        <span>Ici je peux mettre tout mon texte d'aide</span>
+                    </a>
+                    <a class="infobulle">
+                        <img data-idBadge="10" src="images/badges/locked.jpg" alt="	Les Raisins de la colère" title="Les Raisins de la colère">
+                        <span>Ici je peux mettre tout mon texte d'aide</span>
+                    </a>
+                    <a class="infobulle">
+                        <img data-idBadge="11" src="images/badges/locked.jpg" alt="Caaapitaine Flam" title="Caaapitaine Flam">
+                        <span>Ici je peux mettre tout mon texte d'aide</span>
+                    </a>
+                    <a class="infobulle">
+                        <img data-idBadge="12" src="images/badges/locked.jpg" alt="Poussières d’étoiles" title="Poussières d’étoiles">
+                        <span>Ici je peux mettre tout mon texte d'aide</span>
+                    </a>
+                    <a class="infobulle">
+                        <img data-idBadge="13" src="images/badges/locked.jpg" alt="Chorémanie" title="Chorémanie">
+                        <span>Ici je peux mettre tout mon texte d'aide</span>
+                    </a>
+                    <a class="infobulle">
+                        <img data-idBadge="14" src="images/badges/locked.jpg" alt="Mon langage de requête structurée" title="Mon langage de requête structurée">
+                        <span>Ici je peux mettre tout mon texte d'aide</span>
+                    </a>
+                    <a class="infobulle">
+                        <img data-idBadge="15" src="images/badges/locked.jpg" alt="Premier degré" title="Premier degré">
+                        <span>Ici je peux mettre tout mon texte d'aide</span>
+                    </a>
+                    <a class="infobulle">
+                        <img data-idBadge="16" src="images/badges/locked.jpg" alt="Fintastique !" title="Fintastique !">
+                        <span>Ici je peux mettre tout mon texte d'aide</span>
+                    </a>
+                    <a class="infobulle">
+                        <img data-idBadge="17" src="images/badges/locked.jpg" alt="C'EST LE BOUTON ROUGE" title="C'EST LE BOUTON ROUGE">
+                        <span>Ici je peux mettre tout mon texte d'aide</span>
+                    </a>
+                    <a class="infobulle">
+                        <img data-idBadge="18" src="images/badges/locked.jpg" alt="Passion amnésie spatiale" title="Passion amnésie spatiale">
+                        <span>Ici je peux mettre tout mon texte d'aide</span>
+                    </a>
+                    <a class="infobulle" id="test">
+                        <img data-idBadge="19" src="images/badges/locked.jpg" alt="J'adore ce que vous faîtes" title="J'adore ce que vous faîtes">
+                        <span id="test2">Ici je peux mettre tout mon texte d'aide</span>
+                    </a>
                 </div>
             </section>
 

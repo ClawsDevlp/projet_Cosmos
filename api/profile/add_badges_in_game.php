@@ -26,13 +26,14 @@ if((!isset($data["id_game"]) || empty($data["id_game"])) && (!isset($data["id_te
 $id_text = $data["id_text"];
 $id_game = $data["id_game"];
 $id_player = $_SESSION["id"];
+$json = array();
 
 // Include data bdd
 include_once "../data/MyPDO.projet_cosmos.include.php";
 
 //Create a new game
 $stmtCheckBadges = MyPDO::getInstance()->prepare(<<<SQL
-    SELECT b.id_badge
+    SELECT b.id_badge, b.nom_badge, b.description_badge, b.link
     FROM badges b 
     WHERE b.id_texte = :id_text 
 	AND (SELECT b.id_badge FROM badges b INNER JOIN badgesobtenus bo ON b.id_badge = bo.id_badge WHERE b.id_texte = :id_text AND bo.id_joueur = :id_player) IS NULL;
@@ -41,6 +42,7 @@ SQL
 $stmtCheckBadges->execute(array(":id_player" => $id_player, ":id_text" => $id_text));
 while (($row = $stmtCheckBadges->fetch()) !== false) {
     $id_badge = $row["id_badge"];
+    $json["badges"][] = array("id_badge" => $row["id_badge"], "name_badge" => $row["nom_badge"], "description_badge" => $row["description_badge"], "link" => $row["link"]);
     $stmtAddBadge = MyPDO::getInstance()->prepare(<<<SQL
         INSERT INTO badgesobtenus 
         VALUES (:id_player, :id_badge, :id_partie);
@@ -51,7 +53,7 @@ SQL
 
 //Response
 http_response_code(200);
-echo json_encode(array("message" => "Done."));
+echo json_encode($json);
 
 exit();
 

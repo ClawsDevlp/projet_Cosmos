@@ -63,13 +63,16 @@
             <img id="music_img" src="images/Logo_Music.png" alt="Bouton musique">
             <img id="fx_img" src="images/Logo_FX.png" alt="Bouton FX">
             <audio id="music" autoplay="true" src="sounds/ambiant_01.mp3" loop="true" controls hidden></audio>
-            <audio id="button_sound" src="sounds/button_sound_01.mp3" controls hidden></audio>
+            <audio id="fx" src="sounds/button_sound_01.mp3" controls hidden></audio>
         </div>
 
-        <div id="popup_badge">
-            <div id="contenu_popup"></div>
-            <div id="img_popup"></div>
-            <a id="pop_button" style="display:block;">x</a>
+        <div id="popup_badge_bg" class="hide">
+            <div id="popup_badge" class="popup_animation">
+                <a id="button_popup_badge">x</a>
+                <p id="title_popup_badge"></p>
+                <img id="img_popup_badge">
+                <p id="description_popup_badge"></p>
+            </div>
         </div>
 
     </main>
