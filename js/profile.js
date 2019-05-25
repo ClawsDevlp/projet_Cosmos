@@ -172,6 +172,9 @@ function sendUpdateProfile(evt) {
                 //Other errors
                 response.json().then(data => {
                     console.log(data.message);
+                    if(data.message == "Missing password.") {
+                        slide("Veuillez entrer votre mot de passe.", "slider_red");
+                    }
                 });
             }
         })
