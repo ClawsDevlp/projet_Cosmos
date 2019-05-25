@@ -32,7 +32,7 @@ function initialiser(evt) {
     back.addEventListener("click", goRegistration);
     form_registration.addEventListener("submit", sendRegistration);
     cgu.addEventListener("click", pop);
-    return_btn.addEventListener("click", goBack);
+    return_btn.addEventListener("click", unpop);
 }
 
 /*------------------------------
@@ -71,6 +71,7 @@ function sendConnection(evt) {
     if (form_connection.pwd.value) params["pwd"] = form_connection.pwd.value;
     let url = new URL("api/identification/connection.php", "http://localhost/projetPHP/");
     url.search = new URLSearchParams(params);
+    
     //AJAX query : connection
     fetch(url)
         .then(response => {
@@ -116,8 +117,8 @@ function sendRegistration(evt) {
     let params = {};
     if (form_registration.pseudo.value) params["pseudo"] = form_registration.pseudo.value;
     if (form_registration.pwd.value) params["pwd"] = form_registration.pwd.value;
-    if (form_registration.planete.value) params["planete"] = form_registration.planete.value;
-    params["id_avatar"] = form_registration.avatar.value;
+    if (form_registration.planete.value) params["planete"] = form_registration.planete.value; 
+    params["id_avatar"] = document.querySelector("input[name=avatar]:checked").value;
     //AJAX query : registration
     fetch(url, {
             method: "POST",

@@ -7,10 +7,11 @@ const game = document.getElementById("game");
 
 const text = document.getElementById("text");
 const game_badges = document.getElementById("game_badges");
-const badges = document.getElementById("badges");
+const badgesArea = document.getElementById("badges");
 const inventory = document.getElementById("inventory");
-const buttons = document.querySelectorAll("button");
+const buttons = document.querySelectorAll("#game_choice > button");
 const buttonsPlus = document.querySelectorAll("button:not(:first-child)");
+const home_back_choice = document.getElementById("home_back_choice");
 
 const popup_badge_bg = document.getElementById("popup_badge_bg");
 const title_popup_badge = document.getElementById("title_popup_badge");
@@ -34,15 +35,14 @@ document.addEventListener("DOMContentLoaded", initialiser);
 function initialiser(evt) {
     //Possibility to make a choice for each button
     for (let button of buttons) {
-        button.addEventListener("click", function () {
-            text.innerHTML = "";
-        });
         button.addEventListener("click", makeChoice);
     }
 
     //Music & FX
     music_img.addEventListener("click", playMusic);
     fx_img.addEventListener("click", playFX);
+    music.currentTime = 0;
+    fx.currentTime = 0;
 
     //Popup badge
     button_popup_badge.addEventListener("click", function () {
@@ -78,15 +78,12 @@ Game
 //Player make a choice
 function makeChoice(evt) {
     evt.preventDefault();
+    
+    text.innerHTML = "";
 
     //Play a FX sound
     fx.currentTime = 0;
     fx.play();
-
-    // Hide all choices buttons
-    for (let button of buttons) {
-        button.classList.add("hide");
-    }
 
     //Creation URL and queries
     let params = {};
@@ -112,23 +109,30 @@ function makeChoice(evt) {
         .catch(error => {
             console.log(error)
         });
-
+    
+    // Hide all choices buttons
+    for (let button of buttons) {
+        button.classList.add("hide");
+        delete button.dataset.idChoice;
+        button.innerHTML = "";
+    }
 }
 
 //Display game
 function displayGame(data) {
     if (!(data.text)) {
         //If end of the game
+        buttons[0].classList.remove("hide");
+        delete buttons[0].dataset.idChoice;
         buttons[0].innerHTML = "Revenir au menu";
+        buttons[0].removeEventListener("click", makeChoice)
         buttons[0].addEventListener("click", function () {
             window.location.href = "home.php";
         });
-        buttons[0].classList.remove("hide");
 
         //Creation URL and queries
         let params = {};
         params["id_game"] = id_game;
-
         let url = new URL("api/game/end_game.php", "http://localhost/projetPHP/");
         url.search = new URLSearchParams(params);
         //AJAX query : end game (infos end)
@@ -137,17 +141,23 @@ function displayGame(data) {
                 if (response.status == 200) {
                     response.json().then(data => {
                         isEnd = 1;
+                        inventory.classList.add("hide");
                         text.classList.add("end_text");
                         text.innerHTML = "C'était la fin n°" + data.statistics["nb_end"] + ". Vous avez assisté à " + data.statistics["nb_ends"] + " fin sur 10.";
                         typing(isEnd, text.innerHTML);
                         if (data.badges) {
                             for (let badge of data.badges) {
+                                let new_badge_infobulle = document.createElement("a");
+                                new_badge_infobulle.className = "badge_infobulle";
                                 let new_img_badge = document.createElement("img");
                                 new_img_badge.dataset.idBadge = badge["id_badge"];
                                 new_img_badge.src = badge["link"];
                                 new_img_badge.alt = badge["name_badge"];
-                                new_img_badge.title = badge["name_badge"] + " : " + badge["description_badge"];
-                                badges.appendChild(new_img_badge);
+                                let new_span_badge_infobulle = document.createElement("span");
+                                new_span_badge_infobulle.innerHTML = badge["name_badge"] + " : " + badge["description_badge"];
+                                new_badge_infobulle.appendChild(new_img_badge);
+                                new_badge_infobulle.appendChild(new_span_badge_infobulle);
+                                badgesArea.appendChild(new_badge_infobulle);
                             }
                             game_badges.classList.remove("hide");
                         }
@@ -184,16 +194,16 @@ function displayGame(data) {
     }
 
     //Display inventory
-    if (data.objects && data.objects != null) {
+    if (data.objects) {
         while (inventory.hasChildNodes()) {
             inventory.removeChild(inventory.firstChild);
         }
-        for (let objet of data.objects) {
-            let new_img_objet = document.createElement("img");
-            new_img_objet.alt = objet;
-            new_img_objet.title = objet;
-            new_img_objet.src = data.objects_link;
-            inventory.appendChild(new_img_objet);
+        for (let object of data.objects) {
+            let new_img_object = document.createElement("img");
+            new_img_object.alt = object["name_object"];
+            new_img_object.title = object["name_object"];
+            new_img_object.src = object["link_object"];
+            inventory.appendChild(new_img_object);
         }
     }
 
@@ -298,7 +308,7 @@ function typing(isEnd, mytxt) {
 //Popup new badge
 function pop_badge(id_badge, nom_badge, description_badge, link_img_badge) {
     popup_badge_bg.classList.remove("hide");
-    title_popup_badge.innerHTML = "Nouveau badge obtenu : "+nom_badge+".";
+    title_popup_badge.innerHTML = "Nouveau badge obtenu : " + nom_badge + ".";
     img_popup_badge.dataset.idBadge = id_badge;
     img_popup_badge.src = link_img_badge;
     img_popup_badge.alt = nom_badge;

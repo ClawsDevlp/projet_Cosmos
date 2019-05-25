@@ -60,6 +60,7 @@ main {
     font-family: "VT323", Arial, sans-serif;
     font-size: 1em;
     line-height: 0.75;
+    overflow: hidden;
 }
 
 /*------------------------------
@@ -190,7 +191,7 @@ Menu
 
 #menu_visual {
     flex: 1;
-    max-height: 400px;
+    max-height: 410px;
 }
 
 #menu_visual > img {
@@ -202,7 +203,7 @@ Menu
 
 #menu_text {
     flex: 2;
-    min-height: 375px;
+    min-height: 410px;
     margin-left: 30px;
 }
 
@@ -301,6 +302,12 @@ Home
     width: 15px;
     height: 15px;
     margin-left: -2px;
+    background-image: url("../images/log_out_1.svg");
+    background-size: cover;
+}
+
+#home_profile #log_out:hover {
+    background-image: url("../images/log_out_2.svg");
     cursor: pointer;
 }
 
@@ -313,21 +320,22 @@ Game
     min-height: 60px;
 }
 
-#game_story #text {
+#game_story > #text {
     width: 100%;
 }
 
-#game_story .end_text {
+#game_story > .end_text {
     font-size: 1.2em;
-    color: #ff00ff;
+    color: #00ff01;
 }
 
 #game_badges {
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 #game_badges > p {
-    margin-bottom: 5px;
+    color: #ff00ff;
+    margin-bottom: 10px;
 }
 
 #game_badges > #badges > img {
@@ -344,7 +352,7 @@ Game
 #inventory > img {
     width: 75px;
     height: 75px;
-    margin-left: 20px;
+    margin-left: 8px;
     border: 1px solid #fff;
 }
 
@@ -352,7 +360,7 @@ Game
 #musicFx {
     position: fixed;
     bottom: 8px;
-    left: 10px;
+    left: 8px;
 }
 
 #musicFx img {
@@ -436,30 +444,36 @@ Badges & infobulles
     border: 1px solid #fff;
 }
 
-.infobulle {
-    text-decoration: none;
+.badge_infobulle {
     position: relative;
+    text-decoration: none;
 }
 
-.infobulle span {
-    display: none;
-    background-color: red;
-    font-size: 0.9em;
-    left: 50%;
+.badge_infobulle > span {
     position: absolute;
-    overflow: hidden;
-    top: 50%;
-    z-index: 3;
+    display: none;
+    left: 50%;
+    bottom: 60%;
+    min-width: 200px;
     padding: 8px;
+    background-color: #ff00ff;
+    border-radius: 1px;
+    font-size: 0.9em;
+    right: auto;
     user-select: none;
-    width: 200px;
+    z-index: 2;
 }
 
-.infobulle:hover {
+.badge_infobulle > span.badge_infobulle_left {
+    right: 50%;
+    left: auto;
+}
+
+.badge_infobulle:hover {
     cursor: pointer;
 }
 
-.infobulle:hover span {
+.badge_infobulle:hover span {
     display: block;
 }
 
@@ -671,6 +685,10 @@ Responsive
     #badges {
         width: 100%;
     }
+    
+    .badge_infobulle > span {
+        min-width: 100px;
+    }
 
     /* Menu */
     #menu {
@@ -705,7 +723,7 @@ Responsive
     #game_story {
         min-height: 100px;
     }
-    
+
     #popup_badge {
         width: 90%;
         height: 70%;

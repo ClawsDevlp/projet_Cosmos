@@ -40,9 +40,13 @@ while (($row = $stmtInfosGame->fetch()) !== false) {
     $json["text"]["id_text"] =  $row["id_texte"];
     $json["text"]["text_content"] = $row["contenu_texte"];
     $json["text"]["nb_end"] = $row["nb_end"];
-    $objects_player[] = $row["id_objet"];
-    $objects_name[] = $row["nom_objet"];
-	$objects_link[] = $row["link"];
+    
+    if($row["id_objet"] != NULL){
+        $objects_player[] = $row["id_objet"];
+        $objects_name[] = $row["nom_objet"];
+        $objects_link[] = $row["link"];
+        $json["objects"][] = array("name_object" => $row["nom_objet"], "link_object" => $row["link"]);
+    }
 }
 
 //Player objects for a query
@@ -54,12 +58,6 @@ if($objects_player != NULL){
         $in_params[$key] = $object; // collecting values into key-value array
     }
     $in = rtrim($in,","); // :id0,:id1,:id2
-
-    if($objects_name[0] != null){
-        $json["objects"] = $objects_name;
-		$json["objects_link"] = $objects_link;
-    }
-
 }else{
     $in = ":id0";
     $in_params["id0"] = 0;

@@ -21,9 +21,9 @@
     <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
     <link rel="stylesheet" href="css/normalize.css" type="text/css" />
     <link rel="stylesheet" href="css/style.css" type="text/css" />
-	
-	<!--Favicon-->
-	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
@@ -35,7 +35,7 @@
                     <img id="avatar" src="" alt="Image avatar">
                 </a>
                 <span id="pseudo"></span>
-                <img id="log_out" src="./images/log_out.svg">
+                <a id="log_out"></a>
             </div>
 
             <div id="home_visual">

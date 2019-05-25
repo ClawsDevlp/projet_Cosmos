@@ -31,14 +31,6 @@ function unpop(evt) {
     popup_bg.classList.add("hide");
 }
 
-function continueGame() {
-    window.location.href = "game.php";
-}
-
-function restartGame() {
-    createGame();
-}
-
 function slide(message, color) {
     slider.className = "";
     slider.classList.add(color);
@@ -80,7 +72,7 @@ function initialiser(evt) {
         .catch(error => {
             console.log(error)
         });
-    
+
     testPreviousPage();
     log_out.addEventListener("click", logOut);
     go_profile.addEventListener("click", function () {
@@ -91,9 +83,9 @@ function initialiser(evt) {
 
 // Test previous page to show connection slider
 function testPreviousPage() {
-    if((document.referrer).substr(-9) == "index.php") {
+    if ((document.referrer).substr(-9) == "index.php") {
         slide("Vous êtes maintenant dans votre navette. Que voulez-vous faire ?", "slider_green");
-    }  
+    }
 }
 
 /*------------------------------
@@ -139,8 +131,12 @@ function startGame(evt) {
                 response.json().then(data => {
                     if (data.id_game && data.text.id_text > 4 && data.text.nb_end == null) {
                         pop(evt);
-                        validate_btn.addEventListener("click", continueGame);
-                        validate_no_btn.addEventListener("click", restartGame);
+                        validate_btn.addEventListener("click", function () {
+                            window.location.href = "game.php";
+                        });
+                        validate_no_btn.addEventListener("click", function () {
+                            createGame();
+                        });
                         cancel_btn.addEventListener("click", unpop);
                     } else {
                         createGame();

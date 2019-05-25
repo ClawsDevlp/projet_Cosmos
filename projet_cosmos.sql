@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 20 mai 2019 à 17:18
+-- Généré le :  sam. 25 mai 2019 à 19:44
 -- Version du serveur :  5.7.24
 -- Version de PHP :  7.2.14
 
@@ -85,7 +85,7 @@ INSERT INTO `badges` (`id_badge`, `nom_badge`, `description_badge`, `id_texte`, 
 (17, 'C\'EST LE BOUTON ROUGE', 'Vous vous êtes obstiné à appuyer au moins 10 fois sur le bouton bleu. ', NULL, 'images/badges/badge_17.jpg'),
 (18, 'Passion amnésie spatiale', 'Vous avez effectué au moins 30 parties. ', NULL, 'images/badges/badge_18.jpg'),
 (19, 'J\'adore ce que vous faîtes', 'Vous avez collectionné tous les badges.', NULL, 'images/badges/badge_19.jpg'),
-(20, 'Pasc\'elle le vaut bien', 'Vous avez «Pascale» dans votre pseudo.', NULL, 'images/badges/badge_20.jpg');
+(20, 'Pasc\'elle le vaut bien', 'Vous avez « Pascale » dans votre pseudo.', NULL, 'images/badges/badge_20.jpg');
 
 -- --------------------------------------------------------
 
@@ -106,9 +106,31 @@ CREATE TABLE IF NOT EXISTS `badgesobtenus` (
 --
 
 INSERT INTO `badgesobtenus` (`id_joueur`, `id_badge`, `id_partie`) VALUES
-(1, 1, 57),
-(1, 17, NULL),
-(1, 18, NULL);
+(11, 2, 310),
+(11, 4, 311),
+(11, 17, NULL),
+(11, 18, NULL),
+(11, 20, NULL),
+(16, 1, 286),
+(16, 3, 304),
+(16, 4, 305),
+(16, 7, 304),
+(16, 8, 300),
+(16, 9, 298),
+(16, 10, 296),
+(16, 11, 296),
+(16, 15, 296),
+(16, 17, NULL),
+(16, 18, NULL),
+(16, 20, NULL),
+(20, 1, 317),
+(25, 1, 319),
+(25, 3, 318),
+(25, 4, 318),
+(25, 7, 322),
+(25, 10, 322),
+(25, 15, 322),
+(26, 1, 323);
 
 -- --------------------------------------------------------
 
@@ -124,15 +146,7 @@ CREATE TABLE IF NOT EXISTS `joueur` (
   `planete_origine` varchar(20) DEFAULT NULL,
   `id_avatar` int(11) NOT NULL,
   PRIMARY KEY (`id_joueur`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `joueur`
---
-
-INSERT INTO `joueur` (`id_joueur`, `pseudo`, `mdp`, `planete_origine`, `id_avatar`) VALUES
-(1, 'BaptisteO', 'c654fccb73b6aec4534cfaf165bdc26c', NULL, 3),
-(2, 'pascale_patraque', 'abfdeb7faf918063f887720c9ebe0222', NULL, 2);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -172,38 +186,6 @@ CREATE TABLE IF NOT EXISTS `objetsrecuperes` (
   PRIMARY KEY (`id_partie`,`id_objet`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `objetsrecuperes`
---
-
-INSERT INTO `objetsrecuperes` (`id_partie`, `id_objet`) VALUES
-(12, 3),
-(14, 3),
-(15, 3),
-(18, 3),
-(19, 2),
-(20, 2),
-(21, 2),
-(24, 2),
-(26, 2),
-(28, 3),
-(29, 2),
-(30, 2),
-(30, 4),
-(31, 2),
-(32, 3),
-(34, 1),
-(35, 1),
-(36, 3),
-(38, 2),
-(50, 2),
-(52, 3),
-(53, 3),
-(54, 1),
-(55, 3),
-(56, 3),
-(60, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -217,74 +199,7 @@ CREATE TABLE IF NOT EXISTS `partie` (
   `id_joueur` int(11) NOT NULL,
   `date_texte` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_partie`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `partie`
---
-
-INSERT INTO `partie` (`id_partie`, `id_texte`, `id_joueur`, `date_texte`) VALUES
-(1, 6, 1, '2019-04-28 19:56:46'),
-(2, 6, 1, '2019-04-28 19:56:50'),
-(3, 6, 1, '2019-04-28 19:56:54'),
-(4, 6, 1, '2019-04-28 19:56:57'),
-(5, 6, 1, '2019-04-28 19:57:02'),
-(6, 6, 1, '2019-04-28 19:57:05'),
-(7, 6, 1, '2019-04-28 19:57:07'),
-(8, 6, 1, '2019-04-28 19:57:10'),
-(9, 6, 1, '2019-04-28 19:57:13'),
-(10, 6, 1, '2019-04-28 19:57:23'),
-(11, 6, 1, '2019-04-28 20:03:41'),
-(12, 49, 1, '2019-04-28 20:03:49'),
-(13, 6, 1, '2019-04-29 10:51:08'),
-(14, 49, 1, '2019-04-29 10:51:13'),
-(15, 48, 1, '2019-04-29 10:54:36'),
-(16, 1, 1, '2019-04-29 11:09:50'),
-(17, 6, 1, '2019-04-29 11:10:44'),
-(18, 49, 1, '2019-04-29 11:10:48'),
-(19, 89, 1, '2019-04-29 11:11:16'),
-(20, 57, 1, '2019-04-29 11:11:28'),
-(21, 115, 1, '2019-04-29 11:11:54'),
-(22, 6, 1, '2019-04-29 11:18:57'),
-(23, 6, 1, '2019-04-29 11:19:13'),
-(24, 44, 1, '2019-04-29 11:19:17'),
-(25, 6, 1, '2019-04-29 18:19:27'),
-(26, 102, 1, '2019-04-29 18:23:05'),
-(27, 6, 1, '2019-04-29 19:02:16'),
-(28, 44, 1, '2019-04-29 19:02:19'),
-(29, 115, 1, '2019-04-29 19:04:42'),
-(30, 111, 1, '2019-04-29 19:12:20'),
-(31, 69, 1, '2019-04-29 19:14:15'),
-(32, 44, 1, '2019-04-29 19:16:29'),
-(33, 6, 1, '2019-04-29 19:16:42'),
-(34, 18, 1, '2019-04-29 19:16:45'),
-(35, 18, 1, '2019-04-29 19:16:54'),
-(36, 102, 1, '2019-04-29 19:17:02'),
-(37, 6, 1, '2019-04-29 19:18:50'),
-(38, 75, 1, '2019-04-29 19:18:53'),
-(39, 1, 1, '2019-04-29 19:22:19'),
-(40, 8, 2, '2019-05-09 20:46:40'),
-(41, 1, 2, '2019-05-09 20:47:40'),
-(42, 6, 2, '2019-05-09 20:48:01'),
-(43, 6, 1, '2019-05-09 22:06:35'),
-(44, 2, 1, '2019-05-09 22:08:28'),
-(45, 1, 1, '2019-05-09 22:09:47'),
-(46, 6, 1, '2019-05-09 22:10:04'),
-(47, 6, 1, '2019-05-09 22:13:09'),
-(48, 6, 1, '2019-05-09 22:14:26'),
-(49, 6, 1, '2019-05-09 22:18:59'),
-(50, 44, 1, '2019-05-09 22:19:06'),
-(51, 2, 3, '2019-05-09 22:26:43'),
-(52, 49, 4, '2019-05-09 22:27:49'),
-(53, 44, 4, '2019-05-09 22:32:40'),
-(54, 18, 4, '2019-05-09 22:37:04'),
-(55, 49, 4, '2019-05-09 22:37:29'),
-(56, 102, 4, '2019-05-09 22:40:07'),
-(57, 6, 1, '2019-05-09 22:59:34'),
-(58, 6, 1, '2019-05-09 22:59:41'),
-(59, 6, 1, '2019-05-09 22:59:46'),
-(60, 58, 1, '2019-05-09 23:18:38'),
-(61, 6, 5, '2019-05-10 16:47:01');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -405,7 +320,7 @@ INSERT INTO `textes` (`id_texte`, `contenu_texte`, `nb_end`) VALUES
 (49, 'Vous mourez dans d’atroces souffrances.', 4),
 (50, 'Vous vous apprêtez à retirer ce corps étranger de votre cuisse mais vous apercevez la flasque de whishy. Elle est juste en face de vous, intacte.', NULL),
 (51, 'Vous tendez le bras pour l’atteindre et parvenez finalement à l’attraper.', NULL),
-(52, 'Une gorgée pour le courage et le reste sur la plaie pour la désinfecter.', NULL),
+(52, 'Une gorgée pour le courage et le reste sur la plaie pour la désinfecter', NULL),
 (53, 'Le verrou est fermé. Vous sortez le tournevis afin de crocheter la serrure.', NULL),
 (54, 'A l’intérieur il y a de la nourriture en abondance.', NULL),
 (55, '*Scrunch…scrunch…* Vous regagnez des forces.', NULL),
@@ -433,7 +348,7 @@ INSERT INTO `textes` (`id_texte`, `contenu_texte`, `nb_end`) VALUES
 (78, 'Une musique se fait entendre dans le vaisseau. Vous dansez jusqu’au bout de la nuit.', NULL),
 (79, 'Puis le jour suivant, puis la nuit d’après, puis un tout petit peu d’autres jours avec les nuits qui vont avec, puis vous mourrez.', 7),
 (80, 'Vous faites plusieurs tours dans le fauteuil. Cela vous amuse beaucoup, mais au bout d’un moment vous vous sentez un peu mal.', NULL),
-(81, 'Vous courrez alors dans le vaisseau à la recherche d’une «salle d’eau», mais finissez par vomir sur le pauvre sol d’un couloir du vaisseau.', NULL),
+(81, 'Vous courrez alors dans le vaisseau à la recherche d’une « salle d’eau », mais finissez par vomir sur le pauvre sol d’un couloir du vaisseau.', NULL),
 (82, 'Après plusieurs rejets actifs d’une partie de votre estomac, vous apercevez, près de votre flaque de contenu gastrique, une trappe. Vous l’ouvrez.', NULL),
 (83, 'Surpris, vous tombez sur le chargement du vaisseau : des milliers de petits chapeaux violets. Vous décidez de vous coiffer d’un de ces petits chapeaux.', NULL),
 (84, 'Puis, vous remontez dans le couloir et rejoignez le cockpit.', NULL),

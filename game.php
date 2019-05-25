@@ -48,7 +48,7 @@
             </div>
 
             <div id="game_choice">
-                <button data-idChoice="0" type="button" class="btn hide"></button>
+                <button type="button" class="btn hide"></button>
                 <button type="button" class="btn hide"></button>
                 <button type="button" class="btn hide"></button>
                 <button type="button" class="btn hide"></button>
