@@ -123,6 +123,7 @@ function displayGame(data) {
         buttons[0].addEventListener("click", function () {
             window.location.href = "home.php";
         });
+        buttons[0].classList.remove("hide");
 
         //Creation URL and queries
         let params = {};
