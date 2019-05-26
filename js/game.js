@@ -143,7 +143,12 @@ function displayGame(data) {
                         isEnd = 1;
                         inventory.classList.add("hide");
                         text.classList.add("end_text");
-                        text.innerHTML = "C'était la fin n°" + data.statistics["nb_end"] + ". Vous avez assisté à " + data.statistics["nb_ends"] + " fin sur 10.";
+                        if(data.statistics["nb_ends"]<2) {
+                            text.innerHTML = "C'était la fin n°" + data.statistics["nb_end"] + ". Vous avez assisté à " + data.statistics["nb_ends"] + " fin sur 10.";
+                        }
+                        else {
+                            text.innerHTML = "C'était la fin n°" + data.statistics["nb_end"] + ". Vous avez assisté à " + data.statistics["nb_ends"] + " fins sur 10.";
+                        }
                         typing(isEnd, text.innerHTML);
                         if (data.badges) {
                             for (let badge of data.badges) {
