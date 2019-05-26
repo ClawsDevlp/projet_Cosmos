@@ -40,14 +40,14 @@ $stmtCheckBadges = MyPDO::getInstance()->prepare(<<<SQL
             badges b LEFT OUTER JOIN badgesobtenus bo ON b.id_badge = bo.id_badge
         WHERE p.id_joueur = :id_player AND b.id_badge = 17 AND p.id_texte = 6
         GROUP BY p.id_joueur
-        HAVING COUNT(p.id_partie) >= 10)
+        HAVING COUNT(DISTINCT p.id_partie) >= 10)
     OR b.id_badge =
         (SELECT DISTINCT b.id_badge
         FROM partie p, 
             badges b LEFT OUTER JOIN badgesobtenus bo ON b.id_badge = bo.id_badge
         WHERE p.id_joueur = :id_player AND b.id_badge = 18
         GROUP BY p.id_joueur
-        HAVING COUNT(p.id_partie) >= 30)
+        HAVING COUNT(DISTINCT p.id_partie) >= 30)
     OR b.id_badge =
         (SELECT DISTINCT b.id_badge
         FROM partie p, 

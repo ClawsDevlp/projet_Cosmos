@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.6.6deb4
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le :  sam. 25 mai 2019 à 19:44
--- Version du serveur :  5.7.24
--- Version de PHP :  7.2.14
+-- Host: sqletud.u-pem.fr
+-- Generation Time: May 26, 2019 at 06:06 PM
+-- Server version: 5.5.62-0+deb8u1-log
+-- PHP Version: 7.0.33-0+deb9u3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,24 +17,22 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `projet_cosmos`
+-- Database: `cdaigmor_db`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `avatar`
+-- Table structure for table `avatar`
 --
 
-DROP TABLE IF EXISTS `avatar`;
-CREATE TABLE IF NOT EXISTS `avatar` (
+CREATE TABLE `avatar` (
   `id_avatar` int(1) NOT NULL,
-  `link` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id_avatar`)
+  `link` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `avatar`
+-- Dumping data for table `avatar`
 --
 
 INSERT INTO `avatar` (`id_avatar`, `link`) VALUES
@@ -48,41 +44,39 @@ INSERT INTO `avatar` (`id_avatar`, `link`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `badges`
+-- Table structure for table `badges`
 --
 
-DROP TABLE IF EXISTS `badges`;
-CREATE TABLE IF NOT EXISTS `badges` (
+CREATE TABLE `badges` (
   `id_badge` int(2) NOT NULL,
   `nom_badge` varchar(255) DEFAULT NULL,
   `description_badge` varchar(255) DEFAULT NULL,
   `id_texte` int(3) DEFAULT NULL,
-  `link` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id_badge`)
+  `link` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `badges`
+-- Dumping data for table `badges`
 --
 
 INSERT INTO `badges` (`id_badge`, `nom_badge`, `description_badge`, `id_texte`, `link`) VALUES
 (1, 'Petit ange parti trop tôt', 'Vous avez appuyé sur le bouton bleu. Il fallait manifestement appuyer sur l\'autre bouton.', 6, 'images/badges/badge_1.jpg'),
-(2, 'Noir c\'est noir', 'Vous êtes mort d\'asphyxie dans la salle des machines ; seul, dans le noir, il n\'y avait plus d\'espoir.', 18, 'images/badges/badge_2.jpg'),
+(2, 'Noir c\'est noir', 'Vous êtes mort.e d\'asphyxie dans la salle des machines ; seul.e, dans le noir, il n\'y avait plus d\'espoir.', 18, 'images/badges/badge_2.jpg'),
 (3, 'La race avant tout', 'Vous avez vidé une bouteille de whisky à vous tout seul. Ça c\'est IMAC ! (L\'abus d\'alcool est dangereux pour la santé.)', 30, 'images/badges/badge_3.jpg'),
-(4, '440 Hz', 'Vous préférez les aventures spaciales aux analyses spectrales.', 44, 'images/badges/badge_4.jpg'),
+(4, '440 Hz', 'Vous préférez les aventures spatiales aux analyses spectrales.', 44, 'images/badges/badge_4.jpg'),
 (5, 'Complètement marteau', 'Vous avez (volontairement ?) aggravé vos blessures avec un marteau.', 47, 'images/badges/badge_5.jpg'),
-(6, 'Oh no.', 'Vous êtes mort dans d\'atroces souffrances des suites de vos blessures.', 49, 'images/badges/badge_6.jpg'),
-(7, 'MacGyver', 'Vous êtes parvenu à vous soigner.', 92, 'images/badges/badge_7.jpg'),
-(8, 'Tapez dans l\'dos !', 'En l\'absence de premiers secours, vous êtes mort d\'étouffement.', 102, 'images/badges/badge_8.jpg'),
-(9, 'Bienvenue dans la grappe', 'Vous vous êtes intégré parmi les Raisseriens.', 111, 'images/badges/badge_9.jpg'),
+(6, 'Oh no.', 'Vous êtes mort.e dans d\'atroces souffrances des suites de vos blessures.', 49, 'images/badges/badge_6.jpg'),
+(7, 'MacGyver', 'Vous êtes parvenu.e à vous soigner.', 92, 'images/badges/badge_7.jpg'),
+(8, 'Tapez dans l\'dos !', 'En l\'absence de premiers secours, vous êtes mort.e d\'étouffement.', 102, 'images/badges/badge_8.jpg'),
+(9, 'Bienvenue dans la grappe', 'Vous vous êtes intégré.e parmi les Raisseriens.', 111, 'images/badges/badge_9.jpg'),
 (10, 'Les Raisins de la colère', 'Vous avez servi de repas aux Raisseriens. ', 115, 'images/badges/badge_10.jpg'),
 (11, 'Caaapitaine Flam', 'Vous avez atteri sur Sonhat avec succès.', 87, 'images/badges/badge_11.jpg'),
-(12, 'Poussières d’étoiles', 'A la suite d\'une explosion, vous avez été réduit à l\'état de miettes. De touuutes petites miettes.', 69, 'images/badges/badge_12.jpg'),
+(12, 'Poussières d’étoiles', 'A la suite d\'une explosion, vous avez été réduit.e à l\'état de miettes. De touuutes petites miettes.', 69, 'images/badges/badge_12.jpg'),
 (13, 'Chorémanie', 'Votre superbe déhanché aura eu raison de vous.', 79, 'images/badges/badge_13.jpg'),
-(14, 'Mon langage de requête structurée', 'Vous êtes allé aux limites de l\'univers et découvert que vous étiez en fait une requête SQL. ', 75, 'images/badges/badge_14.jpg'),
-(15, 'Premier degré', 'La blague du chef des Raisseriens vous a laissé de marbre.', 112, 'images/badges/badge_15.jpg'),
+(14, 'Mon langage de requête structurée', 'Vous êtes allé.e aux limites de l\'univers et découvert que vous étiez en fait une requête SQL. ', 75, 'images/badges/badge_14.jpg'),
+(15, 'Premier degré', 'La blague du chef des Raisseriens vous a laissé.e de marbre.', 112, 'images/badges/badge_15.jpg'),
 (16, 'Fintastique !', 'Vous avez débloqué toutes les fins.', NULL, 'images/badges/badge_16.jpg'),
-(17, 'C\'EST LE BOUTON ROUGE', 'Vous vous êtes obstiné à appuyer au moins 10 fois sur le bouton bleu. ', NULL, 'images/badges/badge_17.jpg'),
+(17, 'C\'EST LE BOUTON ROUGE', 'Vous vous êtes obstiné.e à appuyer au moins 10 fois sur le bouton bleu. ', NULL, 'images/badges/badge_17.jpg'),
 (18, 'Passion amnésie spatiale', 'Vous avez effectué au moins 30 parties. ', NULL, 'images/badges/badge_18.jpg'),
 (19, 'J\'adore ce que vous faîtes', 'Vous avez collectionné tous les badges.', NULL, 'images/badges/badge_19.jpg'),
 (20, 'Pasc\'elle le vaut bien', 'Vous avez « Pascale » dans votre pseudo.', NULL, 'images/badges/badge_20.jpg');
@@ -90,81 +84,44 @@ INSERT INTO `badges` (`id_badge`, `nom_badge`, `description_badge`, `id_texte`, 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `badgesobtenus`
+-- Table structure for table `badgesobtenus`
 --
 
-DROP TABLE IF EXISTS `badgesobtenus`;
-CREATE TABLE IF NOT EXISTS `badgesobtenus` (
+CREATE TABLE `badgesobtenus` (
   `id_joueur` int(11) NOT NULL,
   `id_badge` int(2) NOT NULL,
-  `id_partie` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_joueur`,`id_badge`)
+  `id_partie` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `badgesobtenus`
---
-
-INSERT INTO `badgesobtenus` (`id_joueur`, `id_badge`, `id_partie`) VALUES
-(11, 2, 310),
-(11, 4, 311),
-(11, 17, NULL),
-(11, 18, NULL),
-(11, 20, NULL),
-(16, 1, 286),
-(16, 3, 304),
-(16, 4, 305),
-(16, 7, 304),
-(16, 8, 300),
-(16, 9, 298),
-(16, 10, 296),
-(16, 11, 296),
-(16, 15, 296),
-(16, 17, NULL),
-(16, 18, NULL),
-(16, 20, NULL),
-(20, 1, 317),
-(25, 1, 319),
-(25, 3, 318),
-(25, 4, 318),
-(25, 7, 322),
-(25, 10, 322),
-(25, 15, 322),
-(26, 1, 323);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `joueur`
+-- Table structure for table `joueur`
 --
 
-DROP TABLE IF EXISTS `joueur`;
-CREATE TABLE IF NOT EXISTS `joueur` (
-  `id_joueur` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `joueur` (
+  `id_joueur` int(11) NOT NULL,
   `pseudo` varchar(20) NOT NULL,
   `mdp` varchar(32) NOT NULL,
   `planete_origine` varchar(20) DEFAULT NULL,
-  `id_avatar` int(11) NOT NULL,
-  PRIMARY KEY (`id_joueur`)
+  `id_avatar` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `objets`
+-- Table structure for table `objets`
 --
 
-DROP TABLE IF EXISTS `objets`;
-CREATE TABLE IF NOT EXISTS `objets` (
+CREATE TABLE `objets` (
   `id_objet` int(3) NOT NULL,
   `nom_objet` varchar(25) DEFAULT NULL,
   `id_reponse` int(3) DEFAULT NULL,
-  `link` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id_objet`)
+  `link` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `objets`
+-- Dumping data for table `objets`
 --
 
 INSERT INTO `objets` (`id_objet`, `nom_objet`, `id_reponse`, `link`) VALUES
@@ -176,49 +133,43 @@ INSERT INTO `objets` (`id_objet`, `nom_objet`, `id_reponse`, `link`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `objetsrecuperes`
+-- Table structure for table `objetsrecuperes`
 --
 
-DROP TABLE IF EXISTS `objetsrecuperes`;
-CREATE TABLE IF NOT EXISTS `objetsrecuperes` (
+CREATE TABLE `objetsrecuperes` (
   `id_partie` int(11) NOT NULL,
-  `id_objet` int(3) NOT NULL,
-  PRIMARY KEY (`id_partie`,`id_objet`)
+  `id_objet` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `partie`
+-- Table structure for table `partie`
 --
 
-DROP TABLE IF EXISTS `partie`;
-CREATE TABLE IF NOT EXISTS `partie` (
-  `id_partie` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `partie` (
+  `id_partie` int(11) NOT NULL,
   `id_texte` int(3) NOT NULL,
   `id_joueur` int(11) NOT NULL,
-  `date_texte` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_partie`)
+  `date_texte` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `reponses`
+-- Table structure for table `reponses`
 --
 
-DROP TABLE IF EXISTS `reponses`;
-CREATE TABLE IF NOT EXISTS `reponses` (
+CREATE TABLE `reponses` (
   `id_reponse` int(3) NOT NULL,
   `contenu_reponse` varchar(255) DEFAULT NULL,
   `id_texte_declencheur` int(3) NOT NULL,
   `id_objet_necessaire` int(3) DEFAULT NULL,
-  `id_texte_destination` int(3) NOT NULL,
-  PRIMARY KEY (`id_reponse`)
+  `id_texte_destination` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `reponses`
+-- Dumping data for table `reponses`
 --
 
 INSERT INTO `reponses` (`id_reponse`, `contenu_reponse`, `id_texte_declencheur`, `id_objet_necessaire`, `id_texte_destination`) VALUES
@@ -253,19 +204,17 @@ INSERT INTO `reponses` (`id_reponse`, `contenu_reponse`, `id_texte_declencheur`,
 -- --------------------------------------------------------
 
 --
--- Structure de la table `textes`
+-- Table structure for table `textes`
 --
 
-DROP TABLE IF EXISTS `textes`;
-CREATE TABLE IF NOT EXISTS `textes` (
+CREATE TABLE `textes` (
   `id_texte` int(3) NOT NULL,
   `contenu_texte` varchar(300) DEFAULT NULL,
-  `nb_end` int(2) DEFAULT NULL,
-  PRIMARY KEY (`id_texte`)
+  `nb_end` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `textes`
+-- Dumping data for table `textes`
 --
 
 INSERT INTO `textes` (`id_texte`, `contenu_texte`, `nb_end`) VALUES
@@ -276,21 +225,21 @@ INSERT INTO `textes` (`id_texte`, `contenu_texte`, `nb_end`) VALUES
 (5, 'Le sas du cockpit s\'ouvre et vous êtes aspiré.e à l\'extérieur.', NULL),
 (6, 'Le trou noir SX-7044, se trouvant à quelques milliers de kilomètres de là, engloutit votre cadavre à tout jamais.', 1),
 (7, 'La lumière arrête de clignoter et le vaisseau commence à se stabiliser.', NULL),
-(8, 'Un message d\'alerte apparaît alors sur l\'un des écrans : Niveau d\'oxygène en baisse : vanne n°22 non serrée.', NULL),
+(8, 'Un message d\'alerte apparaît alors sur l\'un des écrans : « Niveau d\'oxygène en baisse : vanne n°22 non serrée. »', NULL),
 (9, 'Une boîte à outils se trouve à votre droite. Vous l’ouvrez et voyez quelques outils intéressants. Lequel choisissez-vous ?', NULL),
 (10, 'Vous partez maintenant à la recherche de cette fameuse vanne n°22.', NULL),
 (11, 'Le couloir est très sombre, vous avancez à tâtons.', NULL),
 (12, 'Vous entrez dans ce qui vous semble être la salle des machines.', NULL),
 (13, 'La clé à molette vous glisse des mains.', NULL),
 (14, 'Elle s’écrase 20 mètres en dessous de vous, sous les nombreuses canalisations.', NULL),
-(15, 'Vous commencez à avoir des vertige. Le niveau d’oxygène est maintenant dangereusement bas.', NULL),
+(15, 'Vous commencez à avoir des vertiges. Le niveau d’oxygène est maintenant dangereusement bas.', NULL),
 (16, 'Vous arrivez devant la vanne n°22. Vous essayez de la tourner.', NULL),
-(17, 'La vanne ne bouge pas d’un millimètre. Vous ré-essayez encore et encore, mais vos efforts sont vain.', NULL),
-(18, 'Vous vous écroulez dans la salle des machines ... seul ... dans le noir...', 2),
+(17, 'La vanne ne bouge pas d’un millimètre. Vous ré-essayez encore et encore, mais vos efforts sont vains.', NULL),
+(18, 'Vous vous écroulez dans la salle des machines ... seul.e ... dans le noir...', 2),
 (19, 'Vous arrivez devant la vanne n°22.', NULL),
 (20, 'Malgré vos mains moites, vous arrivez à la resserrer.', NULL),
 (21, 'Vous regagnez le cockpit et vous vous écroulez sur la banquette en cuir.', NULL),
-(22, 'Le message d’alerte a disparu. Vous pouvez être fier de ce que vous venez d’accomplir !', NULL),
+(22, 'Le message d’alerte a disparu. Vous pouvez être fier.e de ce que vous venez d’accomplir !', NULL),
 (23, '*blurp... blurp...*', NULL),
 (24, 'Il semble que votre ventre crie famine.', NULL),
 (25, 'Il faut dire que cette escapade dans la salle des machines vous a absorbé énormément d\'énergie.', NULL),
@@ -301,7 +250,7 @@ INSERT INTO `textes` (`id_texte`, `contenu_texte`, `nb_end`) VALUES
 (30, '*Kof...kof…* Cette boisson est très forte...mais tellement bonne !', NULL),
 (31, 'Vous allez vous asseoir sur le siège conducteur avec votre flasque. Vous admirez la magnifique vue de l’espace qui s’offre à vous.', NULL),
 (32, 'Après un petit moment, l’éthanol commence à jouer sérieusement sur vos neurotransmetteurs.', NULL),
-(33, 'Soudain, vous êtes pris d’un pique de fatigue et vous tombez à la renverse. Dans votre chute, vous déclenchez le levier de contrôle de l’appareil.', NULL),
+(33, 'Soudain, vous êtes pris.e d’un pique de fatigue et vous tombez à la renverse. Dans votre chute, vous déclenchez le levier de contrôle de l’appareil.', NULL),
 (34, 'Sans même vous en apercevoir, vous déviez complètement de la trajectoire initiale et entrez dans l’atmosphère de la planète Sonhat..', NULL),
 (35, 'Pendant que vous dormez paisiblement sur le sol de la cabine, votre vaisseau s’approche petit à petit de la surface de Sonhat.', NULL),
 (36, 'Un signal d’alerte se déclenche dans le cockpit. Rien n’y fait, vous dormez.', NULL),
@@ -313,14 +262,14 @@ INSERT INTO `textes` (`id_texte`, `contenu_texte`, `nb_end`) VALUES
 (42, 'Un sifflement retentit dans votre tête.', NULL),
 (43, 'Il s’accentue, devient de plus en plus fort, de plus en plus intense..!', NULL),
 (44, 'Vous ré-ouvrez les yeux. Vous êtes en cours de signal et le professeur est en train de siffler un 440Hz pour la classe.', 3),
-(45, 'Vous restez assis et remarquez que votre cuisse a été transpercée par un énorme morceau de verre...Vous restez assis et remarquez que votre cuisse a été transpercée par un énorme morceau de verre...', NULL),
+(45, 'Vous restez assis.e et remarquez que votre cuisse a été transpercée par un énorme morceau de verre...', NULL),
 (46, 'Il vous faut impérativement retirer cette chose de votre jambe !', NULL),
 (47, 'Il semblerait que le choc vous ait rendu.e complètement marteau.', NULL),
 (48, 'Vous regrettez instantanément le choix que vous venez de faire.', NULL),
 (49, 'Vous mourez dans d’atroces souffrances.', 4),
 (50, 'Vous vous apprêtez à retirer ce corps étranger de votre cuisse mais vous apercevez la flasque de whishy. Elle est juste en face de vous, intacte.', NULL),
 (51, 'Vous tendez le bras pour l’atteindre et parvenez finalement à l’attraper.', NULL),
-(52, 'Une gorgée pour le courage et le reste sur la plaie pour la désinfecter', NULL),
+(52, 'Une gorgée pour le courage et le reste sur la plaie pour la désinfecter.', NULL),
 (53, 'Le verrou est fermé. Vous sortez le tournevis afin de crocheter la serrure.', NULL),
 (54, 'A l’intérieur il y a de la nourriture en abondance.', NULL),
 (55, '*Scrunch…scrunch…* Vous regagnez des forces.', NULL),
@@ -352,27 +301,27 @@ INSERT INTO `textes` (`id_texte`, `contenu_texte`, `nb_end`) VALUES
 (82, 'Après plusieurs rejets actifs d’une partie de votre estomac, vous apercevez, près de votre flaque de contenu gastrique, une trappe. Vous l’ouvrez.', NULL),
 (83, 'Surpris, vous tombez sur le chargement du vaisseau : des milliers de petits chapeaux violets. Vous décidez de vous coiffer d’un de ces petits chapeaux.', NULL),
 (84, 'Puis, vous remontez dans le couloir et rejoignez le cockpit.', NULL),
-(85, 'Vous en avez marre de rester planté là. Vous commencez à actionner des boutons et des leviers : c’est comme si vous aviez toujours sû conduire ce vaisseau  finalement !', NULL),
-(86, 'Vous voyez sur un écran la présence d’une planète non loin. Elle est, apparemment, nommée «Sonhat». Vous décidez de la rejoindre, dans l’espoir de trouver des indices sur votre identité.', NULL),
+(85, 'Vous en avez marre de rester planté.e là. Vous commencez à actionner des boutons et des leviers : c’est comme si vous aviez toujours sû conduire ce vaisseau  finalement !', NULL),
+(86, 'Vous voyez sur un écran la présence d’une planète non loin. Elle est, apparemment, nommée « Sonhat ». Vous décidez de la rejoindre, dans l’espoir de trouver des indices sur votre identité.', NULL),
 (87, 'Vous atterrissez devant une sorte de village. Les maisons sont sphériques et toutes collées les unes aux autres.', NULL),
 (88, 'Un groupe d’autochtones ressemblants à de gros grains de raisins s’approche.', NULL),
 (89, 'Tout naturellement, vous avez un peu peur. Que faites-vous ?', NULL),
 (90, '« Aaaaaaaaaaah !! ». Oui ça fait mal, vous vous attendiez à quoi ?', NULL),
 (91, 'Vous arrachez prestement le bout de verre de votre jambe.', NULL),
 (92, 'Vous enlevez votre t-shirt et l\'enroulez autour de votre cuisse afin d’en faire un garrot.', NULL),
-(93, 'Toutes ces péripéties vous ont épuisé.e. Vous fermez les yeux et tombez dans un sommeil profond.', NULL),
+(93, 'Toutes ces péripéties vous ont épuisé.e Vous fermez les yeux et tombez dans un sommeil profond.', NULL),
 (94, '12 heures passent...', NULL),
 (95, 'Vous ressentez une violente claque sur la joue droite : cela vous réveille.', NULL),
-(96, 'Une tribu d’autochtones ressemblant à de gros grains de raisins vous ont recueilli et transporté jusque chez eux.', NULL),
+(96, 'Une tribu d’autochtones ressemblant à de gros grains de raisins vous ont recueilli.e et transporté.e jusque chez eux.', NULL),
 (97, 'Vous reculez. Ils reculent aussi.', NULL),
 (98, 'Après plusieurs minutes de longs et embarrassants regards, l’un d’entre eux tente de s’approcher.', NULL),
 (99, 'Il vous apporte ce qui vous semble être un fruit.', NULL),
 (100, 'Vous le remerciez par un geste de tête et commencez à manger. Chaque gros grains de raisin vous regarde, fasciné.', NULL),
 (101, 'Tout à coup, vous commencez à vous étouffer. *Mmg.. mggg*', NULL),
 (102, 'Votre visage déformé effraie les autochtones : ils partent en courant. Plus personne n’est là pour appliquer les gestes de premiers secours. Vous mourez.', 8),
-(103, 'Ce qui vous semble être leur chef se met à vous répondre : «Oh ?! Vous parlez la même langue que nous ?»', NULL),
+(103, 'Ce qui vous semble être leur chef se met à vous répondre : « Oh ?! Vous parlez la même langue que nous ? »', NULL),
 (104, '« Nous sommes des Raisseriens, nous vivons sur la planète Sonhat depuis 4500 ans. »', NULL),
-(105, '« L’engin avec lequel vous êtes arrivé ici est rudement sophistiqué, dites-nous ! »', NULL),
+(105, '« L’engin avec lequel vous êtes arrivé.e ici est rudement sophistiqué, dites-nous ! »', NULL),
 (106, 'Sous le choc, vous n’arrivez plus à prononcer un seul mot.', NULL),
 (107, '« Ne soyez pas si terrorisé.e, on ne va pas vous manger ! Quoique… » Tous les grains de raisin se fendent la poire.', NULL),
 (108, '« Étranger, ton petit chapeau et toi m’êtes sympathiques. Nous, Raisseriens, jurons de t’aider dans ta quête, et ce, quels que soient les problèmes que tu rencontres ! »', NULL),
@@ -388,18 +337,17 @@ INSERT INTO `textes` (`id_texte`, `contenu_texte`, `nb_end`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `textesuivant`
+-- Table structure for table `textesuivant`
 --
 
-DROP TABLE IF EXISTS `textesuivant`;
-CREATE TABLE IF NOT EXISTS `textesuivant` (
+CREATE TABLE `textesuivant` (
   `id_texte_origine` int(3) NOT NULL,
   `id_texte_suivant` int(3) NOT NULL,
   `id_objet_necessaire` int(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `textesuivant`
+-- Dumping data for table `textesuivant`
 --
 
 INSERT INTO `textesuivant` (`id_texte_origine`, `id_texte_suivant`, `id_objet_necessaire`) VALUES
@@ -522,8 +470,79 @@ INSERT INTO `textesuivant` (`id_texte_origine`, `id_texte_suivant`, `id_objet_ne
 (116, 76, NULL),
 (116, 80, NULL),
 (83, 84, NULL);
-COMMIT;
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `avatar`
+--
+ALTER TABLE `avatar`
+  ADD PRIMARY KEY (`id_avatar`);
+
+--
+-- Indexes for table `badges`
+--
+ALTER TABLE `badges`
+  ADD PRIMARY KEY (`id_badge`);
+
+--
+-- Indexes for table `badgesobtenus`
+--
+ALTER TABLE `badgesobtenus`
+  ADD PRIMARY KEY (`id_joueur`,`id_badge`);
+
+--
+-- Indexes for table `joueur`
+--
+ALTER TABLE `joueur`
+  ADD PRIMARY KEY (`id_joueur`);
+
+--
+-- Indexes for table `objets`
+--
+ALTER TABLE `objets`
+  ADD PRIMARY KEY (`id_objet`);
+
+--
+-- Indexes for table `objetsrecuperes`
+--
+ALTER TABLE `objetsrecuperes`
+  ADD PRIMARY KEY (`id_partie`,`id_objet`);
+
+--
+-- Indexes for table `partie`
+--
+ALTER TABLE `partie`
+  ADD PRIMARY KEY (`id_partie`);
+
+--
+-- Indexes for table `reponses`
+--
+ALTER TABLE `reponses`
+  ADD PRIMARY KEY (`id_reponse`);
+
+--
+-- Indexes for table `textes`
+--
+ALTER TABLE `textes`
+  ADD PRIMARY KEY (`id_texte`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `joueur`
+--
+ALTER TABLE `joueur`
+  MODIFY `id_joueur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `partie`
+--
+ALTER TABLE `partie`
+  MODIFY `id_partie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

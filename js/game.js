@@ -313,7 +313,7 @@ function typing(isEnd, mytxt) {
 //Popup new badge
 function pop_badge(id_badge, nom_badge, description_badge, link_img_badge) {
     popup_badge_bg.classList.remove("hide");
-    title_popup_badge.innerHTML = "Nouveau badge obtenu : " + nom_badge + ".";
+    title_popup_badge.innerHTML = "Nouveau badge obtenu : " + nom_badge;
     img_popup_badge.dataset.idBadge = id_badge;
     img_popup_badge.src = link_img_badge;
     img_popup_badge.alt = nom_badge;
