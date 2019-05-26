@@ -184,14 +184,13 @@ Menu
 
 #menu {
     display: flex;
-    width: 50%;
+    width: 55%;
     margin: auto;
     padding: 5px;
 }
 
 #menu_visual {
     flex: 1;
-    max-height: 410px;
 }
 
 #menu_visual > img {
@@ -203,7 +202,7 @@ Menu
 
 #menu_text {
     flex: 2;
-    min-height: 410px;
+    min-height: 380px;
     margin-left: 30px;
 }
 
@@ -691,10 +690,6 @@ Responsive
     }
 
     /* Menu */
-    #menu {
-        min-height: 435px;
-    }
-
     #menu_visual {
         height: 50px;
         max-height: 50px;
@@ -702,6 +697,7 @@ Responsive
     }
 
     #menu_text {
+        min-height: 370px;
         margin-left: 0;
     }
 
