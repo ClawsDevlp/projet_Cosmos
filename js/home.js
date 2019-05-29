@@ -51,7 +51,7 @@ function initialiser(evt) {
     //Creation URL
     let url = new URL("api/profile/have_infos_player.php", "http://localhost/projetPHP/");
 
-    //AJAX query : have avatar
+    //AJAX query : have avatar & pseudo
     fetch(url)
         .then(response => {
             if (response.status == 200) {
