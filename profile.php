@@ -9,7 +9,15 @@
 <html lang="fr">
 
 <head>
-    <title>Projet Cosmos · Jeu</title>
+    <title>Projet Cosmos · Profil</title>
+    
+    <!-- Open Graph Data -->
+    <meta property="og:title" content="Projet Cosmos · Profil" />
+    <meta property="og:description" content="Projet Cosmos : fiction intéractive se déroulant dans l'espace" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://perso-etudiant.u-pem.fr/~cdaigmor/projetPHP/" />
+    <meta property="og:image" content="images/Visuel_site.jpg" />
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
